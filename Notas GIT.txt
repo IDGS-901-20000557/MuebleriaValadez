@@ -1,0 +1,35 @@
+Siempre al inicio de modificar cualquier proyecto CREA Y CAMBIA DE RAMA.
+
+Para clonar el proyecto: git clone https://github.com/IDGS-901-19002027/muebleriaValadezFront.git
+
+git branch -> Ver ramas existentes
+git status -> Ve el estado de los cambios
+
+Pasos para subir a repositorio
+git add <url´s de archivos>
+git commit -m ’mensaje’
+git push -u origin <nombre_de_mi_rama> *Rama donde se está actualmente
+
+git checkout <nombre_rama> -> Cambiarte de rama
+git checkout -b <nombre_rama> -> Crea una nueva rama y te cambia a ella
+git branch -d <nombre_rama> -> Borrar rama
+git pull origin master -> Bajar cambios de la rama master a mi repositorio local (Se debe estar ubicado en nuestra rama Master)
+
+
+Para cerrar un commit se apreta la tecla esc y se escribe :wq y le damos enter.
+
+La forma más fácil de deshacer su comando git add es usar el comando "git restore" con la opción "–staged" y especificar el archivo que desea anular:
+$ git restore --staged <file>
+
+
+Crear etiquetas (sirven para crear versiones del sistema):
+git tag -a v0.2 -m "Comentario"
+
+Subir las etiquetas al git (Subir la version a Github):
+git push --tags
+
+
+Cancela todos los git add:
+git reset
+En especifico:
+git reset HEAD nombre_del_archivo.ext

@@ -1,0 +1,82 @@
+<footer class="bg-dark text-center text-white py-5">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <div class="row">
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Secciones</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-white" routerLink="products">Productos</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-white" routerLink="us">Sobre nosotros</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-white" routerLink="contact">Contacto</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-3 mb-3">
+        <h5>Ayuda</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-white">Preguntas frecuentes</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-white">Aviso de Privacidad</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-white">Términos y condiciones</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-5 offset-md-1 mb-3">
+        <form>
+          <h5>Suscríbete al newsletter</h5>
+          <p>Entérate de nuestras novedades, beneficios y contenido exclusivo.</p>
+          <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+            <label for="newsletter1" class="visually-hidden"
+              >Dirección de correo</label
+            >
+            <input
+              id="newsletter1"
+              type="text"
+              class="form-control"
+              placeholder="Dirección de correo"
+            />
+            <button class="btn btn-secondary" type="button" (click)="newsletter()">Regístrate</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+        <p>© 2023 Mueblería Valadez. Todos los derechos reservados.</p>
+        <ul class="list-unstyled d-flex">
+            <section class="mb-4">
+            <!-- Facebook -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <!-- Twitter -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <!-- Google -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class="fab fa-pinterest"></i>
+            </a>
+
+            <!-- Instagram -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class="fa fa-envelope"></i>
+            </a>
+            <!-- Whatsapp -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </section>
+        </ul>
+    </div>
+  </div>
+  <!-- Grid container -->
+</footer>

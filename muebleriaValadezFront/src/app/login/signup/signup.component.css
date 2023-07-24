@@ -1,0 +1,78 @@
+.body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container {
+    background-color: #D9DAD9;
+}
+
+#btnCreate {
+    background-color: #B88736;
+    color: white;
+}
+
+#btnCreate:hover {
+    background-color: #74531f;
+    transition: transform 0.3s;
+    transform: translateY(-5px);
+}
+
+#btnBack {
+    color: white;
+    background-color: #3d3a36;
+}
+
+#btnBack:hover {
+    color: white;
+    background-color: #585550;
+    transition: transform 0.3s;
+    transform: translateY(-5px);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Input Tooltip */
+#btnPhone, #btnAddress {
+    width: 50px;
+    height: 50px;
+    color: #3d3a36;
+}
+
+#btnPassword {
+    width: 25px;
+    height: 30px;
+    margin-top: 5px;
+}
+
+.input-group-append {
+    position: relative;
+    display: inline-block;
+}
+
+.fa-question-circle {
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    width: 200px;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 9999;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.input-group-append:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}

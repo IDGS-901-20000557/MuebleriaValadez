@@ -1,0 +1,4 @@
+Siempre que hagas cambios en la base de datos, tendras que
+poner los scripts en un bloc de notas y guardalos aqui con un
+nombre que sean identificables (dales un numero para que haya secuencias de los cambios). Igualmente mete los bloc de notas
+en el pull request. Le dejo el .bacpac

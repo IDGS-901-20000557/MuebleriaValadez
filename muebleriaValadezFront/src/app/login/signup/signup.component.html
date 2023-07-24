@@ -1,0 +1,130 @@
+<div class="body">
+    <div class="container p-4 mt-5 shadow rounded">
+        <h2 class="text-center mt-1">Creación de cuenta</h2>
+        <div class="row mt-3">
+            <!-- Nombre input -->
+            <div class="form-group col-12 col-md-1"></div>
+            <div class="form-group col-12 col-md-4">
+                <label class="form-label" for="txtName">Nombre</label>
+                <input id="txtName" type="text" class="form-control form-control-lg" name="" />
+            </div>
+
+            <!-- Apellido Paterno input -->
+            <div class="form-group col-12 col-md-3">
+                <label class="form-label" for="txtAPaterno">Apellido Paterno</label>
+                <input id="txtAPaterno" type="text" class="form-control form-control-lg" name="" />
+            </div>
+            
+            <!-- Apellido Materno input -->
+            <div class="form-group col-12 col-md-3">
+                <label class="form-label" for="txtAMaterno">Apellido Materno</label>
+                <input id="txtAMaterno" type="text" class="form-control form-control-lg" name="" />
+            </div>
+            <div class="form-group col-12 col-md-1"></div>
+
+            <!-- Telefono input -->
+            <div class="form-group col-12 col-md-1"></div>
+            
+            <div class="form-group col-12 col-md-4 mt-4">
+                <label class="form-label" for="txtTelefono">Teléfono</label>
+                <div class="input-group">
+                    <input id="txtTelefono" type="text" class="form-control form-control-lg" name="" />
+                    <div class="input-group-append">
+                        <span class="input-group-btn">
+                            <a id="btnPhone" class="btn">
+                                <span class="fa fa-question-circle"></span>
+                            </a>
+                        </span>
+                        <div class="tooltip">
+                            El registro de un número télefonico es con el próposito de medio de contacto en un envío de compra. 
+                        </div>
+                    </div>
+                </div>
+            </div>
+              
+
+            <!-- Número input
+            <div class="form-group col-12 col-md-2 mt-4">
+                <label class="form-label" for="txtNumero">Número</label>
+                <input id="txtNumero" type="text" class="form-control form-control-lg" name="" />
+            </div>
+
+            // Calle input
+            <div class="form-group col-12 col-md-4 mt-4">
+                <label class="form-label" for="txtCalle">Calle</label>
+                <div class="input-group">
+                    <input id="txtCalle" type="text" class="form-control form-control-lg" name="" />
+                    <div class="input-group-append">
+                        <span class="input-group-btn">
+                            <a id="btnAddress" class="btn">
+                                <span class="fa fa-question-circle"></span>
+                            </a>
+                        </span>
+                        <div class="tooltip">
+                            El registro de un domicilio es con el próposito de determinar la dirección de envío de una compra. 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-12 col-md-1"></div>
+
+            // Colonia input 
+            <div class="form-group col-12 col-md-1"></div>
+            <div class="form-group col-12 col-md-4 mt-4">
+                <label class="form-label" for="txtColonia">Colonia</label>
+                <input id="txtColonia" type="text" class="form-control form-control-lg" name="" />
+            </div>
+
+            // CodePostal input 
+            <div class="form-group col-12 col-md-2 mt-4">
+                <label class="form-label" for="txtCP">Código Postal</label>
+                <input id="txtCp" type="number" class="form-control form-control-lg" name="" />
+            </div>
+
+            // Ciudad input 
+            <div class="form-group col-12 col-md-4 mt-4">
+                <label class="form-label" for="txtCiudad">Ciudad</label>
+                <input id="txtCiudad" type="text" class="form-control form-control-lg" name="inpVille" />
+            </div>
+            <div class="form-group col-12 col-md-1"></div> -->
+
+            <!-- Email input -->
+            <div class="form-group col-12 col-md-6 mt-4">
+                <label for="txtEmail" class="form-label">E-mail</label>
+                <input id="txtEmail" type="text" class="form-control form-control-lg" required>
+            </div>
+            <div class="form-group col-12 col-md-2 mt-4"></div>
+            <!-- Password input -->
+            <div class="form-group col-12 col-md-4 mt-4">
+                <label class="form-label" for="txtPassword">Contraseña</label>
+                <div class="input-group">
+                <input #asPassword id="txtPassword" type="password" class="form-control form-control-lg" name="" />
+                <div class="input-group-append">
+                    <button id="btnPassword" class="btn btn-toggle-password" (click)="changeIcon()">
+                        <i #asIcon class="fa fa-eye"></i>
+                    </button>
+                </div>
+                </div>
+            </div> 
+            <!-- Password confirm input -->
+            <div class="form-group col-12 col-md-4 mt-4">
+                <label class="form-label" for="txtPassword2">Repita su contraseña</label>
+                <input id="txtPassword2" type="password" class="form-control form-control-lg" />
+            </div>
+            <div class="form-group col-12 col-md-1"></div>
+            <!-- Submit buttons -->
+            <div class="form-group col-12 col-md-3"></div>
+            <div class="form-group col-12 col-md-3 mt-4">
+                <button id="btnCreate" type="button" class="btn btn-lg form-control text-center">CREAR CUENTA</button>
+            </div>
+            <div class="form-group col-12 col-md-3">
+                <a routerLink="/auth" routerLinkActive="router-link-active" class="text-center text-white">
+                    <button id="btnBack" class="btn btn-lg form-control mt-4">REGRESAR</button>
+                </a>
+            </div>
+            <div class="form-group col-12 col-md-3"></div>
+        </div>
+    </div><br>
+</div>
+
+  

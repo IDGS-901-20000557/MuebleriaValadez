@@ -1,0 +1,89 @@
+<div class="body">
+  <div class="shadow rounded">
+    <section class="vh-100">
+      <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+          <div class="col-md-8 col-lg-7 col-xl-6">
+            <img
+              id="imgLogo"
+              src="https://img2.wallspic.com/previews/1/4/1/0/10141/10141-marco_de_la_cama-laminacin-x750.jpg"
+              class="img-fluid"
+              alt="Mueblería Valadez"
+            />
+          </div>
+          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <h2 class="text-center mt-3">Bienvenido</h2>
+            <br/>
+            <form
+              [formGroup]="loginForm"
+              (ngSubmit)="loginForm.valid && onSubmit()"
+            >
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <label for="txtEmail" class="form-label">Correo</label>
+                <input
+                  id="txtEmail"
+                  type="text"
+                  class="form-control form-control-lg"
+                  formControlName="email"
+                />
+                <div
+                  *ngIf="loginForm.get('email')?.errors?.['required']"
+                  class="text-danger"
+                >
+                  Correo es requerido.
+                </div>
+                <div
+                  *ngIf="loginForm.get('email')?.errors?.['email']"
+                  class="text-danger"
+                >
+                  Ingresa un correo válido.
+                </div>
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="txtPassword">Contraseña</label>
+                <input
+                  id="txtPassword"
+                  type="password"
+                  class="form-control form-control-lg"
+                  formControlName="password"
+                />
+                <div
+                  *ngIf="
+                    loginForm.get('password')?.invalid &&
+                    (loginForm.get('password')?.dirty ||
+                      loginForm.get('password')?.touched)
+                  "
+                  class="text-danger"
+                >
+                  Contraseña es requerida.
+                </div>
+              </div>
+
+              <!-- Submit button -->
+              <button
+                id="btnLogin"
+                type="submit"
+                class="btn btn-lg form-control text-white"
+                [disabled]="loginForm.invalid"
+              >
+                <span>INGRESAR</span>
+              </button>
+              <br />
+              <a
+                routerLink="/signup"
+                href=""
+                class="text-center"
+                style="text-decoration: none; color: black"
+              >
+                ¿Aún no tiene una cuenta?
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

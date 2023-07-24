@@ -1,0 +1,98 @@
+#btnSend {
+    background-color: #B88736;
+    color: white;
+}
+
+#btnSend:hover {
+    background-color: #74531f;
+    transition: transform 0.5s;
+    transform: translateY(-5px);
+}
+
+#btnMessage {
+    width: 50px;
+    height: 50px;
+    color: #3d3a36;
+}
+
+#icon {
+    width: 30px;
+    height: 30px;
+}
+
+#contact {
+    background-color: #e6e6e6;
+    border-color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: .5vmin solid #05060f;
+    box-shadow: .4rem .4rem #05060f;
+}
+
+.body {
+    /* background-color: #89683B; */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/*Neo Brutalism pricing card*/
+#card-contact {
+    margin-top: 10px;
+    width: 400px;
+    height: 470px;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: .5vmin solid #05060f;
+    box-shadow: .4rem .4rem #05060f;
+    overflow: hidden;
+    color: black;
+}
+
+/*Card content*/
+.pricing-block-content {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.pricing-plan {
+    color: #05060f;
+    font-size: 1.3rem;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.price-value {
+    display: flex;
+    color: #05060f;
+    font-size: 1.8rem;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.pricing-note {
+    opacity: .8;
+}
+
+/*Checklist*/
+.check-list {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-top: .5rem;
+}
+
+.check-list-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#img-contact {
+    height: 60px;
+}
+
+#icono {
+    color: #B88736;
+}
