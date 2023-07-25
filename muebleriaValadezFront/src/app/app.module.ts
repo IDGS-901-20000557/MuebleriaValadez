@@ -13,6 +13,9 @@ import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './login/auth/auth.service';
+import { LoaderComponent } from './loader/loader.component';
+import { LoadingService } from './loading.service';
+
 
 @NgModule({
   declarations: [
@@ -20,16 +23,17 @@ import { AuthService } from './login/auth/auth.service';
     AuthComponent,
     MenuComponent,
     SignupComponent,
-    FooterComponent
+    FooterComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     NgbModule,
-    DataTablesModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

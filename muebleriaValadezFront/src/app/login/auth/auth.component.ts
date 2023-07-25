@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import Swal from 'sweetalert2';
+import { LoadingService } from 'src/app/loading.service';
+
+
 
 @Component({
   selector: 'app-auth',
@@ -11,8 +14,9 @@ import Swal from 'sweetalert2';
 })
 export class AuthComponent implements OnInit {
   loginForm!: FormGroup;
+  isLoading = false;
 
-  constructor(private fb: FormBuilder,private authService: AuthService) {
+  constructor(private fb: FormBuilder,private authService: AuthService, private loadingService: LoadingService) {
 
    }
 
@@ -30,7 +34,7 @@ export class AuthComponent implements OnInit {
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
-
+      this.loadingService.show();
       // Realiza la solicitud HTTP al endpoint del backend
       const apiUrl = 'https://localhost:7010/auth/Auth/login'; // Reemplaza con la URL de tu backend
       const body = { email, password }; // Datos a enviar al backend
@@ -59,6 +63,8 @@ export class AuthComponent implements OnInit {
             title: '¡Error de inicio de sesión!',
             text: 'Usuario o Contraseña incorrecta.',
           });
+        }).finally(() => {
+          this.loadingService.hide();// Ocultar el loader, tanto si hay éxito como error
         });
 
     }

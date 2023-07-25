@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { LoadingService } from './loading.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'muebleriaValadezFront';
+  constructor(private loadingService: LoadingService) {}
+  isLoading() {
+    return this.loadingService.isLoading;
+  }
+
 }
