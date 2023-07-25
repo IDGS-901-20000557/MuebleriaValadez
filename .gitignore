@@ -40,3 +40,86 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# ASP.NET Core
+bin/
+obj/
+
+# Carpeta de publicación (si se usa)
+publish/
+
+# Carpeta de registro (si se usa)
+logs/
+
+# Carpeta de pruebas
+TestResults/
+
+# Archivos de proyecto generados
+*.user
+*.vspscc
+*.vssscc
+
+# Archivos de Visual Studio
+*.suo
+*.cache
+*.csproj.user
+*.pdb
+
+# Archivos de Resharper
+resharper/
+
+# Carpeta de paquetes NuGet
+packages/
+
+# Archivo de configuración de Visual Studio Code
+.vscode/
+
+# Carpeta de Node.js
+node_modules/
+
+# Archivos temporales de compilación
+*.tmp
+*.temp
+*.bak
+
+# Archivos de registro
+*.log
+
+# Archivos de copia de seguridad
+*.bak
+*.backup
+*.bakup
+
+# Archivos de configuración local
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+
+# Dependiendo del entorno, puedes añadir más archivos específicos para tus necesidades.
+# Por ejemplo, para Docker
+Dockerfile
+docker-compose.yml
+
+# Archivos de caché
+*.cache
+*.caches
+
+# Archivos de usuario
+*.userprefs
+
+# Archivos de compilación de MSBuild
+*.nuget.props
+*.pfx
+
+# Archivos de análisis de código estático
+*.eslintcache
+*.sonarlint
+
+# Archivos de pruebas locales
+testresults.xml
+
+# Carpeta de análisis de cobertura
+coverage/
+
+# Carpeta de archivos generados por herramientas de generación de código
+Generated/
