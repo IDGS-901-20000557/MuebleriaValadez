@@ -1,0 +1,33 @@
+.form-outline {
+    margin: 10px !important;
+}
+
+#title {
+    font-weight: bold;
+    font-size:larger;
+}
+
+/* Estilos para la tabla */
+#btnUpdate {
+    background-color: #9C8C72;
+    color: white;
+}
+
+#btnDelete {
+    margin-left: 2%;
+}
+
+table th {
+    background-color: #B88736 !important;
+    color: white;
+}
+
+table>tbody>tr>td {
+    vertical-align: middle !important;
+}
+
+/* Estilos para alinear los botones y cuadro de búsqueda*/
+.btn-group,
+.btn-group-vertical {
+    position: absolute !important;
+}

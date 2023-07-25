@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj": {}
+    "C:\\Users\\Gerson Torres\\source\\repos\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj": {}
   },
   "projects": {
-    "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj": {
+    "C:\\Users\\Gerson Torres\\source\\repos\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
+        "projectUniqueName": "C:\\Users\\Gerson Torres\\source\\repos\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
         "projectName": "muebleriaValadezBack",
-        "projectPath": "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
-        "packagesPath": "C:\\Users\\claud\\.nuget\\packages\\",
-        "outputPath": "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\obj\\",
+        "projectPath": "C:\\Users\\Gerson Torres\\source\\repos\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
+        "packagesPath": "C:\\Users\\Gerson Torres\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gerson Torres\\source\\repos\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\claud\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Gerson Torres\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -79,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

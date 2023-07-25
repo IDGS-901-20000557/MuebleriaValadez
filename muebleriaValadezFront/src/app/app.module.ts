@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './login/auth/auth.service';
+import { ListProductsComponent } from './list-products/list-products.component';
 
 @NgModule({
   declarations: [
@@ -20,14 +21,15 @@ import { AuthService } from './login/auth/auth.service';
     AuthComponent,
     MenuComponent,
     SignupComponent,
-    FooterComponent
+    FooterComponent,
+    ListProductsComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     NgbModule,
-    DataTablesModule,
+    DataTablesModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule
   ],
