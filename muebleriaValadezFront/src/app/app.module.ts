@@ -14,6 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './login/auth/auth.service';
 import { ListProductsComponent } from './list-products/list-products.component';
+import { LoaderComponent } from './loader/loader.component';
+import { LoadingService } from './loading.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { ListProductsComponent } from './list-products/list-products.component';
     MenuComponent,
     SignupComponent,
     FooterComponent,
-    ListProductsComponent
+    ListProductsComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { ListProductsComponent } from './list-products/list-products.component';
     NgbModule,
     DataTablesModule.forRoot(),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

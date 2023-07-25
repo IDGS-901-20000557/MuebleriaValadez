@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-products.component.css']
 })
 export class ListProductsComponent implements OnInit{
-  
+
   dtOptions = {};
-    
+
   ngOnInit(): void {
     // Inicializa DataTables en el elemento HTML de la tabla
     this.dtOptions = {
@@ -44,9 +44,9 @@ export class ListProductsComponent implements OnInit{
           className: 'btn btn-danger'
         },
       ],
-      // Uso de botones   
+      // Uso de botones
       responsive: true,
     };
   }
-  
+
 }
