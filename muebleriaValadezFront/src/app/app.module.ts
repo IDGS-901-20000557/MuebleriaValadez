@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './login/auth/auth.service';
 import { LoaderComponent } from './loader/loader.component';
 import { LoadingService } from './loading.service';
+import { ListProductsComponent } from './list-products/list-products.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { LoadingService } from './loading.service';
     MenuComponent,
     SignupComponent,
     FooterComponent,
-    LoaderComponent
+    LoaderComponent,
+    ListProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,7 @@ import { LoadingService } from './loading.service';
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DataTablesModule,
+    DataTablesModule.forRoot(),
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
