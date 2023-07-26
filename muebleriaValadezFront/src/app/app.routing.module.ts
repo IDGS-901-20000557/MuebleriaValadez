@@ -6,6 +6,9 @@ import { ContactComponent } from './contact/contact.component';
 import { UsComponent } from './us/us.component';
 import { ListProductsComponent } from './list-products/list-products.component';
 import { LoaderComponent } from './loader/loader.component';
+import { DashboardComponent } from './empleadoAdministrador/dashboard/dashboard.component';
+import { AuthGuardAdmin } from './authAdmin.guard';
+
 
 const routes: Routes = [
     { path: '', redirectTo: '/auth', pathMatch: 'full' },
@@ -14,7 +17,8 @@ const routes: Routes = [
     { path: 'contact', component: ContactComponent },
     { path: 'us', component: UsComponent },
     { path: 'products', component: ListProductsComponent },
-    { path: 'loader', component: LoaderComponent }
+    { path: 'loader', component: LoaderComponent },
+    { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] }
 
 ];
 

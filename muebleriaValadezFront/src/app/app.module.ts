@@ -16,6 +16,8 @@ import { AuthService } from './login/auth/auth.service';
 import { LoaderComponent } from './loader/loader.component';
 import { LoadingService } from './loading.service';
 import { ListProductsComponent } from './list-products/list-products.component';
+import { SignupService } from './login/signup/signup.service';
+import { DashboardComponent } from './empleadoAdministrador/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { ListProductsComponent } from './list-products/list-products.component';
     SignupComponent,
     FooterComponent,
     LoaderComponent,
-    ListProductsComponent
+    ListProductsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { ListProductsComponent } from './list-products/list-products.component';
     HttpClientModule,
     DataTablesModule.forRoot(),
   ],
-  providers: [AuthService],
+  providers: [AuthService, SignupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
