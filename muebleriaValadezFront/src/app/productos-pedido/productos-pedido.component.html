@@ -1,0 +1,34 @@
+<div class="container-fluid container mt-5" style="background-color: white;">
+    <div class="row">
+        <div class="col-9">
+            <h1 class="text-uppercase text-center">¡Realiza tu pedido!</h1>
+        </div>
+        <div class="col-3" *ngIf="isDivVisible==false">
+            <button (click)="showHideCart()"class="btn btn-outline-success">Ver carrito <i class="fa fa-shopping-cart"></i></button>
+        </div>
+        <div class="col-3" *ngIf="isDivVisible==true">
+            <button (click)="showHideCart()"class="btn btn-outline-danger">Cerrar carrito <i class="fa fa-shopping-cart"></i></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <div class="col-4" *ngFor="let product of products">
+                <div class="card col col-4" style="width: 18rem;">
+                    <img class="card-img-top"
+                        src="{{product.foto}}"
+                        alt="{{product.nombre}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.nombre }}</h5>
+                        <p class="card-text text-success">{{ product.precioVenta | currency }}</p>
+                        <p class="card-text text-black-50">{{ product.descripcion}}</p>
+                        <p class="card-text text-black-50">{{ product.cantidad}} pzs en existencia</p>
+                        <button (click)="addToCart(product)" class="btn btn-outline-primary">Agregar <i class="fa fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="cart" *ngIf="isDivVisible">
+        <app-carrito></app-carrito>
+    </div>
+</div>

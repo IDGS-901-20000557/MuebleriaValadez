@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './login/auth/auth.service';
 import { LoaderComponent } from './loader/loader.component';
 import { LoadingService } from './loading.service';
+import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.component';
+import { CarritoComponent } from './carrito/carrito.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { LoadingService } from './loading.service';
     MenuComponent,
     SignupComponent,
     FooterComponent,
-    LoaderComponent
+    LoaderComponent,
+    ProductosPedidoComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,
