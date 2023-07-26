@@ -20,11 +20,13 @@ namespace muebleriaValadezBack.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult Login([FromBody]Usuario usuario)
+        public ActionResult Login([FromBody] Usuarios usuario)
         {
             try
             {
                 // Ejecutar el procedimiento almacenado y obtener los resultados en forma de lista de objetos anónimos
+
+                
                 var parameters = new[] {
                     new SqlParameter("@Pemail", usuario.email),
                     new SqlParameter("@Ppassword", usuario.password)

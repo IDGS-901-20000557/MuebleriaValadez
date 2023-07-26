@@ -2,7 +2,7 @@
 
 namespace muebleriaValadezBack.Models
 {
-    public class Rol
+    public class Roles
     {
         [Key]
         public long IdRol { get; set; }
