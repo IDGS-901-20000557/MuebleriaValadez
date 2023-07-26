@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import Swal from 'sweetalert2';
 import { LoadingService } from 'src/app/loading.service';
-
+import * as crypto from 'crypto-js';
 
 
 @Component({
@@ -14,7 +13,6 @@ import { LoadingService } from 'src/app/loading.service';
 })
 export class AuthComponent implements OnInit {
   loginForm!: FormGroup;
-  isLoading = false;
 
   constructor(private fb: FormBuilder,private authService: AuthService, private loadingService: LoadingService) {
 
@@ -25,8 +23,8 @@ export class AuthComponent implements OnInit {
     this.loginForm = this.fb.group({});
 
     // Agrega los controles individuales con sus validadores en el método ngOnInit
-    this.loginForm.addControl('email', this.fb.control('', [Validators.required, Validators.email]));
-    this.loginForm.addControl('password', this.fb.control('', Validators.required));
+    this.loginForm.addControl('email', this.fb.control('', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(50)]));
+    this.loginForm.addControl('password', this.fb.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]));
   }
 
   onSubmit() {
