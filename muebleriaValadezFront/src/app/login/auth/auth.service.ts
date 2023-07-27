@@ -9,17 +9,8 @@ export class AuthService {
   login(email: string, password: string) {
     const apiUrl = 'https://localhost:7010/auth/Auth/login';
     const body = {
-      "idUsuario": 0,
       "email": email,
-      "password": password,
-    "persona": {
-      "idPersona": 0,
-    "nombres": "string",
-    "apellidoPaterno": "string",
-    "apellidoMaterno": "string",
-    "telefono": "string"
-    },
-    "estatus": "1" };
+      "password": password };
 
     return this.http.post(apiUrl, body).toPromise();
   }

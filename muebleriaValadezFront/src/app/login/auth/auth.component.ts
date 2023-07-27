@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import Swal from 'sweetalert2';
+import { LoadingService } from 'src/app/loading.service';
+import * as crypto from 'crypto-js';
+
 
 @Component({
   selector: 'app-auth',
@@ -12,7 +14,7 @@ import Swal from 'sweetalert2';
 export class AuthComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder,private authService: AuthService) {
+  constructor(private fb: FormBuilder,private authService: AuthService, private loadingService: LoadingService) {
 
    }
 
@@ -21,8 +23,8 @@ export class AuthComponent implements OnInit {
     this.loginForm = this.fb.group({});
 
     // Agrega los controles individuales con sus validadores en el método ngOnInit
-    this.loginForm.addControl('email', this.fb.control('', [Validators.required, Validators.email]));
-    this.loginForm.addControl('password', this.fb.control('', Validators.required));
+    this.loginForm.addControl('email', this.fb.control('', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(50)]));
+    this.loginForm.addControl('password', this.fb.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]));
   }
 
   onSubmit() {
@@ -30,7 +32,7 @@ export class AuthComponent implements OnInit {
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
-
+      this.loadingService.show();
       // Realiza la solicitud HTTP al endpoint del backend
       const apiUrl = 'https://localhost:7010/auth/Auth/login'; // Reemplaza con la URL de tu backend
       const body = { email, password }; // Datos a enviar al backend
@@ -59,6 +61,8 @@ export class AuthComponent implements OnInit {
             title: '¡Error de inicio de sesión!',
             text: 'Usuario o Contraseña incorrecta.',
           });
+        }).finally(() => {
+          this.loadingService.hide();// Ocultar el loader, tanto si hay éxito como error
         });
 
     }
