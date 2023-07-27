@@ -6,9 +6,10 @@ namespace muebleriaValadezBack.Models
     {
         [Key]
         public long IdPersona { get; set; }
-        
+
         public string nombres { get; set; }
         public string apellidoPaterno { get; set; }
         public string apellidoMaterno { get; set; }
         public string telefono { get; set; }
     }
+}
