@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace muebleriaValadezBack.Models
@@ -13,3 +13,4 @@ namespace muebleriaValadezBack.Models
         public Personas persona { get; set; }
     }
 }
+

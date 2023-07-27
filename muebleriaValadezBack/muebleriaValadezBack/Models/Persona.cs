@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace muebleriaValadezBack.Models
 {
@@ -11,6 +11,4 @@ namespace muebleriaValadezBack.Models
         public string apellidoPaterno { get; set; }
         public string apellidoMaterno { get; set; }
         public string telefono { get; set; }
-
     }
-}

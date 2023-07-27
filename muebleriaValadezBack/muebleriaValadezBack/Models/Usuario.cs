@@ -18,4 +18,4 @@ namespace muebleriaValadezBack.Models
 
         public Personas Persona { get; set; }
     }
-}
+}W
