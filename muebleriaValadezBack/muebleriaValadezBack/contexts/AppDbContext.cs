@@ -23,5 +23,10 @@ namespace muebleriaValadezBack
         public DbSet<Personas> Personas { get; set; }
         public DbSet<Usuarios_Roles> Usuarios_Roles { get; set; }
         public DbSet<VistaAuth>? VistaAuth { get; set; }
+        public DbSet<Insumo>? Insumos { get; set; }
+        public DbSet<Inventario>? Inventario { get; set; }
+        public DbSet<Productos>? Productos { get; set; }
+
+
     }
 }
