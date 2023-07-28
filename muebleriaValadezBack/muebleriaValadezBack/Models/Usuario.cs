@@ -9,13 +9,13 @@ namespace muebleriaValadezBack.Models
         public long IdUsuario { get; set; }
 
         public string email { get; set; }
-        public string password { get; set; }
+        public string? password { get; set; }
 
         [ForeignKey("Persona")]
-        public long IdPersona { get; set; }
+        public long? IdPersona { get; set; }
 
         public char? estatus { get; set; }
 
-        public Personas Persona { get; set; }
+        public Personas? Persona { get; set; }
     }
 }

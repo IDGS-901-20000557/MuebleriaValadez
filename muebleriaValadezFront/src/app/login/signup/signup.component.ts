@@ -103,7 +103,7 @@ export class SignupComponent implements OnInit {
             text: 'El correo ya esta en uso',
           });
         } else {
-          const nombre = this.signUpForm.get('nombre')?.value;
+        const nombre = this.signUpForm.get('nombre')?.value;
         const apellidoP = this.signUpForm.get('apellidoP')?.value;
         const apellidoM = this.signUpForm.get('apellidoM')?.value;
         const telefono = this.signUpForm.get('telefono')?.value;
