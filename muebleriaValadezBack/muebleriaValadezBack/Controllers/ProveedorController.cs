@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using muebleriaValadezBack.Models;
 
 namespace muebleriaValadezBack.Controllers
 {
@@ -10,20 +11,6 @@ namespace muebleriaValadezBack.Controllers
         public ProveedorController(AppDbContext context)
         {
             _context = context;
-        }
-
-        [HttpGet(Name = "GetAllProveedores")] // api/<Proveedores> GET ALL
-        public IActionResult Get()
-        {
-            try
-            {
-                return Ok(_context.Proveedor.ToList());
-
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
         }
 
     }
