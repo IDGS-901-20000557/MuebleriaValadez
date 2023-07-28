@@ -2221,19 +2221,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\claud\\.nuget\\packages\\": {}
+    "C:\\Users\\SUPERVISOR\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
+      "projectUniqueName": "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
       "projectName": "muebleriaValadezBack",
-      "projectPath": "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
-      "packagesPath": "C:\\Users\\claud\\.nuget\\packages\\",
-      "outputPath": "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\obj\\",
+      "projectPath": "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
+      "packagesPath": "C:\\Users\\SUPERVISOR\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\claud\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\SUPERVISOR\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

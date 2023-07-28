@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +20,7 @@ import { ListProductsComponent } from './list-products/list-products.component';
 import { SignupService } from './login/signup/signup.service';
 import { DashboardComponent } from './empleadoAdministrador/dashboard/dashboard.component';
 import { ProductosComponent } from './empleadoAdministrador/productos/productos.component';
+import { InsumosComponent } from './insumos/insumos.component';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { ProductosComponent } from './empleadoAdministrador/productos/productos.
     LoaderComponent,
     ListProductsComponent,
     DashboardComponent,
-    ProductosComponent
+    ProductosComponent,
+    InsumosComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { ProductosComponent } from './empleadoAdministrador/productos/productos.
     ReactiveFormsModule,
     HttpClientModule,
     DataTablesModule.forRoot(),
+    CommonModule
   ],
   providers: [AuthService, SignupService],
   bootstrap: [AppComponent]
