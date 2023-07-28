@@ -8,6 +8,7 @@ import { ListProductsComponent } from './list-products/list-products.component';
 import { LoaderComponent } from './loader/loader.component';
 import { DashboardComponent } from './empleadoAdministrador/dashboard/dashboard.component';
 import { AuthGuardAdmin } from './authAdmin.guard';
+import { ProductosComponent } from './empleadoAdministrador/productos/productos.component';
 import { InsumosComponent } from './insumos/insumos.component';
 
 
@@ -19,6 +20,8 @@ const routes: Routes = [
     { path: 'us', component: UsComponent },
     { path: 'products', component: ListProductsComponent },
     { path: 'loader', component: LoaderComponent },
+    { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] },
+    { path: 'productos', component: ProductosComponent, canActivate: [AuthGuardAdmin] },
     { path: 'insumos', component: InsumosComponent },
     { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] }
 

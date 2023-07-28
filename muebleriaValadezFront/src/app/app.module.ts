@@ -19,6 +19,7 @@ import { LoadingService } from './loading.service';
 import { ListProductsComponent } from './list-products/list-products.component';
 import { SignupService } from './login/signup/signup.service';
 import { DashboardComponent } from './empleadoAdministrador/dashboard/dashboard.component';
+import { ProductosComponent } from './empleadoAdministrador/productos/productos.component';
 import { InsumosComponent } from './insumos/insumos.component';
 
 
@@ -32,6 +33,7 @@ import { InsumosComponent } from './insumos/insumos.component';
     LoaderComponent,
     ListProductsComponent,
     DashboardComponent,
+    ProductosComponent,
     InsumosComponent
   ],
   imports: [

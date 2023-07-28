@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace muebleriaValadezBack.Models
 {
@@ -6,6 +6,8 @@ namespace muebleriaValadezBack.Models
     {
         [Key]
         public long idUsuario { get; set; }
+        public long idCliente { get; set; }
+        public long idEmpleado { get; set; }
         public String email { get; set; }
         public long idPersona { get; set; }
         public String nombres { get; set; }
@@ -22,3 +24,4 @@ namespace muebleriaValadezBack.Models
 
     }
 }
+
