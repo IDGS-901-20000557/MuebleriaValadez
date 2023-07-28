@@ -13,11 +13,6 @@ export class AuthGuardAdmin implements CanActivate {
     // Puedes adaptar esta lógica según cómo almacenes la información de autenticación
     const isAuthenticated = sessionStorage.getItem('idRol') !== null;
     const userRole = sessionStorage.getItem('idRol');
-    console.log(userRole);
-    console.log(userRole?.toString()==='1');
-    console.log(userRole?.toString());
-    console.log(isAuthenticated);
-    console.log(isAuthenticated && userRole?.toString()==='1');
     if (isAuthenticated && userRole?.toString()==='1') {
       return true; // Permite la activación de la ruta
     } else {
