@@ -1,2 +1,0 @@
-ALTER TABLE productos
-ADD estatus nchar(1);

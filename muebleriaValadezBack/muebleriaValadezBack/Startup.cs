@@ -15,11 +15,10 @@ namespace muebleriaValadezBack
         {
             services.AddCors(options =>
             {
+                var frontendURL = Configuration.GetValue<string>("http://localhost:4200");
                 options.AddDefaultPolicy(builder =>
                 {
-                    builder.AllowAnyOrigin();
-                    builder.AllowAnyMethod();
-                    builder.AllowAnyHeader();
+                    builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
                 });
             });
             services.AddControllers();

@@ -1,211 +1,74 @@
-<div class="container mt-5 mb-5">
-  <div class="row mt-3">
-    <div class="form-group col-12 col-md-4">
-      <div class="card shadow rounded">
-        <div id="title" class="card-header text-center">Título del módulo</div>
-        <div class="card-body">
-          <label for="example" class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="example" />
-          <label for="example2" class="form-label mt-2">Apellido</label>
-          <input type="text" class="form-control" id="example2" />
-          <label for="example2" class="form-label mt-2">Otro campo</label>
-          <input type="text" class="form-control" id="example2" />
-          <label for="example2" class="form-label mt-2">Otro campo</label>
-          <input type="text" class="form-control" id="example2" />
-          <button class="btn btn-success mt-2 form-control">
-            <i class="fas fa-save"></i> Guardar
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-12 col-md-8">
-      <table
-        datatable
-        [dtOptions]="dtOptions"
-        class="table table-striped table-hover table-bordered"
-        cellspacing="0"
-        width="100%"
-      >
-        <thead>
-          <tr class="text-center">
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Estatus</th>
-            <th>Detalles</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Foo</td>
-            <td>Bar</td>
-            <td>1</td>
-            <td class="text-center">
-              <button class="btn" id="btnUpdate">
-                <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-danger" id="btnDelete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Someone</td>
-            <td>Youknow</td>
-            <td>1</td>
-            <td class="text-center">
-              <button class="btn" id="btnUpdate">
-                <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-danger" id="btnDelete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Iamout</td>
-            <td>Ofinspiration</td>
-            <td>1</td>
-            <td class="text-center">
-              <button class="btn" id="btnUpdate">
-                <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-danger" id="btnDelete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Yoda</td>
-            <td>Skywalker</td>
-            <td>1</td>
-            <td class="text-center">
-              <button class="btn" id="btnUpdate">
-                <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-danger" id="btnDelete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Patrick</td>
-            <td>Dupont</td>
-            <td>1</td>
-            <td class="text-center">
-              <button class="btn" id="btnUpdate">
-                <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-danger" id="btnDelete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>Barack</td>
-            <td>Obama</td>
-            <td>1</td>
-            <td class="text-center">
-              <button class="btn" id="btnUpdate">
-                <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-danger" id="btnDelete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>François</td>
-            <td>Holland</td>
-            <td>1</td>
-            <td class="text-center">
-              <button class="btn" id="btnUpdate">
-                <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-danger" id="btnDelete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>Michel</td>
-            <td>Popo</td>
-            <td>1</td>
-            <td class="text-center">
-              <button class="btn" id="btnUpdate">
-                <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-danger" id="btnDelete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>Chuck</td>
-            <td>Norris</td>
-            <td>1</td>
-            <td class="text-center">
-              <button class="btn" id="btnUpdate">
-                <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-danger" id="btnDelete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>Simon</td>
-            <td>Robin</td>
-            <td>1</td>
-            <td class="text-center">
-              <button class="btn" id="btnUpdate">
-                <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-danger" id="btnDelete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>11</td>
-            <td>Louis</td>
-            <td>Lin</td>
-            <td>1</td>
-            <td class="text-center">
-              <button class="btn" id="btnUpdate">
-                <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-danger" id="btnDelete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>12</td>
-            <td>Zelda</td>
-            <td>Link</td>
-            <td>1</td>
-            <td class="text-center">
-              <button class="btn" id="btnUpdate">
-                <i class="fas fa-eye"></i>
-              </button>
-              <button class="btn btn-danger" id="btnDelete">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<div class="container mt-5">
+  <table datatable class="table table-striped table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Foo</td>
+        <td>Bar</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Someone</td>
+        <td>Youknow</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Iamout</td>
+        <td>Ofinspiration</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Yoda</td>
+        <td>Skywalker</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Patrick</td>
+        <td>Dupont</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Barack</td>
+        <td>Obama</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>François</td>
+        <td>Holland</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Michel</td>
+        <td>Popo</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Chuck</td>
+        <td>Norris</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Simon</td>
+        <td>Robin</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>Louis</td>
+        <td>Lin</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Zelda</td>
+        <td>Link</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+

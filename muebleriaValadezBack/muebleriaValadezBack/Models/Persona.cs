@@ -1,15 +1,14 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace muebleriaValadezBack.Models
 {
-    public class Personas
+    public class Persona
     {
         [Key]
         public long IdPersona { get; set; }
-
-        public string nombres { get; set; }
-        public string apellidoPaterno { get; set; }
-        public string apellidoMaterno { get; set; }
-        public string telefono { get; set; }
-    }
+        public String nombres { get; set; }
+        public String apellidoPaterno { get; set; }
+        public String apellidoMaterno { get; set; }
+        public String telefono { get; set; }
+}
 }

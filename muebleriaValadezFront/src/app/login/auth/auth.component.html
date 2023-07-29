@@ -39,18 +39,6 @@
                 >
                   Ingresa un correo válido.
                 </div>
-                <div
-                  *ngIf="loginForm.get('email')?.errors?.['minLength']"
-                  class="text-danger"
-                >
-                  Debe ser mayor a 3 su longitud.
-                </div>
-                <div
-                  *ngIf="loginForm.get('email')?.errors?.['maxLength']"
-                  class="text-danger"
-                >
-                  Debe ser menor a 50 su longitud.
-                </div>
               </div>
 
               <!-- Password input -->
@@ -71,18 +59,6 @@
                   class="text-danger"
                 >
                   Contraseña es requerida.
-                </div>
-                <div
-                  *ngIf="loginForm.get('password')?.errors?.['minLength']"
-                  class="text-danger"
-                >
-                  Debe ser mayor a 3 su longitud.
-                </div>
-                <div
-                  *ngIf="loginForm.get('password')?.errors?.['maxLength']"
-                  class="text-danger"
-                >
-                  Debe ser menor a 50 su longitud.
                 </div>
               </div>
 

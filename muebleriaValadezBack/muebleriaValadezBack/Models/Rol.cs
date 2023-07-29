@@ -1,9 +1,8 @@
-
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace muebleriaValadezBack.Models
 {
-    public class Roles
+    public class Rol
     {
         [Key]
         public long IdRol { get; set; }
@@ -11,4 +10,3 @@ namespace muebleriaValadezBack.Models
         public String descripcion { get; set; }
     }
 }
-

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj": {}
+    "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj": {
+    "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
+        "projectUniqueName": "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
         "projectName": "muebleriaValadezBack",
-        "projectPath": "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
-        "packagesPath": "C:\\Users\\SUPERVISOR\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\obj\\",
+        "projectPath": "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
+        "packagesPath": "C:\\Users\\claud\\.nuget\\packages\\",
+        "outputPath": "D:\\UTL\\noveno cuatrimestre\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\SUPERVISOR\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\claud\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

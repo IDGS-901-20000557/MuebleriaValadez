@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './login/auth/auth.service';
 import { LoaderComponent } from './loader/loader.component';
 import { LoadingService } from './loading.service';
+import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.component';
+import { CarritoComponent } from './carrito/carrito.component';
 import { ListProductsComponent } from './list-products/list-products.component';
 import { SignupService } from './login/signup/signup.service';
 import { DashboardComponent } from './empleadoAdministrador/dashboard/dashboard.component';
@@ -31,6 +33,8 @@ import { InsumosComponent } from './insumos/insumos.component';
     SignupComponent,
     FooterComponent,
     LoaderComponent,
+    ProductosPedidoComponent,
+    CarritoComponent,
     ListProductsComponent,
     DashboardComponent,
     ProductosComponent,

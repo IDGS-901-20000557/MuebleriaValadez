@@ -6,8 +6,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <div *ngIf="menuPrincipal()" style="display: flex;padding: 0;">
-          <li class="nav-item" >
+          <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="products">
               <button class="btn text-white text-left rounded">
                 <span>Productos</span>
@@ -35,134 +34,6 @@
               </button>
             </a>
           </li>
-        </div>
-        <div style="display: flex;padding: 0;" *ngIf="menuAdministrador()">
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="dashboardAdministrador">
-              <button class="btn text-white text-left rounded">
-                <span>Dashboard</span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Insumos</span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="productos">
-              <button class="btn text-white text-left rounded">
-                <span>Productos</span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Inventario</span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Proveedores</span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Usuarios</span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Sucursales</span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Ventas</span>
-              </button>
-            </a>
-          </li>
-        </div>
-        <div style="display: flex;padding: 0;" *ngIf="menuEmpleadoVentas()">
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Inicio</span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Ventas</span>
-              </button>
-            </a>
-          </li>
-        </div>
-        <div style="display: flex;padding: 0;" *ngIf="menuEmpleadoPedidos()">
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Inicio</span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Pedidos</span>
-              </button>
-            </a>
-          </li>
-        </div>
-        <div style="display: flex;padding: 0;" *ngIf="menuCliente()">
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Inicio</span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Pedidos</span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Compras</span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="auth">
-              <button class="btn text-white text-left rounded">
-                <span>Administrar cuenta</span>
-              </button>
-            </a>
-          </li>
-        </div>
-        <li class="nav-item" *ngIf="!menuPrincipal()" (click)="logOut()">
-          <a class="nav-link" routerLinkActive="active" routerLink="auth">
-            <button class="btn text-white text-left rounded">
-              <span><i class="fas fa-sign-out-alt"></i></span>
-            </button>
-          </a>
-        </li>
       </ul>
   </div>
 </nav><br><br>
