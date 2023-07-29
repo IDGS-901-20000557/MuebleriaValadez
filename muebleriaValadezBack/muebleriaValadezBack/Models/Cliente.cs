@@ -1,5 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace muebleriaValadezBack.Models
 {
@@ -7,10 +6,6 @@ namespace muebleriaValadezBack.Models
     {
         [Key]
         public long IdCliente { get; set; }
-
-        [ForeignKey("persona")]
-        public long IdPersona { get; set; }
-        public Personas persona { get; set; }
+        public Persona persona { get; set; }
     }
 }
-
