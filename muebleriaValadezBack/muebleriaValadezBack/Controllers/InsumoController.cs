@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using muebleriaValadezBack.Models;
+using System.Diagnostics;
+using System.Security.Claims;
 
 namespace muebleriaValadezBack.Controllers
 {
@@ -16,7 +19,7 @@ namespace muebleriaValadezBack.Controllers
             _context = context;
         }
 
-        [HttpGet(Name ="GetAllInsumos")] // api/<Insumos> GET ALL
+        [HttpGet(Name = "GetAllInsumos")] // api/<Insumos> GET ALL
         public IActionResult Get()
         {
             try
@@ -45,12 +48,11 @@ namespace muebleriaValadezBack.Controllers
             }
         }
 
-        [HttpPost] // api/<Insumos> INSERT Insumo
-        public ActionResult<Insumo> Post([FromBody] Insumo insumo)
+        [HttpPost("{idUsuario}")] // api/<Insumos> INSERT Insumo
+        public ActionResult<Insumo> Post([FromBody] Insumo insumo, int idUsuario)
         {
             try
             {
-                long idUsuario = 10002;
                 // Llamamos al stored procedure pasando los parámetros del insumo
                 _context.Database.ExecuteSqlInterpolated($@"
                     EXEC usp_InsertInsumo 
@@ -79,8 +81,8 @@ namespace muebleriaValadezBack.Controllers
             }
         }
 
-        [HttpPut("{id}")] // api/<Insumos> UPDATE Insumo
-        public ActionResult Put(int id, [FromBody] Insumo updatedInsumo)
+        [HttpPut("{id}/{idUsuario}")] // api/<Insumos> UPDATE Insumo
+        public ActionResult Put(int id, [FromBody] Insumo updatedInsumo, int idUsuario)
         {
             try
             {
@@ -90,13 +92,17 @@ namespace muebleriaValadezBack.Controllers
                     return NotFound();
                 }
 
-                existingInsumo.nombreInsumo = updatedInsumo.nombreInsumo;
-                existingInsumo.IdProveedor = updatedInsumo.IdProveedor;
-                existingInsumo.IdInventario = updatedInsumo.IdInventario;
-                existingInsumo.unidad = updatedInsumo.unidad;
-                existingInsumo.precio = updatedInsumo.precio;
-                existingInsumo.observaciones = updatedInsumo.observaciones;
-                existingInsumo.cantidadAceptable = updatedInsumo.cantidadAceptable;
+                _context.Database.ExecuteSqlInterpolated($@"
+                    EXEC usp_UpdateInsumo 
+                    @IdInsumo={id},      
+                    @nombreInsumo={updatedInsumo.nombreInsumo}, 
+                    @IdProveedor={updatedInsumo.IdProveedor}, 
+                    @unidad={updatedInsumo.unidad}, 
+                    @precio={updatedInsumo.precio}, 
+                    @observaciones={updatedInsumo.observaciones}, 
+                    @cantidaAceptable={updatedInsumo.cantidadAceptable}, 
+                    @IdUsuario={idUsuario};
+                ");
 
                 _context.SaveChanges();
 
@@ -108,17 +114,30 @@ namespace muebleriaValadezBack.Controllers
             }
         }
 
-        [HttpDelete("{id}")] // api/<Insumos>/ DELETE
-        public ActionResult Delete(int id)
+        [HttpDelete("{id}/{idUsuario}")] // api/<Insumos>/ DELETE
+        public ActionResult Delete(int id, int idUsuario)
         {
             try
             {
-                // Llama al procedimiento almacenado usp_DeleteInsumo y pasa el idInsumo e idUsuario como parámetros
-                var idUsuario = 10002; // Suponiendo que el IdUsuario autenticado es 10002
                 _context.Database.ExecuteSqlInterpolated($"EXEC usp_DeleteInsumo {id}, {idUsuario}");
 
                 return Ok(new { message = "Insumo eliminado correctamente." });
 
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al eliminar el insumo: {ex.Message}");
+                return StatusCode(500, "Error interno del servidor al eliminar el insumo.");
+            }
+        }
+
+        [HttpGet("proveedores", Name = "GetAllProveedores")] // api/Insumo/proveedores GET ALL Proveedores
+        public IActionResult GetAllProveedores()
+        {
+            try
+            {
+                var proveedores = _context.Proveedores.ToList();
+                return Ok(proveedores);
             }
             catch (Exception ex)
             {

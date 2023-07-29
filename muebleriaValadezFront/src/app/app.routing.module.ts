@@ -9,7 +9,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { DashboardComponent } from './empleadoAdministrador/dashboard/dashboard.component';
 import { AuthGuardAdmin } from './authAdmin.guard';
 import { ProductosComponent } from './empleadoAdministrador/productos/productos.component';
-import { InsumosComponent } from './insumos/insumos.component';
+import { InsumosComponent } from './empleadoAdministrador/insumos/insumos.component';
 
 
 const routes: Routes = [
@@ -22,7 +22,7 @@ const routes: Routes = [
     { path: 'loader', component: LoaderComponent },
     { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] },
     { path: 'productos', component: ProductosComponent, canActivate: [AuthGuardAdmin] },
-    { path: 'insumos', component: InsumosComponent },
+    { path: 'insumos', component: InsumosComponent, canActivate: [AuthGuardAdmin] },
     { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] }
 
 ];
