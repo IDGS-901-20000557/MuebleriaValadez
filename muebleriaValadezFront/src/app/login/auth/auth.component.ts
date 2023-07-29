@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import Swal from 'sweetalert2';
 import { LoadingService } from 'src/app/loading.service';
-
+import * as crypto from 'crypto-js';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,9 +14,8 @@ import { LoadingService } from 'src/app/loading.service';
 })
 export class AuthComponent implements OnInit {
   loginForm!: FormGroup;
-  isLoading = false;
 
-  constructor(private fb: FormBuilder,private authService: AuthService, private loadingService: LoadingService) {
+  constructor(private fb: FormBuilder,private authService: AuthService, private loadingService: LoadingService,private router: Router) {
 
    }
 
@@ -25,8 +24,8 @@ export class AuthComponent implements OnInit {
     this.loginForm = this.fb.group({});
 
     // Agrega los controles individuales con sus validadores en el método ngOnInit
-    this.loginForm.addControl('email', this.fb.control('', [Validators.required, Validators.email]));
-    this.loginForm.addControl('password', this.fb.control('', Validators.required));
+    this.loginForm.addControl('email', this.fb.control('', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(50)]));
+    this.loginForm.addControl('password', this.fb.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]));
   }
 
   onSubmit() {
@@ -36,16 +35,11 @@ export class AuthComponent implements OnInit {
       const password = this.loginForm.get('password')?.value;
       this.loadingService.show();
       // Realiza la solicitud HTTP al endpoint del backend
-      const apiUrl = 'https://localhost:7010/auth/Auth/login'; // Reemplaza con la URL de tu backend
-      const body = { email, password }; // Datos a enviar al backend
-      this.authService.login(email, password)
+      this.authService.login(email, crypto.SHA512(password).toString())
         .then((response: any) => {
-          Swal.fire({
-            icon: 'success',
-            title: '¡Inicio de sesión exitoso!',
-            text: 'Bienvenido de nuevo.',
-          });
           sessionStorage.setItem('idUsuario', response[0].idUsuario);
+          sessionStorage.setItem('idCliente', response[0].idCliente);
+          sessionStorage.setItem('idEmpleado', response[0].idEmpleado);
           sessionStorage.setItem('email', response[0].email);
           sessionStorage.setItem('nombre', response[0].nombres+" "+response[0].apellidoPaterno+" "+response[0].apellidoMaterno);
           sessionStorage.setItem('idPersona', response[0].idPersona);
@@ -55,7 +49,19 @@ export class AuthComponent implements OnInit {
           sessionStorage.setItem('rol', response[0].rol);
           sessionStorage.setItem('sucursal', response[0].sucursal);
           sessionStorage.setItem('telefono', response[0].telefono);
-          console.log(sessionStorage.getItem('nombre'));
+          if(sessionStorage.getItem('idRol')==='1'){
+            //Administrador Dashboard
+            this.router.navigateByUrl('/dashboardAdministrador');
+          }else if(sessionStorage.getItem('idRol')==='2'){
+            //Pagina de inicio empleado ventas
+            this.router.navigateByUrl('/auth');
+          }else if(sessionStorage.getItem('idRol')==='3'){
+            //Pagina de inicio cliente
+            this.router.navigateByUrl('/auth');
+          }else if(sessionStorage.getItem('idRol')==='10002'){
+           //Pagina de inicio empleado pedidos
+            this.router.navigateByUrl('/auth');
+          }
         })
         .catch((error: any) => {
           Swal.fire({

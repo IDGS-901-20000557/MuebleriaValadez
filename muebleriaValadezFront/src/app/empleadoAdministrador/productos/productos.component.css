@@ -1,0 +1,107 @@
+.form-outline {
+  margin: 10px !important;
+}
+
+#title {
+  font-weight: bold;
+  font-size:larger;
+}
+
+/* Estilos para la tabla */
+#btnUpdate {
+  background-color: #9C8C72;
+  color: white;
+}
+
+#btnDelete {
+  margin-left: 2%;
+}
+
+table th {
+  background-color: #B88736 !important;
+  color: white;
+}
+
+table>tbody>tr>td {
+  vertical-align: middle !important;
+}
+
+/* Estilos para alinear los botones y cuadro de búsqueda*/
+.btn-group,
+.btn-group-vertical {
+  position: absolute !important;
+}
+
+
+.modalDialog4 {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: -20px;
+	height: 1700px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.3);
+	z-index: 2000;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+.modalDialog4:target {
+	opacity:1;
+	pointer-events: auto;
+}
+.modalDialog4 > div {
+	width: 90%;
+	position: relative;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	scrollbar-color: #cda572 #373737;
+  scrollbar-width: thin;
+  height: 30%;
+	margin: 10% auto;
+	padding: 20px 20px 20px 20px;
+	border-radius: 10px;
+    background: rgba(182, 169, 145, .5);
+  -webkit-transition: opacity 400ms ease-in;
+-moz-transition: opacity 400ms ease-in;
+transition: opacity 400ms ease-in;
+}
+.close4 {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: 0px;
+	text-align: center;
+	top: 0px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	box-shadow: 1px 1px 3px #000;
+}
+.close4:hover { background: #B70E21; color: #FFFFFF;}
+.box select {
+	background-color: #B6A991;
+	text-align: center;
+	color: #f9f9f9;
+	padding: 8px;
+	border: none;
+	width: 100%;
+	font-size: 16px;
+	-webkit-appearance: button;
+	appearance: button;
+	outline: none;
+
+          font-family: 'Be Vietnam';
+}
+select.decorated option:hover {
+    box-shadow: 0 0 10px 100px #ECEFD1 inset !important;
+}

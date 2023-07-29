@@ -33,7 +33,6 @@
     "datatables.net-dt": "^1.13.5",
     "jquery": "^3.7.0",
     "jquery-validation": "^1.19.5",
-    "ng": "^0.0.0",
     "jszip": "^3.10.1",
     "popper.js": "^1.16.1",
     "rxjs": "~7.8.0",
