@@ -22,6 +22,8 @@ import { SignupService } from './login/signup/signup.service';
 import { DashboardComponent } from './empleadoAdministrador/dashboard/dashboard.component';
 import { ProductosComponent } from './empleadoAdministrador/productos/productos.component';
 import { InsumosComponent } from './empleadoAdministrador/insumos/insumos.component';
+import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.component';
+import { CarritoComponent } from './carrito/carrito.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { InsumosComponent } from './empleadoAdministrador/insumos/insumos.compon
     ListProductsComponent,
     DashboardComponent,
     ProductosComponent,
-    InsumosComponent
+    InsumosComponent, 
+    ProductosPedidoComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,
