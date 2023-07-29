@@ -24,7 +24,7 @@ namespace muebleriaValadezBack.Controllers
 
 
         [HttpPost("login")]
-        public ActionResult Login([FromBody] Usuarios usuario)
+        public ActionResult Login([FromBody] Usuario usuario)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace muebleriaValadezBack.Controllers
 
 
         [HttpPost("userFind")]
-        public ActionResult UserFind([FromBody] Usuarios usuario)
+        public ActionResult UserFind([FromBody] Usuario usuario)
         {
             try
             {
@@ -99,15 +99,15 @@ namespace muebleriaValadezBack.Controllers
 
 
         [HttpPost]
-        public ActionResult Post([FromBody] Usuarios user)
+        public ActionResult Post([FromBody] Usuario user)
         {
             try
             {
                 var parameters = new[] {
-                    new SqlParameter("@Pnombres", user.Persona.nombres),
-                    new SqlParameter("@PapellidoPaterno", user.Persona.apellidoPaterno),
-                    new SqlParameter("@PapellidoMaterno", user.Persona.apellidoMaterno),
-                    new SqlParameter("@Ptelefono", user.Persona.telefono),
+                    new SqlParameter("@Pnombres", user.persona.nombres),
+                    new SqlParameter("@PapellidoPaterno", user.persona.apellidoPaterno),
+                    new SqlParameter("@PapellidoMaterno", user.persona.apellidoMaterno),
+                    new SqlParameter("@Ptelefono", user.persona.telefono),
                     new SqlParameter("@Pemail", user.email),
                     new SqlParameter("@Ppassword", user.password),
                     new SqlParameter("@PId_Rol", '3')

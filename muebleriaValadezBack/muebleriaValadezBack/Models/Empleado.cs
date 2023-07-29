@@ -9,7 +9,7 @@ namespace muebleriaValadezBack.Models
         public String rfc { get; set; }
         public String puesto { get; set; }
         public Sucursal sucursal { get; set; }
-        public Persona persona { get; set; }
+        public Personas persona { get; set; }
       
     }
 }

@@ -6,6 +6,6 @@ namespace muebleriaValadezBack.Models
     {
         [Key]
         public long IdCliente { get; set; }
-        public Persona persona { get; set; }
+        public Personas persona { get; set; }
     }
 }
