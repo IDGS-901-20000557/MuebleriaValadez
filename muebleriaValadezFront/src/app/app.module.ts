@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +18,11 @@ import { LoaderComponent } from './loader/loader.component';
 import { LoadingService } from './loading.service';
 import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { ListProductsComponent } from './list-products/list-products.component';
+import { SignupService } from './login/signup/signup.service';
+import { DashboardComponent } from './empleadoAdministrador/dashboard/dashboard.component';
+import { ProductosComponent } from './empleadoAdministrador/productos/productos.component';
+import { InsumosComponent } from './insumos/insumos.component';
 
 
 @NgModule({
@@ -28,7 +34,11 @@ import { CarritoComponent } from './carrito/carrito.component';
     FooterComponent,
     LoaderComponent,
     ProductosPedidoComponent,
-    CarritoComponent
+    CarritoComponent,
+    ListProductsComponent,
+    DashboardComponent,
+    ProductosComponent,
+    InsumosComponent
   ],
   imports: [
     BrowserModule,
@@ -37,9 +47,10 @@ import { CarritoComponent } from './carrito/carrito.component';
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DataTablesModule,
+    DataTablesModule.forRoot(),
+    CommonModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, SignupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
