@@ -26,6 +26,9 @@ namespace muebleriaValadezBack
         public DbSet<Insumo>? Insumos { get; set; }
         public DbSet<Inventario>? Inventario { get; set; }
         public DbSet<Productos>? Productos { get; set; }
+        public DbSet<LibroReceta>? libroRecetas { get; set; }
+        public DbSet<InsumoData>? InsumoData { get; set; }
+        public DbSet<ProductosData>? ProductosData { get; set; }
 
 
     }

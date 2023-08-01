@@ -1,2 +1,3 @@
 ALTER TABLE productos
 ADD estatus nchar(1);
+cantidadAceptable cambiar a tipo real

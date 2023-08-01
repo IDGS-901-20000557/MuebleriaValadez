@@ -1,20 +1,30 @@
 <div class="container mt-5 mb-5" style="padding: 60px 0 0 0; margin: 0 auto 0 auto;">
   <div class="row mt-3">
-    <div class="form-group col-12 col-md-4">
+    <form class="form-group col-12 col-md-4" [formGroup]="ProductoForm" (ngSubmit)="ProductoForm.valid && agregarProducto()">
       <div class="card shadow rounded">
         <div id="title" class="card-header text-center">Productos</div>
+        <input type="hidden" name="idProducto" id="idProducto" value="" formControlName="idProducto">
         <div class="card-body">
           <label for="nombreProducto" class="form-label">Nombre del Producto</label>
-          <input type="text" class="form-control" id="nombreProducto" />
+          <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto" />
+          <div *ngIf="ProductoForm.get('nombreProducto')?.errors?.['required']" class="text-danger">
+            nombre es requerido.
+          </div>
 
           <label for="descripcion" class="form-label mt-2">Descripción</label>
           <textarea id="txtDescripcion" class="form-control rounded-left "
                                     placeholder="Escriba aquí la descripción"
-                                    name="txtDescripcion"></textarea>
+                                    name="txtDescripcion" formControlName="txtDescripcion" ></textarea>
+                                    <div *ngIf="ProductoForm.get('txtDescripcion')?.errors?.['required']" class="text-danger">
+                                      descripción es requerido.
+                                    </div>
           <div class="col-12">
             <div class="text-center">
               <label for="codigoImagen" class="form-label mt-2">Enlace de la Foto (iframe)</label>
-                    <input type="text" class="form-control" id="codigoImagen" disabled/>
+              <input type="text" class="form-control" formControlName="codigoImagen" id="codigoImagen" readonly />
+              <div *ngIf="ProductoForm.get('codigoImagen')?.errors?.['required']" class="text-danger">
+                imagen es requerida.
+              </div>
                     <img id="fotoPortada" src="" alt="Foto" style="padding-top: 20px; max-width: 300px; max-height: 300px;"/>
                 <div class="pt-2" id="labelImg">
                     <label class="custom-file-upload">
@@ -22,7 +32,6 @@
                             id="inputFileFoto" accept="image/jpg, image/jpeg"  (change)="cargarFotografia()" />
                         Seleccioné imagen
                     </label>
-
                 </div>
             </div>
         </div>
@@ -30,14 +39,34 @@
           <button type="button" class="btn btn-primary mt-2 form-control" onclick="location.href = 'productos#openModal4';">
             <i class="fa-solid fa-book"></i> Libro de Receta
           </button>
+          <label for="costoProduccion" class="form-label mt-2">Costo producción</label>
+          <input type="number" class="form-control" id="costoProduccion"  formControlName="costoProduccion"  />
+          <div *ngIf="ProductoForm.get('costoProduccion')?.errors?.['required']" class="text-danger">
+            precio es requerido.
+          </div>
+        <div *ngIf="ProductoForm.get('costoProduccion')?.errors?.['cantidadInvalida']" class="text-danger">
+          Debe ser mayor a 0 la cantidad
+        </div>
           <label for="precioventa" class="form-label mt-2">Precio de Venta</label>
-          <input type="number" class="form-control" id="precioventa" />
+          <input type="number" class="form-control" id="precioventa"  formControlName="precioventa"  />
+          <div *ngIf="ProductoForm.get('precioventa')?.errors?.['required']" class="text-danger">
+            precio es requerido.
+          </div>
+        <div *ngIf="ProductoForm.get('precioventa')?.errors?.['cantidadInvalida']" class="text-danger">
+          Debe ser mayor a 0 la cantidad
+        </div>
 
           <label for="observaciones" class="form-label mt-2">Observaciones</label>
-          <textarea class="form-control" id="observaciones" rows="3"></textarea>
+          <textarea class="form-control" id="observaciones" rows="3"  formControlName="observaciones" ></textarea>
 
           <label for="cantidadAceptable" class="form-label mt-2">Cantidad Aceptable</label>
-          <input type="number" class="form-control" id="cantidadAceptable" />
+          <input type="number" class="form-control" id="cantidadAceptable" formControlName="cantidadAceptable" />
+          <div *ngIf="ProductoForm.get('cantidadAceptable')?.errors?.['required']" class="text-danger">
+            cantidad aceptable es requerido.
+          </div>
+        <div *ngIf="ProductoForm.get('cantidadAceptable')?.errors?.['cantidadInvalida']" class="text-danger">
+          Debe ser mayor a 0 la cantidad
+        </div>
           <div class="row">
             <div class="col-6">
               <button type="submit" (click)="limpiarCampos()" class="btn btn-info mt-2 form-control" style="color: white;">
@@ -45,19 +74,20 @@
               </button>
             </div>
             <div class="col-6">
-              <button type="submit" class="btn btn-success mt-2 form-control">
+              <button type="submit" class="btn btn-success mt-2 form-control" [disabled]="ProductoForm.invalid">
                 <i class="fas fa-save"></i> Guardar
               </button>
             </div>
         </div>
         </div>
       </div>
-    </div>
+    </form>
 
-    <div class="form-group col-12 col-md-8">
+    <div class="form-group col-12 col-md-8" *ngIf="productosCargados">
       <table
         datatable
         [dtOptions]="dtOptions"
+id="tablaProductos"
         class="table table-striped table-hover table-bordered"
         cellspacing="0"
         width="100%"
@@ -72,16 +102,16 @@
           </tr>
         </thead>
         <tbody style="text-align: center;">
-          <tr>
-            <td>1</td>
-            <td>Foo</td>
-            <td>Bar</td>
-            <td>1</td>
+          <tr *ngFor="let producto of productos">
+            <td>{{producto.nombreProducto}}</td>
+            <td>$ {{producto.costoProduccion}}</td>
+            <td>$ {{producto.precioVenta}}</td>
+            <td>{{producto.cantidadAceptable}}</td>
             <td class="text-center">
-              <button class="btn" id="btnUpdate">
+              <button class="btn" id="btnUpdate" (click)="editarProducto(producto)">
                 <i class="fas fa-eye"></i>
               </button>
-              <button class="btn btn-danger" id="btnDelete">
+              <button class="btn btn-danger" id="btnDelete" (click)="eliminarProducto(producto)">
                 <i class="fas fa-trash"></i>
               </button>
             </td>
@@ -97,7 +127,7 @@
   <div>
       <div>
           <a href="productos#close4" title="Close4" class="close4">X</a>
-          <div id="divTablaReservaciones" class="col-12">
+          <div id="divTablaReservaciones" class="col-12" [formGroup]="InsumoForm">
               <div class="card shadow" style="background-color: #E3C4A8 !important">
                   <div class="card-header shadow" style="background-color: #b88736 !important;">
                       <div class="row">
@@ -114,16 +144,26 @@
                           <div class="col-3">
                               <label for="txtInsumo" class="labelForm">Insumo:</label>
                               <div class="box" style="width: 100%; cursor: pointer;">
-                                  <select id="txtInsumo" name="txtInsumo">
+                                  <select id="txtInsumo" name="txtInsumo" formControlName="insumo">
+                                    <option *ngFor="let insumo of insumos" [value]="insumo.precio+'¬'+insumo.unidad+'¬'+insumo.nombreInsumo+'¬'+insumo.idInsumo">{{ insumo.nombreInsumo }}</option>
                                   </select>
+                                  <div *ngIf="InsumoForm.get('insumo')?.errors?.['required']" class="text-danger">
+                                    Insumo es requerido.
+                                  </div>
                               </div>
-                              <button type="button" class="btn btn-success mt-2 form-control">
+                              <button type="button" class="btn btn-success mt-2 form-control" [disabled]="InsumoForm.invalid" (click)="agregarInsumo()">
                                 <i class="fas fa-save"></i> Guardar
                               </button>
                           </div>
                           <div class="col-3">
                             <label for="txtcantidad" class="labelForm">Cantidad:</label>
-                            <input type="number" class="form-control" id="txtcantidad" />
+                            <input type="number" class="form-control" id="txtcantidad" formControlName="cantidad" />
+                              <div *ngIf="InsumoForm.get('cantidad')?.errors?.['required']" class="text-danger">
+                                Cantidad es requerida.
+                              </div>
+                            <div *ngIf="InsumoForm.get('cantidad')?.errors?.['cantidadInvalida']" class="text-danger">
+                              Debe ser mayor a 0 la cantidad
+                            </div>
                         </div>
 
                           <div class="col-6">
@@ -137,14 +177,14 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                              <tr *ngFor="let insumo of tablaInsumos">
+                                <td>{{insumo.nombreInsumo}}</td>
+                                <td>{{insumo.precio}}</td>
+                                <td>{{insumo.unidad}}</td>
+                                <td>{{insumo.cantidadInsumo}}</td>
                               </tr>
                             </tbody>
-                            <button type="button" class="btn btn-danger mt-2 form-control" style="color: white;">
+                            <button (click)="eliminarInsumo()" type="button" class="btn btn-danger mt-2 form-control" style="color: white;">
                               <i class="fa fa-trash"></i> Eliminar
                             </button>
                             </table>

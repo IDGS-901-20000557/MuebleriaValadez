@@ -1,0 +1,44 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Claudio Tamayo
+-- Create date: 09/07/2023
+-- Description:	SP que modifica un producto
+-- =============================================
+CREATE PROCEDURE SP_Modificar_Producto
+	@PIdProducto BIGINT,
+	@PIdUsuario BIGINT,
+	@PnombreProducto nvarchar(200),
+	@Pdescripcion nvarchar(MAX),
+	@Pfoto nvarchar(MAX),
+	@PcostoProduccion real,
+	@PprecioVenta real,
+	@Pobservaciones nvarchar(MAX),
+	@PcantidadAceptable float
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	DECLARE @CIpProducto BIGINT;
+	BEGIN TRAN
+
+	UPDATE Productos SET nombreProducto=@PnombreProducto, descripcion=@Pdescripcion, foto=@Pfoto, costoProduccion=@PcostoProduccion, precioVenta=@PprecioVenta, observaciones=@Pobservaciones, cantidadAceptable=@PcantidadAceptable
+	WHERE IdProducto=@PIdProducto;
+	SET @CIpProducto = (SELECT SCOPE_IDENTITY());
+
+	-- Insertamos en la bitacora la acción (Siempre que se hagan inserts, updates o deletes se inserta en bitacora).
+	INSERT INTO Bitacora VALUES(@PIdUsuario, 'Modificación', 'Productos', CONCAT('Se modifico el producto con id:', @PIdProducto), GETUTCDATE() AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time');
+
+	COMMIT
+END TRY
+BEGIN CATCH
+	-- Todo esto es necesario para capturar el error (en caso de que haya un error en la transacción)
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber,
+        ERROR_SEVERITY() AS ErrorSeverity,
+        ERROR_STATE() AS ErrorState,
+        ERROR_PROCEDURE() AS ErrorProcedure,
+        ERROR_MESSAGE() AS ErrorMessage;
+END CATCH
