@@ -1,0 +1,29 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Claudio Tamayo
+-- Create date: 09/07/2023
+-- Description:	SP que elimina un libro de receta de manera permanente
+-- =============================================
+CREATE PROCEDURE SP_Eliminar_LibrosRecetas 
+	@PIdProducto BIGINT
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	DECLARE @CIpProducto BIGINT;
+	BEGIN TRAN
+	DELETE FROM LibroRecetas WHERE IdProducto=@PIdProducto;
+	COMMIT
+END TRY
+BEGIN CATCH
+	-- Todo esto es necesario para capturar el error (en caso de que haya un error en la transacción)
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber,
+        ERROR_SEVERITY() AS ErrorSeverity,
+        ERROR_STATE() AS ErrorState,
+        ERROR_PROCEDURE() AS ErrorProcedure,
+        ERROR_MESSAGE() AS ErrorMessage;
+END CATCH

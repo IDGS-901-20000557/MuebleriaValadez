@@ -1,6 +1,12 @@
 export interface Insumo {
-  nombreInsumo:string;
-  precio:number;
-  unidad: number;
-  cantidad: number;
+    idInsumo?: number;
+    nombreInsumo?: string;
+    idProveedor?: number;
+    idInventario?: number;
+    unidad?: string;
+    precio?: number;
+    observaciones?: string;
+    cantidadAceptable?: number;
+    cantidadInsumo?: number;
+    estatus?: string;
 }

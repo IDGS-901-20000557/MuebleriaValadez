@@ -1,0 +1,53 @@
+USE [DBMuebleriaValadez]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_Insertar_Producto]    Script Date: 30/07/2023 01:40:46 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Claudio Tamayo
+-- Create date: 09/07/2023
+-- Description:	SP que inserta un producto
+-- =============================================
+CREATE PROCEDURE [dbo].[SP_Insertar_Producto]
+	@PIdUsuario BIGINT,
+	@PIdSucursal BIGINT,
+	@PnombreProducto nvarchar(200),
+	@Pdescripcion nvarchar(MAX),
+	@Pfoto nvarchar(MAX),
+	@PcostoProduccion real,
+	@PprecioVenta real,
+	@Pobservaciones nvarchar(MAX),
+	@PcantidadAceptable float,
+    @ProductId BIGINT OUTPUT 
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	DECLARE @CIdInventario BIGINT;
+	DECLARE @CIpProducto BIGINT;
+	BEGIN TRAN
+
+	INSERT INTO Inventario VALUES(@PIdSucursal, 0);
+	SET @CIdInventario = (SELECT SCOPE_IDENTITY());
+	INSERT INTO Productos VALUES(@PnombreProducto, @Pdescripcion, @Pfoto, @PcostoProduccion, @PprecioVenta, @Pobservaciones, @CIdInventario, @PcantidadAceptable, '1');
+	SET @CIpProducto = (SELECT SCOPE_IDENTITY());
+
+	-- Insertamos en la bitacora la acción (Siempre que se hagan inserts, updates o deletes se inserta en bitacora).
+	INSERT INTO Bitacora VALUES(@PIdUsuario, 'Inserción', 'Productos', CONCAT('Se insertó el producto con id:', @CIpProducto), GETUTCDATE() AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time');
+
+	COMMIT
+	SET @ProductId = @CIpProducto;
+END TRY
+BEGIN CATCH
+	-- Todo esto es necesario para capturar el error (en caso de que haya un error en la transacción)
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber,
+        ERROR_SEVERITY() AS ErrorSeverity,
+        ERROR_STATE() AS ErrorState,
+        ERROR_PROCEDURE() AS ErrorProcedure,
+        ERROR_MESSAGE() AS ErrorMessage;
+END CATCH
