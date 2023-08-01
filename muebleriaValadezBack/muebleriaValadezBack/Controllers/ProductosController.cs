@@ -48,7 +48,7 @@ namespace muebleriaValadezBack.Controllers
 
         // GET api/<ProductosController>/5
 
-        [HttpGet("{id}", Name = "GetById")]
+        [HttpGet("{id}")]
         public LibroReceta Get(int id)
         {
             var productosData = _context.ProductosData
