@@ -1,0 +1,45 @@
+USE [DBMuebleriaValadez]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Jona locote
+-- Create date: 29/07/2023
+-- Description:	SP que inserta pedido (para cuando son más de un producto)
+	-- Nomas por que hay que insertar en la bitacora mi chavo
+-- =============================================
+CREATE PROCEDURE [dbo].[SP_Insertar_Pedido]
+	@PIdCliente bigint, 
+	@PIdTarjeta bigint,
+	@PfechaPedido nvarchar(50),
+	@Ptotal real,
+	@Pcodigo int,
+	@PIdDireccion bigint,
+	@PIdUsuario bigint
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	DECLARE @CidPedido bigInt;
+
+	BEGIN TRAN
+
+	INSERT INTO Pedidos (IdCliente, IdTarjeta, fechaPedido, total, codigo, IdDireccion)  
+	VALUES(@PIdCliente, @PIdTarjeta, CONVERT(datetime, @PfechaPedido, 103), @Ptotal, @Pcodigo, @PIdDireccion);
+	SET @CidPedido =(SELECT SCOPE_IDENTITY());
+
+	--Insertamos en la bitacora la acción 
+	INSERT INTO Bitacora VALUES(@PIdUsuario, 'Inserción', 'Pedido', 
+	CONCAT('Se inserto un pedido para el cliente con el id: ', @PIdCliente), GETUTCDATE() AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time');
+	COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber  
+        ,ERROR_SEVERITY() AS ErrorSeverity  
+        ,ERROR_STATE() AS ErrorState  
+        ,ERROR_PROCEDURE() AS ErrorProcedure  
+        ,ERROR_MESSAGE() AS ErrorMessage;
+END CATCH

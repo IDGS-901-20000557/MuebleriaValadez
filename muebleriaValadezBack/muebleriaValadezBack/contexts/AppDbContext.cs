@@ -27,6 +27,9 @@ namespace muebleriaValadezBack
         public DbSet<Inventario>? Inventario { get; set; }
         public DbSet<Productos>? Productos { get; set; }
         public DbSet<ProveedorDTO>? Proveedores { get; set; }
+        public DbSet<Tarjetas>? Tarjetas { get; set; }
+        public DbSet<Pedido>? Pedido { get; set; }
+        public DbSet<OrdenesPedidos>? OrdenesPedidos { get; set; }
 
 
     }

@@ -1,34 +1,196 @@
-<div class="container-fluid container mt-5" style="background-color: white;">
+<div class="container-fluid">
+<div class="container-fluid mt-5" style="background-color: white;">
     <div class="row">
         <div class="col-9">
-            <h1 class="text-uppercase text-center">¡Realiza tu pedido!</h1>
+            <h1 class="text-uppercase text-center mb-4">Revisa nuestro cátalogo</h1>
         </div>
-        <div class="col-3" *ngIf="isDivVisible==false">
-            <button (click)="showHideCart()"class="btn btn-outline-success">Ver carrito <i class="fa fa-shopping-cart"></i></button>
-        </div>
-        <div class="col-3" *ngIf="isDivVisible==true">
-            <button (click)="showHideCart()"class="btn btn-outline-danger">Cerrar carrito <i class="fa fa-shopping-cart"></i></button>
+        <div class="col-3 col-md-3">
+            <button (click)="showHideCart()" class="btn btn-block btn-success mb-3">
+                {{ isDivVisible ? 'Cerrar carrito' : 'Ver carrito' }} <i class="fa fa-shopping-cart"></i>
+            </button>
         </div>
     </div>
+    
+      
     <div class="row">
-        <div class="row">
-            <div class="col-4" *ngFor="let product of products">
-                <div class="card col col-4" style="width: 18rem;">
-                    <img class="card-img-top"
-                        src="{{product.foto}}"
-                        alt="{{product.nombre}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.nombre }}</h5>
-                        <p class="card-text text-success">{{ product.precioVenta | currency }}</p>
-                        <p class="card-text text-black-50">{{ product.descripcion}}</p>
-                        <p class="card-text text-black-50">{{ product.cantidad}} pzs en existencia</p>
-                        <button (click)="addToCart(product)" class="btn btn-outline-primary">Agregar <i class="fa fa-cart-plus"></i></button>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 col-md-4" *ngFor="let product of products$ | async">
+                    <div class="card mb-3">
+                        <img class="card-img-top" src="{{ product.foto }}" alt="{{ product.nombreProducto }}" height="300">
+                        <div class="card-body">
+                            <h3 class="card-title text-center">{{ product.nombreProducto }}</h3><hr>
+                            <p class="card-text text-success">{{ product.precioVenta | currency }}</p>
+                            <p class="card-text text-muted">{{ product.descripcion }}</p>
+                            <div *ngFor="let invent of inventory$ | async">
+                                <div *ngIf="invent.idInventario == product.idInventario">
+                                    <!-- <p class="card-text text-muted" >{{ invent.cantidaDisponible }} pzs en existencia</p><hr> -->
+                                    <div class="row">
+                                        <div class="col-2"></div>
+                                        <div class="col-5">
+                                            <button (click)="addToCart(product)" class="btn btn-outline-primary btn-block" title="Agregar al carrito">
+                                                <i class="fa fa-cart-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-5">
+                                            <button class="btn btn-outline-primary btn-block" data-bs-toggle="modal" 
+                                            data-bs-target="#exampleModal" (click)="checkData(product)" title="Comprar Ahora">
+                                                <i class="fa fa-shopping-bag"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="cart" *ngIf="isDivVisible">
-        <app-carrito></app-carrito>
+
+<!--Modal para realizar compra de más de un producto con el carrito de compras-->
+      <div class="modal fade" id="finVenta" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title text-center" >Confirmar Compra</h2>
+              <button type="button" class="close btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+                <h4>Confirma tus datos de compra</h4> 
+                </div>
+            <div class="modal-body">
+                <div class="row" >
+                  <div class="col-6" *ngFor="let producto of cartItems">
+                  <div class="card mb-3"  style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{{producto.foto}}" class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">{{producto.nombreProducto}}</h5>
+                          <p class="card-text"><small class="text-muted">{{producto.cantidad}} pieza(s)</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                </div>
+                <div class="col-12">
+                  <form>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="tarjeta" class="col-form-label">Escoge tu tarjeta</label><br>
+                                <select [(ngModel)]="tarjetaS" class="form-select" id="tarjeta" name="tarjeta" >
+                                <option *ngFor="let card of (cards$ | async)" [value]="card.idTarjeta"> 
+                                    {{ card.numeroTarejta }}
+                                </option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label for="direccion" class="col-form-label text-center">Escoge tu direccion</label><br>
+                                <select [(ngModel)]="direccionS" class="form-select" id="direccion" name="direccion">
+                                <option *ngFor="let add of (addresses$ | async)" [value]="add.idDireccion"> 
+                                    {{ add.calle }} #{{add.noExt}} 
+                                </option>
+                                </select>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-6">
+                               <p class="h5 text-primary"> Total: </p>
+                            </div>
+                            <div class="col-6">
+                                <p class="text-success h5">{{getTotalCart() | currency}} pesos</p>
+                            </div>
+                        </div>
+                      </div>
+                  </form>
+                </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="doManyOrders()" >Realizar Pedido</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Finaliza modal para el carrito de compras-->
+
+    <!-- Modal para realizar pedido de un solo producto -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title text-center" id="exampleModalLabel">Confirmar Compra</h2>
+              <button type="button" class="close btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+                <h4>Confirma tus datos de compra</h4> 
+                </div>
+            <div class="modal-body">
+                <div class="row" id="productoS">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{productoS.foto}}" class="card-img-top" alt="{{productoS.nombreProducto}}">
+                        <div class="card-body">
+                          <h3 class="card-text">{{productoS.nombreProducto}}</h3>
+                          <p class="card-text">{{productoS.descripcion}}</p>
+                        </div>
+                      </div>
+                </div>
+              <form>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="tarjeta" class="col-form-label">Escoge tu tarjeta</label><br>
+                            <select [(ngModel)]="tarjetaS" class="form-select" id="tarjeta" name="tarjeta" >
+                            <option *ngFor="let card of (cards$ | async)" [value]="card.idTarjeta"> 
+                                {{ card.numeroTarejta }}
+                            </option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for="direccion" class="col-form-label text-center">Escoge tu direccion</label><br>
+                            <select [(ngModel)]="direccionS" class="form-select" id="direccion" name="direccion">
+                            <option *ngFor="let add of (addresses$ | async)" [value]="add.idDireccion"> 
+                                {{ add.calle }} #{{add.noExt}} 
+                            </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="cantidad" class="col-form-label">Cantidad</label>
+                            <input [(ngModel)]="cantidadS" (ngModelChange)="setTotal()" type="number" class="form-control" id="cantidad" name="cantidad" min="1">
+                        </div>
+                        <div class="col-6">
+                            <label for="total" class="col-form-label">Total</label>
+                            <input [(ngModel)]="totalS" type="number" class="form-control" id="total" name="total" disabled>
+                        </div>
+                    </div>
+                  </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="addToOrderDet()">Realizar Pedido</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Finaliza modal para pedido de un solo producto-->
+
+    <div id="cart" class="row" *ngIf="isDivVisible">
+        <div class="col-12">
+            <app-carrito></app-carrito>
+        </div>
     </div>
+</div>
 </div>

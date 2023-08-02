@@ -1,0 +1,43 @@
+USE DBMuebleriaValadez;
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Jona locote
+-- Create date: 29/07/2023
+-- Description:	SP que inserta una orden de pedido (para cuando son más de un producto)
+			-- Nomas por que hay que insertar en la bitacora mi chavo. x2
+-- =============================================
+CREATE PROCEDURE SP_Insertar_OrdenPedido
+	@Pcantidad int,
+	@PIdProducto bigint,
+	@PprecioVenta real 
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	DECLARE @CidOrdenPedido bigInt;
+	DECLARE @CidPedido bigInt;
+
+	BEGIN TRAN
+
+	SET @CidPedido = (SELECT TOP 1 IdPedido FROM Pedidos ORDER BY IdPedido DESC);
+
+	INSERT INTO OrdenesPedidos(cantidad, IdPedido, IdProducto, subtotal)
+	VALUES(@Pcantidad, @CidPedido, @PIdProducto, (@Pcantidad * @PprecioVenta));
+	SET @CidOrdenPedido =(SELECT SCOPE_IDENTITY());
+
+	--Insertamos en la bitacora la acción 
+	INSERT INTO Bitacora VALUES(@CidPedido, 'Inserción', 'OrdenPedido', 
+	CONCAT('Se inserto una orden de pedido del pedido con id  ', @CidPedido), GETUTCDATE() AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time');
+	COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber  
+        ,ERROR_SEVERITY() AS ErrorSeverity  
+        ,ERROR_STATE() AS ErrorState  
+        ,ERROR_PROCEDURE() AS ErrorProcedure  
+        ,ERROR_MESSAGE() AS ErrorMessage;
+END CATCH

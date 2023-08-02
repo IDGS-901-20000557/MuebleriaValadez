@@ -57,7 +57,7 @@ export class AuthComponent implements OnInit {
             this.router.navigateByUrl('/auth');
           }else if(sessionStorage.getItem('idRol')==='3'){
             //Pagina de inicio cliente
-            this.router.navigateByUrl('/auth');
+            this.router.navigateByUrl('/shop');
           }else if(sessionStorage.getItem('idRol')==='10002'){
            //Pagina de inicio empleado pedidos
             this.router.navigateByUrl('/auth');

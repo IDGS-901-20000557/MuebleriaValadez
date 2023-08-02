@@ -13,8 +13,6 @@ namespace muebleriaValadezBack.Models
         public float precioVenta { get; set; }
         public string observaciones { get; set; }
         public long IdInventario { get; set; }
-        public float cantidadAceptable { get; set; }
-
-        public char estatus { get; set; }
+        public double cantidadAceptable { get; set; }
     }
 }
