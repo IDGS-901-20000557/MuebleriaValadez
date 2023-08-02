@@ -4,16 +4,20 @@
     <div *ngFor="let item of cartItems">
         <div class="card">
             <div class="card-body">
-              <h3 class="card-title">{{ item.nombre }}</h3>
+              <h3 class="card-title">{{ item.nombreProducto }}</h3>
               <h4 class="card-subtitle mb-2 text-muted">{{ item.precioVenta | currency }}</h4>
               <p class="card-text">Haz agregado {{ item.cantidad }} pieza(s)</p>
               <div class="row">
                 <button (click)="removeOneCart(item);" class="btn btn-outline-primary col-6"><i class="fa fa-minus"></i></button>
-                <!-- <button (click)="removeProduct(item);" class="btn btn-outline-primary col-6"><i class="fa fa-trash"></i></button> -->
               </div>
             </div>
           </div>
       </div>
       <p *ngIf="cartItems.length > 0">Total: {{ getTotal() | currency }}</p>
+      <div *ngIf="cartItems.length > 0">
+        <button data-bs-toggle="modal" class="btn btn-success" data-bs-target="#finVenta">
+          Finalizar <i class="fa fa-cart-arrow-down"></i>
+        </button>
+      </div>
 </div>
 

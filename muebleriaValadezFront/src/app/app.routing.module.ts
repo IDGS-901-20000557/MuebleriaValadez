@@ -11,6 +11,8 @@ import { AuthGuardAdmin } from './authAdmin.guard';
 import { ProductosComponent } from './empleadoAdministrador/productos/productos.component';
 import { InsumosComponent } from './empleadoAdministrador/insumos/insumos.component';
 import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 
 const routes: Routes = [
@@ -25,8 +27,10 @@ const routes: Routes = [
     { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] },
     { path: 'productos', component: ProductosComponent, canActivate: [AuthGuardAdmin] },
     { path: 'insumos', component: InsumosComponent, canActivate: [AuthGuardAdmin] },
-    { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] }
-
+    { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] },
+    { path: 'myOrders', component: PedidosComponent},
+    // Page not found
+    { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

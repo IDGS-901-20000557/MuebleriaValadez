@@ -9,6 +9,6 @@ namespace muebleriaValadezBack.Models
         public String calle { get; set; }
         public int noExt { get; set; }
         public int? noInt { get; set; }
-        public Domicilio domicilio { get; set; }
+        public long IdDomicilio { get; set; }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using muebleriaValadezBack.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using muebleriaValadezBack.Models;
 using System.Data;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace muebleriaValadezBack.Controllers
 {
@@ -18,25 +18,16 @@ namespace muebleriaValadezBack.Controllers
         {
             _context = context;
         }
+        
         // GET: api/<ProductosController>
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                var productosConEstatusUno = _context.Productos
-                    .Where(p => p.estatus == '1')
-                    .Select(p => new Productos 
-                    {
-                        idProducto = p.idProducto,
-                        nombreProducto = p.nombreProducto,
-                        costoProduccion = p.costoProduccion,
-                        precioVenta = p.precioVenta,
-                        cantidadAceptable = p.cantidadAceptable
-                    })
-                    .ToList();
+                var results = _context.Set<Productos>().FromSqlRaw("SELECT * FROM Productos WHERE estatus = 1").ToList();
+                return Ok(results);
 
-                return Ok(productosConEstatusUno);
             }
             catch (Exception ex)
             {
@@ -283,6 +274,5 @@ namespace muebleriaValadezBack.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
     }
 }
