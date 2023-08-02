@@ -1,0 +1,33 @@
+USE [DBMuebleriaValadez]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_Insertar_LibroReceta]    Script Date: 29/07/2023 11:06:08 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Claudio Tamayo
+-- Create date: 09/07/2023
+-- Description:	SP que inserta libro de receta
+-- =============================================
+CREATE PROCEDURE [dbo].[SP_Insertar_LibroReceta]
+	@PIdProducto BIGINT,
+	@PIdInsumo BIGINT,
+	@PcantidadInsumo real
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	BEGIN TRAN
+	INSERT INTO LibroRecetas VALUES(@PIdProducto,@PIdInsumo,@PcantidadInsumo);
+	COMMIT
+END TRY
+BEGIN CATCH
+--Todo esto es necesario para capturar el error (en caso de que haya un error en la transacción)
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber  
+        ,ERROR_SEVERITY() AS ErrorSeverity  
+        ,ERROR_STATE() AS ErrorState  
+        ,ERROR_PROCEDURE() AS ErrorProcedure  
+        ,ERROR_MESSAGE() AS ErrorMessage;
+END CATCH
