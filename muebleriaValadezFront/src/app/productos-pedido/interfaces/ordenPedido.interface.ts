@@ -1,7 +1,7 @@
 export interface OrdenPedido {
-    IdOrdenPedido: number;
+    idOrdenPedido: number;
     cantidad: number;
-    IdPedido: number;
-    IdProducto: number;
+    idPedido: number;
+    idProducto: number;
     subtotal: number;
 }
