@@ -5,7 +5,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Producto } from './productos-pedido/product.interface';
+import { Producto } from './productos-pedido/interfaces/product.interface';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -15,49 +15,44 @@ export class CarritoComprasService {
   private cartItems: Producto[] = [];
 
   addToCart(item: Producto): void {
-    const existingItem = this.cartItems.find((product) => product.id === item.id);
+    const existingItem = this.cartItems.find((product) => product.idProducto === item.idProducto);
     if (existingItem) {
-      if(existingItem.cantidad < item.cantidad){
       existingItem.cantidad++;
-    }else{
-      Swal.fire({
-        icon: 'error',
-        title: 'No se pudo realizar la accion',
-        text: 'Solo puedes agregar hasta '+item.cantidad+' piezas de este mueble',
-      });
-    }
     } else {
       this.cartItems.push({ ...item, cantidad: 1 });
       Swal.fire({
         icon: 'success',
         title: 'Agregado al carrito',
-        text: 'Agregaste '+item.nombre+' al carrito',
+        text: 'Agregaste '+item.nombreProducto+' al carrito',
       });
     }
   }
 
   removeOne(item:Producto):void{
     
-      const existingItem = this.cartItems.find((product) => product.id === item.id);
+      const existingItem = this.cartItems.find((product) => product.idProducto === item.idProducto);
       if (existingItem) {
         existingItem.cantidad--;
         if (existingItem.cantidad == 0) {
-          this.cartItems = this.cartItems.filter((product) => product.id !== item.id);
+          this.cartItems = this.cartItems.filter((product) => product.idProducto !== item.idProducto);
         }
       }
   }
 
   removeItem(item:Producto):void{
-    const existingItem = this.cartItems.find((product) => product.id === item.id);
+    const existingItem = this.cartItems.find((product) => product.idProducto === item.idProducto);
       if (existingItem) {
-          let existingItemIndex = this.cartItems.findIndex((product) => product.id === item.id);
+          let existingItemIndex = this.cartItems.findIndex((product) => product.idProducto === item.idProducto);
           this.cartItems = this.cartItems.splice(existingItemIndex, 1);
         }
   }
-  
 
   getCartItems(): Producto[] {
     return this.cartItems;
+  }
+
+  cleanCart(): void {
+    this.cartItems = [];
   }
 
   getTotal(): number {

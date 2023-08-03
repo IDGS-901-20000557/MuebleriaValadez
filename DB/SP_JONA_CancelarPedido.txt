@@ -1,0 +1,37 @@
+USE [DBMuebleriaValadez]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Jona locote
+-- Create date: 29/07/2023
+-- Description:	SP que cancela un pedido
+	-- Nomas por que hay que insertar en la bitacora mi chavo
+-- =============================================
+CREATE PROCEDURE [dbo].[SP_Cancelar_Pedido]
+	@PIdPedido bigint, 
+	@PIdUsuario bigint
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	DECLARE @CidPedido bigInt;
+
+	BEGIN TRAN
+	UPDATE Pedidos SET estatus = 0 WHERE idPedido = @PIdPedido;
+
+	--Insertamos en la bitacora la acción 
+	INSERT INTO Bitacora VALUES(@PIdUsuario, 'Cancelar', 'Pedido', 
+	CONCAT('Se cancelo un pedido con el id ', @PIdPedido), GETUTCDATE() AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time');
+	COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber  
+        ,ERROR_SEVERITY() AS ErrorSeverity  
+        ,ERROR_STATE() AS ErrorState  
+        ,ERROR_PROCEDURE() AS ErrorProcedure  
+        ,ERROR_MESSAGE() AS ErrorMessage;
+END CATCH

@@ -1,0 +1,122 @@
+ALTER PROCEDURE [SP_ConsultarInicioSesion] 
+	@Pemail nvarchar(100),
+	@Ppassword nvarchar(MAX)
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	DECLARE @CidUsuario BIGINT;
+	DECLARE @CidPersona BIGINT;
+	DECLARE @CidCliente BIGINT;
+	DECLARE @CidEmpleado BIGINT;
+
+	BEGIN TRAN
+		-- Variable de tabla para almacenar los resultados de la consulta
+		DECLARE @UsuariosTable TABLE (
+			IdUsuario BIGINT,
+			idCliente BIGINT,
+			idEmpleado BIGINT,
+			email NVARCHAR(100),
+			IdPersona BIGINT,
+			nombres NVARCHAR(MAX),
+			apellidoPaterno NVARCHAR(MAX),
+			apellidoMaterno NVARCHAR(MAX),
+			telefono NVARCHAR(MAX),
+			rfc NVARCHAR(MAX),
+			puesto NVARCHAR(MAX),
+			sucursal NVARCHAR(MAX),
+			idDireccionSucursal BIGINT,
+			rol NVARCHAR(MAX),
+			IdRol BIGINT
+		);
+
+		-- Realizamos la consulta y almacenamos los resultados en la variable de tabla
+		INSERT INTO @UsuariosTable
+		SELECT 
+			U.IdUsuario,
+			CASE 
+				WHEN R.IdRol = 3 THEN C.IdCliente 
+				ELSE 0 
+			END AS idCliente, 
+			CASE 
+				WHEN R.IdRol != 3 THEN E.IdEmpleado 
+				ELSE 0 
+			END AS idEmpleado, 
+			email, 
+			P.IdPersona, 
+			nombres, 
+			apellidoPaterno, 
+			apellidoMaterno, 
+			telefono,
+			CASE 
+				WHEN R.IdRol = 3 THEN '----' 
+				ELSE rfc 
+			END AS rfc, 
+			CASE 
+				WHEN R.IdRol = 3 THEN '----' 
+				ELSE puesto 
+			END AS puesto, 
+			CASE 
+				WHEN R.IdRol = 3 THEN '----' 
+				ELSE razonSocial 
+			END AS sucursal, 
+			CASE 
+				WHEN R.IdRol = 3 THEN 0 
+				ELSE idDireccion 
+			END AS idDireccionSucursal, 
+			R.nombre AS 'rol',
+			R.IdRol
+		FROM Usuarios AS U
+		INNER JOIN Personas AS P ON P.IdPersona = U.IdPersona
+		LEFT JOIN Empleados AS E ON E.IdPersona = P.IdPersona
+		LEFT JOIN Sucursales AS S ON S.IdSucursal = E.IdSucursal
+		LEFT JOIN Clientes AS C ON C.IdPersona = P.IdPersona
+		INNER JOIN Usuarios_Roles AS UR ON UR.IdUsuario = U.IdUsuario
+		INNER JOIN Roles AS R ON R.IdRol = UR.IdRol
+		WHERE U.estatus = 1 AND U.email = @Pemail AND U.password = @Ppassword;
+
+		-- Verificamos si el usuario existe
+		IF EXISTS (SELECT 1 FROM @UsuariosTable)
+		BEGIN
+			-- Obtenemos el ID del usuario
+			SELECT TOP 1 
+				@CidUsuario = IdUsuario,
+				@CidCliente = idCliente,
+				@CidEmpleado = idEmpleado
+			FROM @UsuariosTable;
+
+			-- Insertamos en la bitácora la acción (Siempre que se hagan inserts, updates o deletes se inserta en bitácora).
+			INSERT INTO Bitacora VALUES(@CidUsuario, 'Inicio Sesion', 'Usuarios', CONCAT('Inicio Sesion: ', @Pemail), GETUTCDATE() AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time');
+		END
+
+		-- Devolvemos los resultados de la consulta
+		SELECT 
+			IdUsuario, 
+			idCliente, 
+			idEmpleado, 
+			email, 
+			IdPersona, 
+			nombres, 
+			apellidoPaterno, 
+			apellidoMaterno, 
+			telefono, 
+			rfc, 
+			puesto, 
+			sucursal, 
+			idDireccionSucursal, 
+			rol, 
+			IdRol
+		FROM @UsuariosTable;
+
+		COMMIT
+END TRY
+BEGIN CATCH
+	-- Todo esto es necesario para capturar el error (en caso de que haya un error en la transacción)
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber,
+        ERROR_SEVERITY() AS ErrorSeverity,
+        ERROR_STATE() AS ErrorState,
+        ERROR_PROCEDURE() AS ErrorProcedure,
+        ERROR_MESSAGE() AS ErrorMessage;
+END CATCH
+

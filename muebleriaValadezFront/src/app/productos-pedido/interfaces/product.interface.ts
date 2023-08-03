@@ -4,12 +4,13 @@
 */
 
 export interface Producto {
-    id: number;
-    nombre: string;
+    idProducto: number;
+    nombreProducto: string;
     descripcion:string;
     foto : string;
     costoProduccion:number;
     precioVenta: number;
     cantidadAceptable: number;
-    cantidad: number;
+    idInventario: number;
+    cantidad:number;
 }
