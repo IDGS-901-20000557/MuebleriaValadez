@@ -18,8 +18,12 @@ export class PedidoService {
         return this.http.get<Pedido[]>(this.apiPedidos+'/'+idCliente);
     }
 
-    getAllOrdenPedido(idPedido:number): Observable<any[]> {
-        return this.http.get<any[]>(this.apiPedidos+'/ObtenerDetalle/'+idPedido);
+    getAllOrdenPedido(idPedido:number): Observable<OrdenPedido[]> {
+        return this.http.get<OrdenPedido[]>(this.apiPedidos+'/ObtenerDetalle/'+idPedido);
+    }
+
+    getAllProductosOrden(idPedido:number): Observable<Producto[]> {
+        return this.http.get<Producto[]>(this.apiPedidos+'/ObtenerProductoPedido/'+idPedido);
     }
 
     addPedidoOrden(producto:Producto, idUsuario:number, idClientes:number, cantidadS:number, idTarjeta:number, IdDireccion:number) {
@@ -52,7 +56,7 @@ export class PedidoService {
         const codigoBD = codigoAleatorio.toString().padStart(3, '0');
         // Se crea el objeto pedido
         var pedido : Pedido = {
-            IdPedido:0,
+            idPedido:0,
             IdCliente : idClientes,
             IdTarjeta:idTarjeta,
             fechaPedido:new Date(),
@@ -70,14 +74,33 @@ export class PedidoService {
     addOrden(producto: Producto, cantidadR: number){
         var idUsuario = sessionStorage.getItem('idUsuario');
         var ordenPedido : OrdenPedido = {
-            IdOrdenPedido:0,
+            idOrdenPedido:0,
             cantidad:cantidadR,
             subtotal:0,
-            IdProducto:producto.idProducto,
-            IdPedido:0
+            idProducto:producto.idProducto,
+            idPedido:0
         };
 
-        return this.http.post<any>(this.apiPedidos+'/AgregarOrden/'+producto.precioVenta+'&&'+idUsuario, ordenPedido).toPromise();
+        return this.http.post<any>(this.apiPedidos+'/AgregarOrden/'+producto.precioVenta+'&&'+idUsuario, 
+                                    ordenPedido).toPromise();
+    }
+
+    cancelarPedido(idPedido:number){
+        var idUsuario = sessionStorage.getItem('idUsuario');
+        var pedido : Pedido = {
+            idPedido:idPedido,
+            IdCliente : 0,
+            IdTarjeta:0,
+            fechaPedido:new Date(),
+            fechaEntrega:new Date(),
+            codigo: '',
+            total: 0,
+            idDireccion:0,
+            IdEmpleadoEntrega:0,
+            estatus:'0'
+        };
+
+        return this.http.post(this.apiPedidos+'/CancelarPedido/'+idUsuario+'&&'+idPedido, pedido).toPromise();
     }
 
 }

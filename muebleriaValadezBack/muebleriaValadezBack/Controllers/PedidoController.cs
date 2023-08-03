@@ -39,18 +39,26 @@ namespace muebleriaValadezBack.Controllers
                                "ON oP.IdProducto = p.IdProducto WHERE oP.IdPedido = @idPedido;",
                     new SqlParameter("@idPedido", idPedido)).ToList();
 
+                return Ok(orders);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("ObtenerProductoPedido/{idPedido}", Name = "GetProductoPedido")]
+        public IActionResult GetProductoPedido(int idPedido)
+        {
+            try
+            {
                 var products = _context.Set<Productos>()
                     .FromSqlRaw("SELECT p.* FROM OrdenesPedidos oP INNER JOIN Productos p " +
                                "ON oP.IdProducto = p.IdProducto WHERE oP.IdPedido = @idPedido;",
                     new SqlParameter("@idPedido", idPedido)).ToList();
 
-                var response = new OrdenPedidoResponse
-                {
-                    ordenesPedidos = orders,
-                    productos = products
-                };
 
-                return Ok(response);
+                return Ok(products);
             }
             catch (Exception ex)
             {
@@ -92,6 +100,35 @@ namespace muebleriaValadezBack.Controllers
                 Console.WriteLine("Fin de parametros");
                 _context.SaveChanges();
                 return Ok(pedidoOrden);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("CancelarPedido/{idUsuario}&&{idPedido}", Name = "CancelarPedido")]
+        public IActionResult CancelPedido(int idUsuario, int idPedido)
+        {
+            try
+            {
+                var parametros = new[]
+                {
+                    new SqlParameter("@PIdPedido", idPedido),
+                    new SqlParameter("@PidUsuario", idUsuario)
+                };
+
+                Console.WriteLine("Hola estos son tus parametros");
+                foreach (var param in parametros)
+                {
+                    Console.WriteLine(param.Value);
+                }
+                Console.WriteLine("Fin de los parametros");
+
+                _context.Database.ExecuteSqlRaw("EXEC SP_Cancelar_Pedido @PIdPedido, @PidUsuario;", parametros);
+
+                _context.SaveChanges();
+                return Ok();
             }
             catch (Exception ex)
             {

@@ -4,7 +4,7 @@
 */
 
 export interface Pedido {
-    IdPedido: number;
+    idPedido: number;
     IdCliente: number;
     IdTarjeta: number;
     fechaPedido: Date;
