@@ -31,3 +31,19 @@ button span {
     transition: transform 0.7s;
     transform: translateY(-5px);
 }
+
+/* Menú desplegable */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #000;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
