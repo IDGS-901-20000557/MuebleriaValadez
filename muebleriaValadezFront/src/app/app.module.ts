@@ -26,6 +26,7 @@ import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.co
 import { CarritoComponent } from './carrito/carrito.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { ProveedorComponent } from './empleadoAdministrador/proveedores/proveedores.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { PedidosComponent } from './pedidos/pedidos.component';
     ProductosPedidoComponent,
     CarritoComponent,
     PageNotFoundComponent,
-    PedidosComponent
+    PedidosComponent,
+    ProveedorComponent
   ],
   imports: [
     BrowserModule,
