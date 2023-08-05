@@ -1,0 +1,204 @@
+<div class="container-fluid mt-5 mb-5">
+    <div class="row mt-3">
+  
+      <div class="form-group col-12 col-md-4">
+        <form [formGroup]="registroProvForm" (ngSubmit)="registroProvForm.valid && registrarProveedor()">
+          <div class="card shadow rounded">
+            <div id="title" class="card-header text-center">Registro de Proveedor</div>
+            <div class="card-body">
+              <div class="row">
+
+              <div class="form-group col-12 col-md-12">
+                <label class="form-label" for="txtNombreEmpresa">Nombre Empresa</label>
+                <input id="txtnombrempresa" type="text" class="form-control form-control-lg" formControlName="nombreEmpresa" />
+                 <div *ngIf="!isUpdate"> 
+                <div *ngIf="registroProvForm.get('nombreEmpresa')?.errors?.['required']" class="text-danger" >
+                  Nombre es requerido.
+                </div>
+                <div *ngIf="registroProvForm.get('nombreEmpresa')?.errors?.['minLength']" class="text-danger">
+                  Debe ser mayor a 3 su longitud.
+                </div>
+                <div *ngIf="registroProvForm.get('nombreEmpresa')?.errors?.['maxLength']" class="text-danger">
+                  Debe ser menor a 100 su longitud.
+                </div>
+               </div> 
+              </div>
+              <div class="form-group col-12 col-md-12">
+                <label class="form-label" for="txtName">Nombre</label>
+                <input id="txtnombre" type="text" class="form-control form-control-lg" formControlName="nombres" />
+                <div *ngIf="!isUpdate">
+                <div *ngIf="registroProvForm.get('nombres')?.errors?.['required']" class="text-danger" >
+                  Nombre es requerido.
+                </div>
+                <div *ngIf="registroProvForm.get('nombres')?.errors?.['minLength']" class="text-danger">
+                  Debe ser mayor a 3 su longitud.
+                </div>
+                <div *ngIf="registroProvForm.get('nombres')?.errors?.['maxLength']" class="text-danger">
+                  Debe ser menor a 100 su longitud.
+                </div>
+               </div> 
+              </div>
+  
+              <div class="form-group col-12 col-md-6">
+                <label class="form-label" for="txtAPaterno">Apellido Paterno</label>
+                <input id="txtAPaterno" type="text" class="form-control form-control-lg"
+                  formControlName="ApellidoPaterno" />
+                <div *ngIf="!isUpdate"> 
+  
+                <div *ngIf="registroProvForm.get('ApellidoPaterno')?.errors?.['required']" class="text-danger">
+                  Apellido Paterno es requerido.
+                </div>
+                <div *ngIf="registroProvForm.get('ApellidoPaterno')?.errors?.['minLength']" class="text-danger">
+                  Debe ser mayor a 3 su longitud.
+                </div>
+                <div *ngIf="registroProvForm.get('ApellidoPaterno')?.errors?.['maxLength']" class="text-danger">
+                  Debe ser menor a 50 su longitud.
+                </div>
+                </div> 
+              </div>
+  
+              <!-- Apellido Materno input -->
+              <div class="form-group col-12 col-md-6">
+                <label class="form-label" for="txtAMaterno">Apellido Materno</label>
+                <input id="txtAMaterno" type="text" class="form-control form-control-lg"
+                  formControlName="ApellidoMaterno" />
+                  <div *ngIf="!isUpdate"> 
+  
+                <div *ngIf="registroProvForm.get('ApellidoMaterno')?.errors?.['required']" class="text-danger">
+                  Apellido Materno es requerido.
+                </div>
+                <div *ngIf="registroProvForm.get('ApellidoMaterno')?.errors?.['minLength']" class="text-danger">
+                  Debe ser mayor a 3 su longitud.
+                </div>
+                <div *ngIf="registroProvForm.get('ApellidoMaterno')?.errors?.['maxLength']" class="text-danger">
+                  Debe ser menor a 50 su longitud.
+                </div>
+               </div> 
+              </div>
+
+              <!-- Telefono input -->
+  
+              <div class="form-group col-12 col-md-12">
+                <label class="form-label" for="txtTelefono">Telefono</label>
+                <input id="txtTelefono" type="text" class="form-control form-control-lg" formControlName="Telefono" />
+                 <div *ngIf="!isUpdate"> 
+  
+                <div *ngIf="registroProvForm.get('Telefono')?.errors?.['required']" class="text-danger">
+                  Telefono es requerido.
+                </div>
+                <div *ngIf="registroProvForm.get('Telefono')?.errors?.['minLength']" class="text-danger">
+                  Debe ser mayor a 3 su longitud.
+                </div>
+                <div *ngIf="registroProvForm.get('Telefono')?.errors?.['maxLength']" class="text-danger">
+                  Debe ser menor a 50 su longitud.
+                </div>
+               </div> 
+              </div>  
+  
+              <div class="row">
+  
+                <div class="form-group col-12 col-md-6">
+                  <label class="form-label" for="txtInfoExtra">Información extra</label>
+                  <textarea id="txtInfoExtra" type="text" class="form-control form-control-lg" formControlName="InfoExtra" ></textarea>
+                </div> 
+              </div>
+   
+  <div class="form-group col-12 col-md-12">
+    <div class="row justify-content-center">
+      
+      <div class="col-12 col-md-6">
+            
+        <div *ngIf="!isUpdate" >
+              <button class="btn btn-success mt-2 form-control" (click)="registrarProveedor()"id="btnGuardar">
+                <i class="fas fa-save"></i> Guardar
+              </button>
+        </div>
+               
+              <div *ngIf="isUpdate" >
+                <button class="btn btn-success mt-2 form-control"
+              (click)="actualizarProveedor()" id="btnGuardar">
+                <i class="fas fa-save"></i> Actualizar Provedor
+            </button>
+              </div>
+              </div>
+
+                  <div class="col-12 col-md-6">
+                  <button class="btn btn-danger mt-2 form-control"  id="btnCancelar">
+                    <i class="fas fa-times"></i> Cancelar
+                  </button>
+                  </div>
+              </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </form>
+      </div>
+  
+      <div class="form-group col-12 col-md-8">
+        <div class="table-responsive">
+  
+          <table datatable [dtOptions]="dtOptions" class="table table-striped table-hover table-bordered" cellspacing="0"
+            width="100%">
+            <thead class="mt-3">
+              <tr class="text-center">
+               <!--  <th>ID</th> -->
+                <th>Empresa</th>
+                <th>Nombre</th>
+                <!-- <th>Apellido Paterno </th>
+                <th>Apellido Materno</th> -->
+                <th>Telefono</th>
+                <th>Extra</th>
+                <th>Estatus</th>
+                <th>Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+  
+              <tr class="text-center" *ngFor="let proveedor of proveedores">
+  
+               <!--  <td>{{ proveedor.idProveedor }}</td> -->
+                <td>{{ proveedor.nombreEmpresa }}</td>
+                <td>{{ proveedor.persona.nombres}} {{ proveedor.persona.apellidoPaterno}} {{ proveedor.persona.apellidoMaterno}}</td>
+                <!-- <td>{{ proveedor.persona.apellidoPaterno}}</td>
+                <td>{{ proveedor.persona.apellidoMaterno}}</td> -->
+                <td>{{ proveedor.persona.telefono }}</td>
+                <td>{{ proveedor.informacionExtra }}</td>
+                <td>{{ proveedor.estatus != 0 ? 'Activo' : 'Inactivo' }}</td>
+
+                <!-- crear un boton para editar -->
+                <td>
+                  <button class="btn btn-primary" (click)="traerDatosProveedor
+                  ({
+                    idProveedor: proveedor.idProveedor,
+                    nombreEmpresa: proveedor.nombreEmpresa,
+                    nombres: proveedor.persona.nombres,
+                    apellidoPaterno: proveedor.persona.apellidoPaterno,
+                    apellidoMaterno: proveedor.persona.apellidoMaterno,
+                    telefono: proveedor.persona.telefono,
+                    informacionExtra: proveedor.informacionExtra
+                    })">
+
+                    <i class="fas fa-edit"></i>
+                  </button>
+                
+                <!-- crear un boton de eliminar-->
+                  <button class="btn btn-danger mx-1" (click)="eliminarProveedor(proveedor.idProveedor)"
+                    *ngIf="proveedor.estatus != 0">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+
+                  <button class="btn btn-success" (click)="activarProveedor(proveedor.idProveedor)"
+                    *ngIf="proveedor.estatus == 0">
+                    <i class="fas fa-check"></i>
+                  </button>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div> 
+

@@ -13,6 +13,7 @@ import { InsumosComponent } from './empleadoAdministrador/insumos/insumos.compon
 import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { ProveedorComponent } from './empleadoAdministrador/proveedores/proveedores.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
     { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] },
     { path: 'productos', component: ProductosComponent, canActivate: [AuthGuardAdmin] },
     { path: 'insumos', component: InsumosComponent, canActivate: [AuthGuardAdmin] },
+    { path: 'proveedores', component: ProveedorComponent, canActivate: [AuthGuardAdmin] },
     { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] },
     { path: 'myOrders', component: PedidosComponent},
     // Page not found
