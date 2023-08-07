@@ -27,6 +27,8 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { ProveedorComponent } from './empleadoAdministrador/proveedores/proveedores.component';
+import { SucursalesComponent } from './empleadoAdministrador/sucursales/sucursales.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { ProveedorComponent } from './empleadoAdministrador/proveedores/proveedo
     MenuComponent,
     SignupComponent,
     FooterComponent,
+    ContactComponent,
     LoaderComponent,
     ListProductsComponent,
     DashboardComponent,
@@ -45,7 +48,8 @@ import { ProveedorComponent } from './empleadoAdministrador/proveedores/proveedo
     CarritoComponent,
     PageNotFoundComponent,
     PedidosComponent,
-    ProveedorComponent
+    ProveedorComponent,
+    SucursalesComponent
   ],
   imports: [
     BrowserModule,
