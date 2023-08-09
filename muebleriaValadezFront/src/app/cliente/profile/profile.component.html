@@ -1,0 +1,163 @@
+<div class="body mt-5 pt-5 mb-5 pb-5">
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="profile-head">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+
+                                <div class="card card2">
+                                    <img src="../../assets/img/img_avatar.png"
+                                        alt="John" style="width:100%">
+                                    <h1>{{nombre}}</h1>
+                                    <p class="title">{{rol}}</p>
+                                    <p>{{email}}</p>
+                                    <p>{{telefono}}</p>
+                                    <p>{{rfc}}</p>
+
+                                    <div style="margin: 24px 0;">
+                                        <a href="#"><i class="fas fa-dove mx-1"></i></a>
+                                        <a href="#"><i class="fas fa-envelope mx-1"></i></a>
+                                        <a href="#"><i class="fas fa-phone mx-1"></i></a>
+                                        <a href="#"><i class="fas fa-birthday-cake mx-1"></i></a>
+                                    </div>
+                                    <p><button>Contact</button></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8 mt-2 mb-2" style="min-height: 800px;">
+
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link" (click)="mostrarTab(1)"
+                                            [class.active]="activeTab === 1">Payment</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" (click)="mostrarTab(2)"
+                                            [class.active]="activeTab === 2">Direction</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" (click)="mostrarTab(3)"
+                                            [class.active]="activeTab === 3">Profile</a>
+                                    </li>
+                                </ul>
+
+
+                                <div id="contenido1" style="width: 100%;">
+                                    <div *ngIf="!mostrarFormulario">
+                                        <div class="card mt-3">
+                                            <div class="card-body">
+                                                <b (click)=" mostrarFormulario = true ; " style="cursor: pointer;">Agregar
+                                                    Tarjeta</b>
+                                                <a (click)=" mostrarFormulario = true ; "
+                                                    style="cursor: pointer; font-size: medium;  " class="mt-3">
+                                                    <i class="fas fa-plus mx-2 mt-2 float-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="mostrarFormulario">
+                                        <a (click)="mostrarFormulario = false"
+                                            style="cursor: pointer; font-size: medium;  " class="mt-3"> <i
+                                                class="fas fa-times mx-2 mt-2 float-right"
+                                                (click)="mostrarFormulario = false"></i></a>
+                                        <app-tarjetas *ngIf="mostrarFormulario" [id]="0"></app-tarjetas>
+
+                                    </div>
+
+                                    <div *ngIf="!mostrarFormulario && tarjetas.length > 0" class="container"
+                                        style="scrollbar-width: none; -ms-overflow-style: none; overflow-y: scroll; height: 500px;">
+                                        <div class="row">
+                                            <div *ngFor="let tarjeta of tarjetas" class="col-md-4 mt-3 mt-5">
+
+
+
+                                                <div class="col-md-12">
+                                                    <app-tarjetas *ngIf="tarjetas.length > 0"
+                                                        [id]="tarjeta.idTarjeta"></app-tarjetas>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="contenido2">
+                                    <div *ngIf="!mostrarFormulario">
+                                        <div class="card mt-3">
+                                            <div class="card-body">
+                                                <b (click)="mostrarFormulario = true" style="cursor: pointer;">Agregar
+                                                    Direccion</b>
+                                                <a (click)="mostrarFormulario = true"
+                                                    style="cursor: pointer; font-size: medium;  " class="mt-3">
+                                                    <i class="fas fa-plus mx-2 mt-2 float-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="mostrarFormulario && IdDireccion === 0">
+                                        <a (click)="mostrarFormulario = false"
+                                            style="cursor: pointer; font-size: medium;  " class="mt-3"> <i
+                                                class="fas fa-times mx-2 mt-2 float-right"
+                                                (click)="mostrarFormulario = false"></i></a>
+                                        <app-address></app-address>
+
+                                    </div>
+                                    <div *ngIf="!mostrarFormulario && direcciones.length > 0" class="container"
+                                        style="scrollbar-width: none; -ms-overflow-style: none; overflow-y: scroll; height: 500px;">
+                                        <div class="row">
+                                            <div *ngFor="let direccion of direcciones" class="col-md-6 mt-3">
+
+                                                <div class="col-md-12">
+
+                                                    <div class="card mt-2">
+                                                        <a data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                            data-bs-title="Tooltip on bottom" (click)="dropDireccion(direccion.idDireccion)"
+                                                            style="cursor: pointer; font-size: medium;  " class="mt-3">
+                                                            <i class="fas fa-times mx-2 mt-2 float-right" data-toggle="tooltip"
+                                                                data-placement="bottom" title="Eliminar" (click)="dropDireccion(direccion.idDireccion)"></i> </a>
+                                                        <div class="card-body">
+
+                                                            <p class="card-text"><b>Calle:</b> {{ direccion.direccion.calle }}
+                                                            <p class="card-text"> <b>No. Exterior:</b> {{
+                                                               direccion.direccion.noExt }}
+                                                                <b>No. Interior:</b> {{ direccion.direccion.noInt }}</p>
+                                                            <p class="card-text"><b>C.P.:</b> {{
+                                                                direccion.direccion.domicilio.cp }}
+                                                                <b> Colonia:</b> {{ direccion.direccion.domicilio.colonia }}</p>
+                                                            <p class="card-text"><b>Ciudad:</b> {{
+                                                                direccion.direccion.domicilio.ciudad }}
+                                                              <b>Estado:</b>   {{ direccion.direccion.domicilio.estado }}</p>
+                                                            <button class="btn btn-primary mt-2" (click)="editarDireccion(direccion.idDireccion)">Editar
+                                                                Dirección</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="editarDireccion"  *ngIf="mostrarFormulario && IdDireccion > 0">
+                                        <a (click)="closeForm()" style="cursor: pointer; font-size: medium;  " class="mt-3"> <i class="fas fa-times mx-2 mt-2 float-right" (click)="closeForm()"></i></a>
+                                            <app-address [id]="IdDireccion"></app-address>
+
+                                 </div>
+                             </div>
+                                <div id="contenido3">
+                              <app-profile-update></app-profile-update>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

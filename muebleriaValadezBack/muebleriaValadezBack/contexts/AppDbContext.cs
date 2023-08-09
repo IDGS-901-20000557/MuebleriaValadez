@@ -11,13 +11,13 @@ namespace muebleriaValadezBack
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-        public DbSet<Cliente>? Cliente { get; set; }
-        public DbSet<Direccion>? Direccion { get; set; }
-        public DbSet<Domicilio>? Domicilio { get; set; }
-        public DbSet<Empleado>? Empleado { get; set; }
+        public DbSet<Cliente>? Clientes { get; set; }
+        public DbSet<Direccion>? Direcciones { get; set; }
+        public DbSet<Domicilio>? Domicilios { get; set; }
+        public DbSet<Empleado>? Empleados { get; set; }
        // public DbSet<Persona>? Persona { get; set; }
         public DbSet<Rol> Roles { get; set; }
-        public DbSet<Sucursal>? Sucursal { get; set; }
+        public DbSet<Sucursal>? Sucursales { get; set; }
        // public DbSet<Usuario>? Usuario { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Personas> Personas { get; set; }
@@ -34,6 +34,7 @@ namespace muebleriaValadezBack
         public DbSet<Pedido>? Pedido { get; set; }
         public DbSet<OrdenesPedidos>? OrdenesPedidos { get; set; }
 
+        public DbSet<ClienteDirecciones>? cliente_Direcciones { get; set; }
 
     }
 }
