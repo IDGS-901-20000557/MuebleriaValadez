@@ -1,14 +1,27 @@
 <div class="body">
     <div class="shadow rounded">
-        <section class="vh-100">
+        <section>
             <div class="container py-5 h-100">
                 <div class="row d-flex align-items-center justify-content-center h-100">
                     <!-- Form Conctac -->
-                    <div class="col-md-8 col-lg-7 col-xl-6">
-                        <h3 class="text-center"></h3>
-                        <div id="contact" class="card">
+                    <div class="col-md-6">
+                        <div id="contact" class="card mt-2">
                             <div class="card-body">
-                                <form action="">
+                            <form [formGroup]="form" action="javascript:void(0)" (submit)="contact()">
+                                <!-- Name input -->
+                                <div class="form-outline mb-4">
+                                    <div class="input-group">
+                                        <input id="txtName" type="text" class="form-control" placeholder="Nombre completo" formControlName="from_email" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-btn">
+                                                <a id="btnMessage" class="btn">
+                                                    <span id="icon" class="fa fa-user"></span>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
@@ -25,28 +38,34 @@
     
                                 <!-- Message input -->
                                 <div class="form-outline mb-4">
-                                    <textarea id="txtMessage" class="form-control" placeholder="Escriba su mensaje..." cols="30" rows="10"></textarea>
+                                    <textarea id="txtMessage" class="form-control" placeholder="Escriba su mensaje..." cols="30" rows="10" formControlName="message"></textarea>
                                 </div>
-    
+                                   
+                                <!-- Checkbox input -->
+                                <input class="form-check-input mb-5" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Acepto los términos para enviar mi información y recibir correos.
+                                </label>
+
                                 <!-- Submit button -->
-                                <button id="btnSend" type="button" class="btn btn-lg form-control"><b>ENVIAR</b></button>
+                                <button id="btnSend" type="submit" class="btn btn-lg form-control"><b>ENVIAR</b></button>
                             </form>
                         </div>
                         </div>
                     </div>
-                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                    <div class="col-md-6">
                         <div class="card" id="card-contact">
                             <div class="pricing-block-content">
-                              <p class="pricing-plan">Información de contacto</p>
-                                <div data-currency-simple="USD" data-currency="$ USD" class="price-value">
-                                    <p class="price-number">Mueblería Valadez<img src="assets/img/isotipo.jpg" id="img-contact"> </p>
+                                <div class="price-value text-center">
+                                    <p>Mueblería Valadez</p>
+                                    <img src="assets/img/Logo Gris.png" id="img-contact"> 
                                 </div>
-                                <div class="pricing-note">Nos importa conocer tu opinión.</div>
+                                <div class="pricing-note">Nos importa conocer su opinión.</div>
                                 <ul role="list" class="check-list">
                                   <li class="check-list-item"><i class="fa fa-phone" id="icono"></i> +52 477-805-38-81</li>
-                                  <hr><li class="check-list-item"><i class="fa fa-envelope" id="icono"></i> contact@mueblesvaladez.com</li>
+                                  <hr><li class="check-list-item"><i class="fa fa-envelope" id="icono"></i><a href="https://www.google.com/intl/es-419/gmail/about/"> contact@mueblesvaladez.com</a></li>
                                   <hr><li class="check-list-item"><i class="fas fa-clock" id="icono"></i> Lunes-Viernes: 9:00 AM - 19:30 PM</li>
-                                  <hr><li class="check-list-item"><i class="fas fa-location" id="icono"></i> Blvd. J. J. Torres Landa Ote. 6502, Jardines de Jerez, 37530 León, Gto.</li>
+                                  <hr><li class="check-list-item"><i class="fas fa-location" id="icono"></i><a href="https://www.google.com.mx/maps/place/Blvd.+J.+J.+Torres+Landa+Ote.+6502,+Jardines+de+Jerez,+37530+Le%C3%B3n,+Gto./@21.0973453,-101.6434711,17z/data=!3m1!4b1!4m6!3m5!1s0x842bbe406674187f:0xdc2083c61e4c8546!8m2!3d21.0973403!4d-101.6408962!16s%2Fg%2F11gfmhmrj6?entry=ttu"> Blvd. J. J. Torres Landa Ote. 6502, Jardines de Jerez, 37530 León, Gto.</a></li>
                                 </ul>
                             </div>
                         </div>

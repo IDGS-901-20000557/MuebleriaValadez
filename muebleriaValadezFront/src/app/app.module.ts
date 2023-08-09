@@ -26,6 +26,14 @@ import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.co
 import { CarritoComponent } from './carrito/carrito.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { ProveedorComponent } from './empleadoAdministrador/proveedores/proveedores.component';
+import { UsersComponent } from './empleadoAdministrador/users/users.component';
+import { ProfileComponent } from './cliente/profile/profile.component';
+import { TarjetasComponent } from './cliente/profile/tarjetas/tarjetas.component';
+import { ProfileUpdateComponent } from './cliente/profile/profile-update/profile-update.component';
+import { AddressComponent } from './cliente/profile/address/address.component';
+import { SucursalesComponent } from './empleadoAdministrador/sucursales/sucursales.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -35,6 +43,7 @@ import { PedidosComponent } from './pedidos/pedidos.component';
     MenuComponent,
     SignupComponent,
     FooterComponent,
+    ContactComponent,
     LoaderComponent,
     ListProductsComponent,
     DashboardComponent,
@@ -43,7 +52,14 @@ import { PedidosComponent } from './pedidos/pedidos.component';
     ProductosPedidoComponent,
     CarritoComponent,
     PageNotFoundComponent,
-    PedidosComponent
+    PedidosComponent,
+    ProveedorComponent,
+    UsersComponent,
+    ProfileComponent,
+    TarjetasComponent,
+    ProfileUpdateComponent,
+    AddressComponent,
+    SucursalesComponent
   ],
   imports: [
     BrowserModule,
