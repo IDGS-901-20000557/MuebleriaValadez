@@ -21,11 +21,10 @@
 }
 
 #contact {
-    background-color: #e6e6e6;
-    border-color: #fff;
+    background-color: #D9DAD9;
+    border-color: #D9DAD9;
     padding: 1rem;
     border-radius: 1rem;
-    border: .5vmin solid #05060f;
     width: auto;
     height: auto;
 }
@@ -38,10 +37,10 @@
 #card-contact {
     width: auto;
     height: auto;
-    background: #fff;
+    background: #D9DAD9;
+    border-color: #D9DAD9;
     padding: 1rem;
     border-radius: 1rem;
-    border: .5vmin solid #05060f;
     color: black;
     margin-top: 1%;
 }
@@ -106,4 +105,14 @@ a {
     /*background-color: #E0CEB6;*/
     background-color: #CBC1B5;
     margin-top: 1%;
+}
+
+.form-check-label {
+    margin-left: 1%;
+}
+
+@media only screen and (max-width: 768px) {
+    #card-contact {
+        margin-top: 5%;
+    }
 }
