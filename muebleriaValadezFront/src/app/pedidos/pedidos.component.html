@@ -23,6 +23,14 @@
               <th>Cancelar</th>
             </tr>
           </thead>
+          <!--ng-container que valida si la lista pedidos esta vacia -->
+          <ng-container *ngIf="(pedidos | async)?.length == 0">
+            <tbody>
+              <tr>
+                <td colspan="8" class="text-center">Aun no haz realizado pedidos</td>
+              </tr>
+            </tbody>
+          </ng-container>
           <tbody *ngFor="let pedido of pedidos | async">
             <tr>
               <td class="text-center">{{pedido.fechaPedido | date : 'dd-MM-yyyy'}}</td>
@@ -59,9 +67,14 @@
                 </button>
               </td>
               <td class="text-center">
+                <ng-container *ngIf="pedido.estatus == '0' else cancelButton">
+                  <p>Cancelado <i class="fa fa-cancel"></i></p>
+                </ng-container>
+                <ng-template #cancelButton>
                 <button class="btn btn-danger" id="btnDelete" (click)="cancelPedido(pedido.idPedido)">
                   <i class="fas fa-trash"></i>
                 </button>
+                </ng-template>
               </td>
             </tr>
           </tbody>

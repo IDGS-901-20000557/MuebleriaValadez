@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+
 import { Router, ActivatedRoute } from '@angular/router';
+import { CarritoComprasService } from '../carrito-compras.service';
+import { Producto } from '../productos-pedido/interfaces/product.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-menu',
@@ -7,8 +11,10 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
 
+  constructor(private router: Router, 
+              private cartService: CarritoComprasService,
+             private activatedRoute: ActivatedRoute) {
   }
 
   isActive(route: string): boolean {
@@ -64,6 +70,33 @@ export class MenuComponent {
     sessionStorage.removeItem('sucursal');
     sessionStorage.removeItem('telefono');
     this.router.navigateByUrl('/auth');
+  }
+  /* Funciones para el botón de carrito en el menu cliente*/
+  cartItems: Producto[] = this.cartService.getCartItems();
+
+  removeOneCart(item : Producto):void{
+      this.cartService.removeOne(item);
+  }
+
+  getTotal(): number {
+    return this.cartService.getTotal();
+  }
+
+  checkSession(){
+    if(sessionStorage.getItem('idUsuario') == null){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debes iniciar sesión para poder realizar tu pedido',
+        timer: 5000,
+        didClose() {
+          window.location.href = '/auth';
+        }
+      });
+      return false;
+    }else{
+      return true;
+    }
   }
 
 }

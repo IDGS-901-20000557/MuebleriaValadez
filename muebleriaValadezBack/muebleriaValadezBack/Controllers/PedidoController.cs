@@ -66,8 +66,8 @@ namespace muebleriaValadezBack.Controllers
             }
         }
 
-        [HttpPost("AgregarPedidoOrden/{precioVenta}&&{idUsuario}", Name = "AgregarPedidoOrden")]
-        public IActionResult AddPedido_Detalle([FromBody]PedidoOrdenDto pedidoOrden, float precioVenta, int idUsuario)
+        [HttpPost("AgregarPedidoOrden/{precioVenta}&&{idUsuario}&&{idInventario}", Name = "AgregarPedidoOrden")]
+        public IActionResult AddPedido_Detalle([FromBody]PedidoOrdenDto pedidoOrden, float precioVenta, int idUsuario, int idInventario)
         {
             Pedido pedido = pedidoOrden.pedido;
             OrdenesPedidos ordenPedido = pedidoOrden.ordenPedido;
@@ -86,11 +86,12 @@ namespace muebleriaValadezBack.Controllers
                     new SqlParameter("@Pcantidad", ordenPedido.cantidad),
                     new SqlParameter("@PIdProducto", ordenPedido.IdProducto),
                     new SqlParameter("@PprecioVenta", precioVenta),
-                    new SqlParameter("@PidUsuario", idUsuario)
+                    new SqlParameter("@PidUsuario", idUsuario),
+                    new SqlParameter("@PidInventario", idInventario)
                 };
                 _context.Database.ExecuteSqlRaw("EXEC SP_Insertar_Pedido_Orden @PIdCliente, @PIdTarjeta, " +
                                                 "@PfechaPedido, @Ptotal, @Pcodigo, @PIdDireccion, @Pcantidad, " +
-                                                "@PIdProducto, @PprecioVenta, @PidUsuario;"
+                                                "@PIdProducto, @PprecioVenta, @PidUsuario, @PidInventario;"
                                                 , parametros);
                 Console.WriteLine("Holaa Estos son tus parametros");
                 foreach (var param in parametros)
@@ -166,8 +167,8 @@ namespace muebleriaValadezBack.Controllers
             }
         }
 
-        [HttpPost("AgregarOrden/{precioProd}&&{idUsuario}", Name = "Agregar_Detalle")]
-        public IActionResult Agregar_Detalle([FromBody] OrdenesPedidos ordenPedido, float precioProd, int idUsuario)
+        [HttpPost("AgregarOrden/{precioProd}&&{idUsuario}&&{idInventario}", Name = "Agregar_Detalle")]
+        public IActionResult Agregar_Detalle([FromBody] OrdenesPedidos ordenPedido, float precioProd, int idUsuario, int idInventario)
         {
             try
             {
@@ -176,10 +177,11 @@ namespace muebleriaValadezBack.Controllers
                     new SqlParameter("@Pcantidad", ordenPedido.cantidad),
                     new SqlParameter("@PIdProducto", ordenPedido.IdProducto),
                     new SqlParameter("@PprecioVenta", precioProd),
-                    new SqlParameter("@PidUsuario", idUsuario)
+                    new SqlParameter("@PidUsuario", idUsuario),
+                    new SqlParameter("@PidInventario", idInventario)
                 };
 
-                _context.Database.ExecuteSqlRaw("EXEC SP_Insertar_OrdenPedido @Pcantidad, @PIdProducto, @PprecioVenta, @PidUsuario", 
+                _context.Database.ExecuteSqlRaw("EXEC SP_Insertar_OrdenPedido @Pcantidad, @PIdProducto, @PprecioVenta, @PidUsuario, @PidInventario", 
                                                 parametros);
 
                 _context.SaveChanges();

@@ -72,8 +72,8 @@ export class ProductosPedidoComponent {
   addresses$: Observable<Direccion[]> =
     this.direccionesService.getAllDireccionesCliente(this.idCliente);
 
-  addToCart(item: Producto): void {
-    this.cartService.addToCart(item);
+  addToCart(item: Producto, inventory : Inventario): void {
+    this.cartService.addToCart(item, inventory);
     sessionStorage.setItem('totalPedido', this.carritoService.getTotal().toString());
   }
   showHideCart(): void {
@@ -82,6 +82,27 @@ export class ProductosPedidoComponent {
 
   setTotal(): void {
     this.totalS = this.productoS.precioVenta*this.cantidadS;
+  }
+
+  checkSession(){
+    if(sessionStorage.getItem('idUsuario') == null){
+      Swal.fire({
+        icon: 'info',
+        title: 'Oops...',
+        text: 'Debes iniciar sesión para poder realizar tu pedido',
+        timer: 5000,
+      });
+    }
+    window.location.href = '/auth';
+  }
+
+  isLoggedIn(){
+    if(sessionStorage.getItem('idUsuario') == null){
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 
   checkData(product : Producto): void {
@@ -132,6 +153,7 @@ export class ProductosPedidoComponent {
       text: 'Tu pedido se ha realizado con éxito.',
       timer: 5000,
     });
+    
         })
         .catch((error: any) => {
           Swal.fire({
@@ -143,47 +165,54 @@ export class ProductosPedidoComponent {
         }); 
   }
 
-  doManyOrders():void{
-    var idUsuario = sessionStorage.getItem('idUsuario');
-    var idCliente = sessionStorage.getItem('idCliente');
-    //Obtiene el id del usuario del sessionStorage
-     //Lo convierte a entero y si no existe, se asigna 0 y se convierte a numero
-    const idUs = idUsuario!== null ? parseInt(idUsuario, 10) : 0;
-    //Obtiene el id del cliente del sessionStorage
-    //Lo convierte a entero y si no existe, se asigna 0 y se convierte a numero
-    const idCl = idCliente!== null ? parseInt(idCliente, 10) : 0;
+  async doManyOrders(): Promise<void> {
+    const idUsuario = sessionStorage.getItem('idUsuario');
+    const idCliente = sessionStorage.getItem('idCliente');
+    const idUs = idUsuario !== null ? parseInt(idUsuario, 10) : 0;
+    const idCl = idCliente !== null ? parseInt(idCliente, 10) : 0;
     const total = this.cartService.getTotal();
-    let errors = 0;
-    this.pedidoService.addPedido(total, idCl, this.tarjetaS, this.direccionS)
-    .then((response: any) => {
+  
+    try {
+      const pedidoResponse = await this.pedidoService.addPedido(total, idCl, this.tarjetaS, this.direccionS);
       this.cartItems = this.cartService.getCartItems();
-      for (let index = 0; index < this.cartItems.length; index++) {
-        const producto = this.cartItems[index];
-        this.pedidoService.addOrden(producto, producto.cantidad).then((response: any) => {
-          errors = errors;
-        }).catch((error: any) => {
-          errors ++;
-        });      
+      let errors = 0;
+  
+      for (const producto of this.cartItems) {
+        try {
+          const ordenResponse = await this.pedidoService.addOrden(producto, producto.cantidad);
+        } catch (error) {
+          errors++;
+        }
       }
-    });
-    if(errors == 0){
-      Swal.fire({
-        icon: 'success',
-        title: '¡Pedido realizado con éxito!',
-        text: 'Tu pedido se ha realizado con éxito.',
-        timer: 5000,
-      });
+  
+      if (errors === 0) {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Pedido realizado con éxito!',
+          text: 'Tu pedido se ha realizado con éxito.',
+          timer: 5000,
+        });
+        
+      } else {
+        console.log(errors);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Hubo un error al realizar tu pedido, por favor intenta de nuevo',
+          timer: 5000,
+        });
+      }
+  
       this.cartService.cleanCart();
-    }else{
-      console.log(errors);
+    } catch (error) {
+      console.error('Error al realizar el pedido:', error);
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Hubo un error al realizar tu pedido, por favor intenta de nuevo',
         timer: 5000,
       });
-      this.cartService.cleanCart();
     }
-    
   }
+  
 }

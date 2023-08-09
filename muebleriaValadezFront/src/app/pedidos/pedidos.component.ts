@@ -37,7 +37,6 @@ export class PedidosComponent {
   }
 
   cancelPedido(idPedido:number){
-    alert(idPedido);
     Swal.fire({
       title: '¿Estas seguro de cancelar el pedido?',
       text: "No podras revertir esta acción",

@@ -7,6 +7,7 @@
 import { Injectable } from '@angular/core';
 import { Producto } from './productos-pedido/interfaces/product.interface';
 import Swal from 'sweetalert2';
+import { Inventario } from './productos-pedido/interfaces/inventory.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,18 @@ import Swal from 'sweetalert2';
 export class CarritoComprasService {
   private cartItems: Producto[] = [];
 
-  addToCart(item: Producto): void {
+  addToCart(item: Producto, invent: Inventario): void {
     const existingItem = this.cartItems.find((product) => product.idProducto === item.idProducto);
     if (existingItem) {
+      if(existingItem.cantidad >= invent.cantidaDisponible){
+        Swal.fire({
+          icon: 'error',
+          title: 'No se puede agregar al carrito',
+          text: 'Por el momento, solo puedes agregar hasta '+invent.cantidaDisponible+' '+item.nombreProducto+' al carrito',
+        });
+      }else{
       existingItem.cantidad++;
+      }
     } else {
       this.cartItems.push({ ...item, cantidad: 1 });
       Swal.fire({
@@ -28,24 +37,26 @@ export class CarritoComprasService {
     }
   }
 
-  removeOne(item:Producto):void{
-    
-      const existingItem = this.cartItems.find((product) => product.idProducto === item.idProducto);
-      if (existingItem) {
-        existingItem.cantidad--;
-        if (existingItem.cantidad == 0) {
-          this.cartItems = this.cartItems.filter((product) => product.idProducto !== item.idProducto);
-        }
-      }
-  }
+  
+removeOne(item: Producto): void {
+  const existingItemIndex = this.cartItems.findIndex(product => product.idProducto === item.idProducto);
 
-  removeItem(item:Producto):void{
-    const existingItem = this.cartItems.find((product) => product.idProducto === item.idProducto);
-      if (existingItem) {
-          let existingItemIndex = this.cartItems.findIndex((product) => product.idProducto === item.idProducto);
-          this.cartItems = this.cartItems.splice(existingItemIndex, 1);
-        }
+  if (existingItemIndex !== -1) {
+    const existingItem = this.cartItems[existingItemIndex];
+
+    if (existingItem.cantidad > 0) {
+      existingItem.cantidad--;
+
+      if (existingItem.cantidad <= 0) {
+        this.removeFromCart(existingItemIndex);
+      }
+    }
   }
+}
+
+removeFromCart(index: number): void {
+  this.cartItems.splice(index, 1);
+}
 
   getCartItems(): Producto[] {
     return this.cartItems;
