@@ -32,6 +32,8 @@ import { ProfileComponent } from './cliente/profile/profile.component';
 import { TarjetasComponent } from './cliente/profile/tarjetas/tarjetas.component';
 import { ProfileUpdateComponent } from './cliente/profile/profile-update/profile-update.component';
 import { AddressComponent } from './cliente/profile/address/address.component';
+import { SucursalesComponent } from './empleadoAdministrador/sucursales/sucursales.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -41,6 +43,7 @@ import { AddressComponent } from './cliente/profile/address/address.component';
     MenuComponent,
     SignupComponent,
     FooterComponent,
+    ContactComponent,
     LoaderComponent,
     ListProductsComponent,
     DashboardComponent,
@@ -55,8 +58,8 @@ import { AddressComponent } from './cliente/profile/address/address.component';
     ProfileComponent,
     TarjetasComponent,
     ProfileUpdateComponent,
-    AddressComponent
-
+    AddressComponent,
+    SucursalesComponent
   ],
   imports: [
     BrowserModule,
