@@ -46,7 +46,7 @@ export class PedidoService {
             }
         };
         // Hace el post al api para agregar el pedido y regresa el pedidoDetalle en JSON
-        return this.http.post(this.apiPedidos+'/AgregarPedidoOrden/'+producto.precioVenta+'&&'+idUsuario, 
+        return this.http.post(this.apiPedidos+'/AgregarPedidoOrden/'+producto.precioVenta+'&&'+idUsuario+'&&'+producto.idInventario, 
                                     body).toPromise();
     }
 
@@ -68,7 +68,8 @@ export class PedidoService {
             estatus:'1'
         };
         // Hace el post al api para agregar el pedido y regresa el pedido en JSON
-        return this.http.post(this.apiPedidos+'/AgregarPedido/'+sessionStorage.getItem('idUsuario'), pedido).toPromise();
+        return this.http.post(this.apiPedidos+'/AgregarPedido/'+sessionStorage.getItem('idUsuario'), 
+        pedido).toPromise();
     }
 
     addOrden(producto: Producto, cantidadR: number){
@@ -81,7 +82,7 @@ export class PedidoService {
             idPedido:0
         };
 
-        return this.http.post<any>(this.apiPedidos+'/AgregarOrden/'+producto.precioVenta+'&&'+idUsuario, 
+        return this.http.post<any>(this.apiPedidos+'/AgregarOrden/'+producto.precioVenta+'&&'+idUsuario+'&&'+producto.idInventario, 
                                     ordenPedido).toPromise();
     }
 

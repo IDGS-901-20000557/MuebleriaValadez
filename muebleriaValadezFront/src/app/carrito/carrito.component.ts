@@ -17,19 +17,12 @@ export class CarritoComponent {
   cartItems: Producto[] = [];
   isDivVisible!: boolean ;
 
-  constructor(private cartService: CarritoComprasService, 
-              private pedidoService: PedidoService,
-              private tarjetaService: TarjetaService,
-              private direccionesService: DireccionService) {
+  constructor(private cartService: CarritoComprasService) {
     this.cartItems = this.cartService.getCartItems();
   }
 
   removeOneCart(item:Producto):void{
       this.cartService.removeOne(item);
-  }
-
-  removeProduct(item:Producto):void{
-    this.cartService.removeItem(item);
   }
 
   getTotal(): number {
