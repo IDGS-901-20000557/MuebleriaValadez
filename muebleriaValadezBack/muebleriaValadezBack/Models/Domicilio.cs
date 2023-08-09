@@ -2,6 +2,7 @@
 
 namespace muebleriaValadezBack.Models
 {
+    //integracion del proyecto
     public class Domicilio
     {
         [Key]

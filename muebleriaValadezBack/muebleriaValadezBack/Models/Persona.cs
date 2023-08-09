@@ -2,6 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace muebleriaValadezBack.Models
 {
+
+    //integracion del proyecto
     public class Personas
     {
         [Key]
