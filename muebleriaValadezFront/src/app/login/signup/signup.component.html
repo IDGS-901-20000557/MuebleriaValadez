@@ -16,23 +16,21 @@
                 type="text"
                 class="form-control form-control-lg"
                 formControlName="nombre"/>
-                <div
-                  *ngIf="signUpForm.get('nombre')?.errors?.['required']"
-                  class="text-danger"
-                >
-                  Nombre es requerido.
+                <div *ngIf="signUpForm.get('nombre')?.touched && 
+                            signUpForm.get('nombre')?.errors?.['required']" class="text-danger">
+                    Este campo es requerido
                 </div>
-                <div
-                  *ngIf="signUpForm.get('nombre')?.errors?.['minLength']"
-                  class="text-danger"
-                >
-                  Debe ser mayor a 3 su longitud.
+                <div *ngIf="signUpForm.get('nombre')?.touched && 
+                            signUpForm.get('nombre')?.errors?.['minlength']" class="text-danger">
+                    El nombre debe ser más largo que
+                    {{signUpForm.get('nombre')?.errors?.['minlength']?.requiredLength}} 
+                    letras
                 </div>
-                <div
-                  *ngIf="signUpForm.get('nombre')?.errors?.['maxLength']"
-                  class="text-danger"
-                >
-                  Debe ser menor a 100 su longitud.
+                <div *ngIf="signUpForm.get('nombre')?.touched && 
+                            signUpForm.get('nombre')?.errors?.['maxlength']" class="text-danger">
+                    El nombre debe ser menor que
+                    {{signUpForm.get('nombre')?.errors?.['maxlength']?.requiredLength}} 
+                    letras
                 </div>
             </div>
 
@@ -40,23 +38,21 @@
             <div class="form-group col-12 col-md-3">
                 <label class="form-label" for="txtAPaterno">Apellido Paterno</label>
                 <input id="txtAPaterno" type="text" class="form-control form-control-lg" formControlName="apellidoP" />
-                <div
-                  *ngIf="signUpForm.get('apellidoP')?.errors?.['required']"
-                  class="text-danger"
-                >
-                Apellido Paterno es requerido.
+                <div *ngIf="signUpForm.get('apellidoP')?.touched && 
+                            signUpForm.get('apellidoP')?.errors?.['required']" class="text-danger">
+                    Este campo es requerido
                 </div>
-                <div
-                  *ngIf="signUpForm.get('apellidoP')?.errors?.['minLength']"
-                  class="text-danger"
-                >
-                  Debe ser mayor a 3 su longitud.
+                <div *ngIf="signUpForm.get('apellidoP')?.touched && 
+                            signUpForm.get('apellidoP')?.errors?.['minlength']" class="text-danger">
+                    El apellido debe ser más largo que
+                    {{signUpForm.get('apellidoP')?.errors?.['minlength']?.requiredLength}} 
+                    letras
                 </div>
-                <div
-                  *ngIf="signUpForm.get('apellidoP')?.errors?.['maxLength']"
-                  class="text-danger"
-                >
-                  Debe ser menor a 50 su longitud.
+                <div *ngIf="signUpForm.get('apellidoP')?.touched && 
+                            signUpForm.get('apellidoP')?.errors?.['maxlength']" class="text-danger">
+                    El apellido debe ser menor que
+                    {{signUpForm.get('apellidoP')?.errors?.['maxlength']?.requiredLength}} 
+                    letras
                 </div>
             </div>
 
@@ -64,24 +60,6 @@
             <div class="form-group col-12 col-md-3">
                 <label class="form-label" for="txtAMaterno">Apellido Materno</label>
                 <input id="txtAMaterno" type="text" class="form-control form-control-lg" formControlName="apellidoM" />
-                <div
-                  *ngIf="signUpForm.get('apellidoM')?.errors?.['required']"
-                  class="text-danger"
-                >
-                Apellido Materno es requerido.
-                </div>
-                <div
-                  *ngIf="signUpForm.get('apellidoM')?.errors?.['minLength']"
-                  class="text-danger"
-                >
-                  Debe ser mayor a 3 su longitud.
-                </div>
-                <div
-                  *ngIf="signUpForm.get('apellidoM')?.errors?.['maxLength']"
-                  class="text-danger"
-                >
-                  Debe ser menor a 50 su longitud.
-                </div>
             </div>
             <div class="form-group col-12 col-md-1"></div>
 
@@ -92,6 +70,22 @@
                 <label class="form-label" for="txtTelefono">Teléfono</label>
                 <div class="input-group">
                     <input id="txtTelefono" type="text" class="form-control form-control-lg" formControlName="telefono" />
+                    <div *ngIf="signUpForm.get('telefono')?.touched && 
+                            signUpForm.get('telefono')?.errors?.['required']" class="text-danger">
+                          Este campo es requerido
+                    </div>
+                    <div *ngIf="signUpForm.get('telefono')?.touched && 
+                            signUpForm.get('telefono')?.errors?.['minlength']" class="text-danger">
+                          El teléfono debe contar o bien ser mayor a
+                          {{signUpForm.get('telefono')?.errors?.['minlength']?.requiredLength}} 
+                          dígitos.
+                    </div>
+                    <div *ngIf="signUpForm.get('telefono')?.touched && 
+                            signUpForm.get('telefono')?.errors?.['maxlength']" class="text-danger">
+                          El teléfono debe ser menor que
+                          {{signUpForm.get('telefono')?.errors?.['maxlength']?.requiredLength}} 
+                          letras
+                    </div>
                     <div class="input-group-append">
                         <span class="input-group-btn">
                             <a id="btnPhone" class="btn">
@@ -102,24 +96,6 @@
                             El registro de un número télefonico es con el próposito de medio de contacto en un envío de compra.
                         </div>
                     </div>
-                </div>
-                <div
-                  *ngIf="signUpForm.get('telefono')?.errors?.['required']"
-                  class="text-danger"
-                >
-                Telefono es requerido.
-                </div>
-                <div
-                  *ngIf="signUpForm.get('telefono')?.errors?.['minLength']"
-                  class="text-danger"
-                >
-                  Debe ser mayor a 10 su longitud.
-                </div>
-                <div
-                  *ngIf="signUpForm.get('telefono')?.errors?.['maxLength']"
-                  class="text-danger"
-                >
-                  Debe ser menor a 20 su longitud.
                 </div>
             </div>
 
@@ -173,29 +149,22 @@
             <div class="form-group col-12 col-md-6 mt-4">
                 <label for="txtEmail" class="form-label">E-mail</label>
                 <input id="txtEmail" type="text" class="form-control form-control-lg" formControlName="email">
-                <div
-                  *ngIf="signUpForm.get('email')?.errors?.['required']"
-                  class="text-danger"
-                >
-                  Correo es requerido.
+              
+                <div *ngIf="signUpForm.get('email')?.touched && 
+                            signUpForm.get('email')?.errors?.['required']" class="text-danger">
+                    Este campo es requerido.
                 </div>
-                <div
-                  *ngIf="signUpForm.get('email')?.errors?.['email']"
-                  class="text-danger"
-                >
-                  Ingresa un correo válido.
+                <div *ngIf="signUpForm.get('email')?.touched && 
+                            signUpForm.get('email')?.errors?.['minlength']" class="text-danger">
+                    El correo debe ser más largo que
+                    {{signUpForm.get('email')?.errors?.['minlength']?.requiredLength}} 
+                    letras
                 </div>
-                <div
-                  *ngIf="signUpForm.get('email')?.errors?.['minLength']"
-                  class="text-danger"
-                >
-                  Debe ser mayor a 3 su longitud.
-                </div>
-                <div
-                  *ngIf="signUpForm.get('email')?.errors?.['maxLength']"
-                  class="text-danger"
-                >
-                  Debe ser menor a 50 su longitud.
+                <div *ngIf="signUpForm.get('email')?.touched && 
+                            signUpForm.get('email')?.errors?.['maxlength']" class="text-danger">
+                    El correo debe ser menor que
+                    {{signUpForm.get('email')?.errors?.['maxlength']?.requiredLength}} 
+                    letras
                 </div>
             </div>
             <div class="form-group col-12 col-md-2 mt-4"></div>

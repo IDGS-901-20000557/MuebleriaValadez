@@ -67,7 +67,9 @@ export class AuthComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: '¡Error de inicio de sesión!',
-            text: 'Usuario o Contraseña incorrecta.',
+            text: 'Usuario y/o contraseña incorrectos.',
+            confirmButtonColor: '#20a124',
+            confirmButtonText: 'Aceptar',
           });
         }).finally(() => {
           this.loadingService.hide();// Ocultar el loader, tanto si hay éxito como error
