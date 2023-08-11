@@ -74,6 +74,10 @@ export class MenuComponent {
   /* Funciones para el botón de carrito en el menu cliente*/
   cartItems: Producto[] = this.cartService.getCartItems();
 
+  getCartItems(){
+    this.cartItems = this.cartService.getCartItems();
+  }
+
   removeOneCart(item : Producto):void{
       this.cartService.removeOne(item);
   }

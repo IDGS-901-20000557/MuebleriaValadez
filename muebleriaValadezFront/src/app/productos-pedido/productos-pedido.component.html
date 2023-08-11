@@ -55,7 +55,8 @@
                           <div class="row">
                             <div class="col-2"></div>
                             <div class="col-5">
-                              <button *ngIf="isLoggedIn(); else loginButton" (click)="addToCart(product, invent)" class="btn btn-outline-primary btn-block" title="Agregar al carrito">
+                              <button *ngIf="isLoggedIn(); else loginButton" (click)="addToCart(product, invent)" 
+                              class="btn btn-outline-primary btn-block" title="Agregar al carrito">
                                 <i class="fa fa-cart-plus"></i> Agregar al carrito
                               </button>
                               <ng-template #loginButton>
@@ -65,7 +66,9 @@
                               </ng-template>
                             </div>
                             <div class="col-5">
-                              <button *ngIf="isLoggedIn(); else loginShop" class="btn btn-outline-primary btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="checkData(product)" title="Comprar Ahora">
+                              <button *ngIf="isLoggedIn(); else loginShop" class="btn btn-outline-primary btn-block" 
+                                  data-bs-toggle="modal" data-bs-target="#exampleModal" 
+                                  (click)="checkData(product)" title="Comprar Ahora">
                                 <i class="fa fa-shopping-bag"></i> Comprar Ahora
                               </button>
                               <ng-template #loginShop>
@@ -122,7 +125,7 @@
                                 <label for="tarjeta" class="col-form-label">Escoge tu tarjeta</label><br>
                                 <select [(ngModel)]="tarjetaS" class="form-select" id="tarjeta" name="tarjeta" >
                                 <option *ngFor="let card of (cards$ | async)" [value]="card.idTarjeta"> 
-                                    {{ card.numeroTarejta }}
+                                    {{ card.numeroTarejta.concat('****') }}
                                 </option>
                                 </select>
                             </div>
@@ -186,7 +189,7 @@
                         <div class="col-6">
                             <label for="tarjeta" class="col-form-label">Escoge tu tarjeta</label><br>
                             <select [(ngModel)]="tarjetaS" class="form-select" id="tarjeta" name="tarjeta" >
-                            <option *ngFor="let card of (cards$ | async)" [value]="card.idTarjeta"> 
+                            <option *ngFor="let card of cards$ | async" [value]="card.idTarjeta"> 
                                 {{ card.numeroTarejta }}
                             </option>
                             </select>
