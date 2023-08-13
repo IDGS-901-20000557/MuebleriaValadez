@@ -20,6 +20,7 @@ import { TarjetasComponent } from './cliente/profile/tarjetas/tarjetas.component
 import { ProfileUpdateComponent } from './cliente/profile/profile-update/profile-update.component';
 import { AuthGuardCliente } from './authCliente.guard';
 import { AddressComponent } from './cliente/profile/address/address.component';
+import { SucursalesComponent } from './empleadoAdministrador/sucursales/sucursales.component';
 
 
 const routes: Routes = [
@@ -37,10 +38,12 @@ const routes: Routes = [
     { path: 'proveedores', component: ProveedorComponent, canActivate: [AuthGuardAdmin] },
     { path: 'users', component: UsersComponent, canActivate: [AuthGuardAdmin] },
     { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] },
+    { path: 'sucursal', component: SucursalesComponent, canActivate: [AuthGuardAdmin] },
+
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardCliente] },
     { path: 'tarjetas', component: TarjetasComponent, canActivate: [AuthGuardCliente] },
     { path: 'profileUpdate', component: ProfileUpdateComponent, canActivate: [AuthGuardCliente] },
-    {path: 'address', component: AddressComponent, canActivate: [AuthGuardCliente] },
+    { path: 'address', component: AddressComponent, canActivate: [AuthGuardCliente] },
 
     { path: 'myOrders', component: PedidosComponent},
     // Page not found

@@ -77,4 +77,12 @@ export class AuthComponent implements OnInit {
 
     }
   }
+
+  // Validaciones del formulario login antes de enviarlo
+  initForm(): FormGroup {
+    return this.fb.group({
+      email: ['', Validators.required, Validators.minLength(10), Validators.maxLength(100)],
+      password:['', Validators.required, Validators.minLength(3)]
+    });
+  }
 }
