@@ -44,11 +44,9 @@
                   class="form-control form-control-lg"
                   formControlName="email"
                 />
-                <div
-                  *ngIf="loginForm.get('email')?.errors?.['required']"
-                  class="text-danger"
-                >
-                  Correo es requerido.
+                <div *ngIf="loginForm.get('email')?.touched && 
+                            loginForm.get('email')?.errors?.['required']" class="text-danger">
+                    El correo es requerido.
                 </div>
                 <div
                   *ngIf="loginForm.get('email')?.errors?.['email']"

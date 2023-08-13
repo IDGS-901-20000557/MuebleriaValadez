@@ -1,10 +1,16 @@
+.body {
+    background-color: #D9DAD9;
+    width: 100%;
+    height: auto;
+}
+
 .form-outline {
     margin: 10px !important;
 }
 
 #title {
     font-weight: bold !important;
-    font-size:larger !important;
+    font-size: 22px !important;
 }
 
 /* Estilos para la tabla */
@@ -27,7 +33,11 @@ table>tbody>tr>td {
 }
 
 /* Estilos para alinear los botones y cuadro de búsqueda*/
-.btn-group,
-.btn-group-vertical {
+.dt-buttons {
     position: absolute !important;
+    margin-bottom: 5px !important;
+}
+
+table {
+    margin-top: 6% !important;
 }

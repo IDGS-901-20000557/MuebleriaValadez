@@ -13,7 +13,7 @@ namespace muebleriaValadezBack.Models
 
         public Direccion direccion { get; set; }
         public String razonSocial { get; set; }
-
+        public String estatus { get; set; }
 
     }
 }

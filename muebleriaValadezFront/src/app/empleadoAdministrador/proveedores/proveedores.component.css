@@ -1,0 +1,43 @@
+.body {
+    background-color: #D9DAD9;
+    width: 100%;
+    height: auto;
+}
+
+.form-outline {
+    margin: 10px !important;
+}
+
+#title {
+    font-weight: bold !important;
+    font-size: 22px !important;
+}
+
+/* Estilos para la tabla */
+#btnUpdate {
+    background-color: #9C8C72;
+    color: white;
+}
+
+#btnDelete {
+    margin-left: 2%;
+}
+
+table th {
+    background-color: #B88736 !important;
+    color: white;
+}
+
+table>tbody>tr>td {
+    vertical-align: middle !important;
+}
+
+/* Estilos para alinear los botones y cuadro de búsqueda*/
+.dt-buttons {
+    position: absolute !important;
+    margin-bottom: 5px !important;
+}
+
+table {
+    margin-top: 6% !important;
+}
