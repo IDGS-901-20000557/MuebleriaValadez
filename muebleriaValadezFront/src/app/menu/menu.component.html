@@ -84,7 +84,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" routerLink="inventario">
+              <a class="nav-link" routerLinkActive="active" routerLink="inventarios">
                 <button class="btn text-white text-left rounded">
                   <span>Inventario</span>
                 </button>
@@ -92,7 +92,7 @@
             </li>
           </div>
         </div>
-        <!-- 
+        <!--
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="insumos">
             <button class="btn text-white text-left rounded">
@@ -212,14 +212,14 @@
           </a>
         </li>
       </div>
-      
+
       <li class="nav-item" *ngIf="!menuPrincipal()" (click)="logOut()">
         <a class="nav-link" routerLinkActive="active" routerLink="auth">
           <button class="btn text-white text-left rounded">
             <span><i class="fas fa-sign-out-alt"></i></span>
           </button>
         </a>
-      </li>            
+      </li>
     </ul>
   </div>
 
@@ -239,10 +239,10 @@
           <div class="row g-0">
             <div class="col-md-4">
               <ng-container *ngIf="item.foto == ''">
-                <img src="../../assets/img/logo.jpg" class="img-fluid rounded-start" alt="logo">  
+                <img src="../../assets/img/logo.jpg" class="img-fluid rounded-start" alt="logo">
               </ng-container>
               <ng-container *ngIf="item.foto != '' || item.foto">
-                <img src="{{item.foto}}" class="img-fluid rounded-start" alt="{{item.nombreProducto}}">  
+                <img src="{{item.foto}}" class="img-fluid rounded-start" alt="{{item.nombreProducto}}">
               </ng-container>
             </div>
             <div class="col-md-8">
