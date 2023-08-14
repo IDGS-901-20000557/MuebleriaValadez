@@ -24,6 +24,7 @@ import { ProductosComponent } from './empleadoAdministrador/productos/productos.
 import { InsumosComponent } from './empleadoAdministrador/insumos/insumos.component';
 import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { InventariosComponent } from './empleadoAdministrador/inventarios/inventarios.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { ProveedorComponent } from './empleadoAdministrador/proveedores/proveedores.component';
@@ -34,6 +35,7 @@ import { ProfileUpdateComponent } from './cliente/profile/profile-update/profile
 import { AddressComponent } from './cliente/profile/address/address.component';
 import { SucursalesComponent } from './empleadoAdministrador/sucursales/sucursales.component';
 import { ContactComponent } from './contact/contact.component';
+
 
 
 @NgModule({
@@ -51,6 +53,7 @@ import { ContactComponent } from './contact/contact.component';
     InsumosComponent, 
     ProductosPedidoComponent,
     CarritoComponent,
+    InventariosComponent,
     PageNotFoundComponent,
     PedidosComponent,
     ProveedorComponent,

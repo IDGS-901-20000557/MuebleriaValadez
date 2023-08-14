@@ -127,7 +127,7 @@ id="tablaProductos"
   <div>
       <div>
           <a href="productos#close4" title="Close4" class="close4">X</a>
-          <div id="divTablaReservaciones" class="col-12" [formGroup]="InsumoForm">
+          <div id="divTablaInsumos" class="col-12" [formGroup]="InsumoForm">
               <div class="card shadow" style="background-color: #E3C4A8 !important">
                   <div class="card-header shadow" style="background-color: #b88736 !important;">
                       <div class="row">
@@ -179,7 +179,7 @@ id="tablaProductos"
                             <tbody>
                               <tr *ngFor="let insumo of tablaInsumos">
                                 <td>{{insumo.nombreInsumo}}</td>
-                                <td>{{insumo.precio}}</td>
+                                <td>$ {{insumo.precio}}</td>
                                 <td>{{insumo.unidad}}</td>
                                 <td>{{insumo.cantidadInsumo}}</td>
                               </tr>
