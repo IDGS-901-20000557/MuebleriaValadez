@@ -24,6 +24,7 @@ import { ProductosComponent } from './empleadoAdministrador/productos/productos.
 import { InsumosComponent } from './empleadoAdministrador/insumos/insumos.component';
 import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { InventariosComponent } from './empleadoAdministrador/inventarios/inventarios.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { CarritoComponent } from './carrito/carrito.component';
     ProductosComponent,
     InsumosComponent, 
     ProductosPedidoComponent,
-    CarritoComponent
+    CarritoComponent,
+    InventariosComponent
   ],
   imports: [
     BrowserModule,

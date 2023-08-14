@@ -149,6 +149,7 @@ export class ProductosComponent implements OnInit {
             this.loadingService.hide();
             Swal.fire('¡Eliminado!', 'El Producto ha sido eliminado.', 'success');
             this.getAllProductos();
+            this.limpiarCampos();
           },
           (error) => {
             console.error(error);

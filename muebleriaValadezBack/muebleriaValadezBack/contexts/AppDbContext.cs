@@ -15,10 +15,10 @@ namespace muebleriaValadezBack
         public DbSet<Direccion>? Direccion { get; set; }
         public DbSet<Domicilio>? Domicilio { get; set; }
         public DbSet<Empleado>? Empleado { get; set; }
-       // public DbSet<Persona>? Persona { get; set; }
+        // public DbSet<Persona>? Persona { get; set; }
         public DbSet<Rol> Roles { get; set; }
         public DbSet<Sucursal>? Sucursal { get; set; }
-       // public DbSet<Usuario>? Usuario { get; set; }
+        // public DbSet<Usuario>? Usuario { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Personas> Personas { get; set; }
         public DbSet<Usuario_Rol> Usuarios_Roles { get; set; }
@@ -29,6 +29,10 @@ namespace muebleriaValadezBack
         public DbSet<LibroReceta>? libroRecetas { get; set; }
         public DbSet<InsumoData>? InsumoData { get; set; }
         public DbSet<ProductosData>? ProductosData { get; set; }
+        public DbSet<Lotes>? Lotes { get; set; }
+        public DbSet<InsumoLote>? InsumoLote { get; set; }
+        public DbSet<ProductosLote>? ProductoLote { get; set; }
+        public DbSet<InventarioResult>? InventarioResult { get; set; }
         public DbSet<ProveedorDTO>? Proveedores { get; set; }
 
 
