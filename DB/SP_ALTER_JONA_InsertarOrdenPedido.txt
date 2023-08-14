@@ -1,0 +1,51 @@
+USE [DBMuebleriaValadez]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_Insertar_OrdenPedido]    Actualizado el : 09/08/2023 12:43:51 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Jona locote
+-- Create date: 29/07/2023
+-- Description:	SP que inserta una orden de pedido (para cuando son más de un producto)
+			-- Nomas por que hay que insertar en la bitacora mi chavo.
+-- =============================================
+ALTER PROCEDURE [dbo].[SP_Insertar_OrdenPedido]
+	@Pcantidad int,
+	@PIdProducto bigint,
+	@PprecioVenta real,
+	@PidUsuario bigint,
+	@PidInventario bigint
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	DECLARE @CidOrdenPedido bigInt;
+	DECLARE @CidPedido bigInt;
+	DECLARE @cantidadDisponible int;
+	BEGIN TRAN
+
+	SET @CidPedido = (SELECT TOP 1 IdPedido FROM Pedidos ORDER BY IdPedido DESC);
+
+	INSERT INTO OrdenesPedidos(cantidad, IdPedido, IdProducto, subtotal)
+	VALUES(@Pcantidad, @CidPedido, @PIdProducto, (@Pcantidad * @PprecioVenta));
+	SET @CidOrdenPedido =(SELECT SCOPE_IDENTITY());
+
+	SET @cantidadDisponible = (SELECT cantidaDisponible FROM Inventario WHERE IdInventario = @PidInventario);
+
+	UPDATE Inventario SET cantidaDisponible = (@cantidadDisponible - @Pcantidad) WHERE IdInventario = @PidInventario;
+
+	--Insertamos en la bitacora la acción 
+	INSERT INTO Bitacora VALUES(@PidUsuario, 'Inserción', 'OrdenPedido', 
+	CONCAT('Se inserto una orden de pedido del pedido con id  ', @CidPedido), GETUTCDATE() AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time');
+	COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber  
+        ,ERROR_SEVERITY() AS ErrorSeverity  
+        ,ERROR_STATE() AS ErrorState  
+        ,ERROR_PROCEDURE() AS ErrorProcedure  
+        ,ERROR_MESSAGE() AS ErrorMessage;
+END CATCH

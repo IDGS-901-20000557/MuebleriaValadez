@@ -1,11 +1,11 @@
-.body {
-    /* background-color: #89683B; */
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+* {
+    font-family: system-ui;
 }
 
 #btnLogin {
     background-color: #B88736;
     color: white;
+    margin-bottom: 2%;
 }
 
 #btnLogin:hover {
@@ -23,6 +23,8 @@
 #imgLogo {
     border-radius: 10px;
     margin-left: 15px;
+    width: 100%;
+    height: auto;
 }
 
 @media (max-width: 767px) {
@@ -77,4 +79,21 @@ button::before {
 
 button:hover::before {
     transform: translate3d(100%, 0, 0);
+}
+
+#title {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+label {
+    font-size: medium;
+}
+
+a {
+    font-size: 16px;
+}
+
+.body {
+    background-color: #CBC1B5;
 }

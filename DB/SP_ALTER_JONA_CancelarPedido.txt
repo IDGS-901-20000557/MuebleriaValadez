@@ -1,0 +1,57 @@
+USE [DBMuebleriaValadez]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_Cancelar_Pedido]    Script Date: 09/08/2023 01:05:55 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Jona locote
+-- Create date: 29/07/2023
+-- Description:	SP que cancela un pedido
+	-- Nomas por que hay que insertar en la bitacora mi chavo
+-- =============================================
+ALTER PROCEDURE [dbo].[SP_Cancelar_Pedido]
+	@PIdPedido bigint, 
+	@PIdUsuario bigint
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	DECLARE @CidPedido bigInt;
+
+	BEGIN TRAN
+
+	-- Obtener las cantidades de productos del pedido cancelado
+	DECLARE @CancelledQuantities TABLE
+	(
+		IdProducto int,
+		CantidadCancelada int
+	);
+
+	UPDATE Pedidos SET estatus = 0 WHERE idPedido = @PIdPedido;
+
+	-- Insertar en la tabla @CancelledQuantities las cantidades de productos cancelados
+	INSERT INTO @CancelledQuantities (IdProducto, CantidadCancelada)
+	SELECT IdProducto, cantidad FROM OrdenesPedidos WHERE IdPedido = @PIdPedido;
+
+	UPDATE I
+	SET I.cantidaDisponible = I.cantidaDisponible + C.CantidadCancelada
+	FROM Inventario I
+	INNER JOIN Productos P ON P.IdInventario = I.IdInventario
+	INNER JOIN @CancelledQuantities C ON P.IdProducto = C.IdProducto;
+
+
+	--Insertamos en la bitacora la acción 
+	INSERT INTO Bitacora VALUES(@PIdUsuario, 'Cancelar', 'Pedido', 
+	CONCAT('Se cancelo un pedido con el id ', @PIdPedido), GETUTCDATE() AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time');
+	COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber  
+        ,ERROR_SEVERITY() AS ErrorSeverity  
+        ,ERROR_STATE() AS ErrorState  
+        ,ERROR_PROCEDURE() AS ErrorProcedure  
+        ,ERROR_MESSAGE() AS ErrorMessage;
+END CATCH

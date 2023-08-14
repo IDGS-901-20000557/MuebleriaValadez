@@ -48,8 +48,8 @@ namespace muebleriaValadezBack.Controllers
             }
         }
 
-        [HttpPost("{idUsuario}")] // api/<Insumos> INSERT Insumo
-        public ActionResult<Insumo> Post([FromBody] Insumo insumo, int idUsuario)
+        [HttpPost("{idUsuario}/{idSucursal}")] // api/<Insumos> INSERT Insumo
+        public ActionResult<Insumo> Post([FromBody] Insumo insumo, int idUsuario, int idSucursal)
         {
             try
             {
@@ -62,7 +62,8 @@ namespace muebleriaValadezBack.Controllers
                         @precio={insumo.precio}, 
                         @observaciones={insumo.observaciones}, 
                         @cantidaAceptable={insumo.cantidadAceptable}, 
-                        @IdUsuario={idUsuario};
+                        @IdUsuario={idUsuario},
+                        @IdSucursal={idSucursal};
                 ");
 
                 return CreatedAtRoute("GetAllInsumos", null);

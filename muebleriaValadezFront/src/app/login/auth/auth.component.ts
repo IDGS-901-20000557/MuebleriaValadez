@@ -57,7 +57,7 @@ export class AuthComponent implements OnInit {
             this.router.navigateByUrl('/auth');
           }else if(sessionStorage.getItem('idRol')==='3'){
             //Pagina de inicio cliente
-            this.router.navigateByUrl('/auth');
+            this.router.navigateByUrl('/shop');
           }else if(sessionStorage.getItem('idRol')==='10002'){
            //Pagina de inicio empleado pedidos
             this.router.navigateByUrl('/auth');
@@ -67,12 +67,22 @@ export class AuthComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: '¡Error de inicio de sesión!',
-            text: 'Usuario o Contraseña incorrecta.',
+            text: 'Usuario y/o contraseña incorrectos.',
+            confirmButtonColor: '#20a124',
+            confirmButtonText: 'Aceptar',
           });
         }).finally(() => {
           this.loadingService.hide();// Ocultar el loader, tanto si hay éxito como error
         });
 
     }
+  }
+
+  // Validaciones del formulario login antes de enviarlo
+  initForm(): FormGroup {
+    return this.fb.group({
+      email: ['', Validators.required, Validators.minLength(10), Validators.maxLength(100)],
+      password:['', Validators.required, Validators.minLength(3)]
+    });
   }
 }

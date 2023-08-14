@@ -1,0 +1,48 @@
+USE DBMuebleriaValadez;
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Jona locote
+-- Create date: 30/07/2023
+-- Description:	SP que inserta pedidos y orden de pedido (solo para cuando es un producto);
+-- =============================================
+CREATE PROCEDURE SP_Insertar_Pedido_Orden
+	@PIdCliente bigint, 
+	@PIdTarjeta bigint,
+	@PfechaPedido nvarchar(50),
+	@Ptotal real,
+	@Pcodigo int,
+	@PIdDireccion bigint,
+	@Pcantidad int,
+	@PIdProducto bigint,
+	@PprecioVenta real 
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	DECLARE @CidPedido bigInt;
+
+	BEGIN TRAN
+
+	INSERT INTO Pedidos (IdCliente, IdTarjeta, fechaPedido, total, codigo, IdDireccion, estatus)  
+	VALUES(@PIdCliente, @PIdTarjeta, CONVERT(datetime, @PfechaPedido, 103), @Ptotal, @Pcodigo, @PIdDireccion, 1);
+	SET @CidPedido =(SELECT SCOPE_IDENTITY());
+
+	INSERT INTO OrdenesPedidos(cantidad, IdPedido, IdProducto, subtotal)
+	VALUES(@Pcantidad, @CidPedido, @PIdProducto, (@Pcantidad * @PprecioVenta));
+
+	--Insertamos en la bitacora la acción 
+	INSERT INTO Bitacora VALUES(@CidPedido, 'Inserción', 'Pedido y Orden Pedido', 
+	CONCAT('Se inserto un pedido y orden de pedido del cliente:', @PIdCliente), GETUTCDATE() AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time');
+	COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber  
+        ,ERROR_SEVERITY() AS ErrorSeverity  
+        ,ERROR_STATE() AS ErrorState  
+        ,ERROR_PROCEDURE() AS ErrorProcedure  
+        ,ERROR_MESSAGE() AS ErrorMessage;
+END CATCH

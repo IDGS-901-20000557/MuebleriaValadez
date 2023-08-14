@@ -131,13 +131,16 @@ export class InsumosComponent implements OnInit {
         title: 'Error',
         text: 'Complete todos los campos requeridos y asegúrese de que las cantidades sean mayores o iguales a 0.',
         icon: 'error',
-        confirmButtonText: 'Aceptar'
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#20a124'
       });
       return;
     }
     this.nuevoInsumo.idProveedor = this.selectedProveedorId; // Asignar el id del proveedor seleccionado al nuevo insumo
     const idUser = sessionStorage.getItem('idUsuario');
     const idUsuario = idUser ? parseInt(idUser, 10) : 0;
+    const idSuc = sessionStorage.getItem('idDireccionSucursal');
+    const idSucursal = idSuc ? parseInt(idSuc, 10) : 0;
     if (this.modoEdicion) {
       // Modo edición: actualizar el insumo existente
       this.insumoService.updateInsumo(this.nuevoInsumo.idInsumo, this.nuevoInsumo, idUsuario).subscribe(
@@ -147,7 +150,9 @@ export class InsumosComponent implements OnInit {
             title: '¡Actualización exitosa!',
             text: 'Los datos del insumo han sido actualizados.',
             icon: 'success',
-            confirmButtonText: 'Aceptar'
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#20a124'
+
           });
           this.getAllInsumos();
           this.clearForm();
@@ -158,7 +163,7 @@ export class InsumosComponent implements OnInit {
       );
     } else {
       // Modo inserción: insertar un nuevo insumo
-      this.insumoService.insertInsumo(this.nuevoInsumo, this.selectedProveedorId, idUsuario).subscribe(
+      this.insumoService.insertInsumo(this.nuevoInsumo, this.selectedProveedorId, idUsuario, idSucursal).subscribe(
         (response) => {
           this.insumos.push(response);
           this.clearForm();
@@ -166,7 +171,9 @@ export class InsumosComponent implements OnInit {
             title: '¡Éxito!',
             text: 'El insumo ha sido insertado correctamente.',
             icon: 'success',
-            confirmButtonText: 'Aceptar'
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#20a124'
+
           });
         },
         (error) => {
@@ -174,8 +181,11 @@ export class InsumosComponent implements OnInit {
             title: '¡Error!',
             text: 'Ha ocurrido un error al insertar el insumo.',
             icon: 'error',
-            confirmButtonText: 'Aceptar'
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#20a124'
+
           });
+          console.log(error);
         }
       );
     }

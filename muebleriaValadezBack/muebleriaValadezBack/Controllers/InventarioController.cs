@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +12,6 @@ namespace muebleriaValadezBack.Controllers
     public class InventarioController : Controller
     {
         private readonly AppDbContext _context;
-
         public InventarioController(AppDbContext context)
         {
             _context = context;
@@ -23,6 +22,7 @@ namespace muebleriaValadezBack.Controllers
         {
             try
             {
+
                 var lotes = _context.Lotes
                     .Where(l => l.estatus != '0')
                     .Select(l => new Lotes
@@ -69,9 +69,6 @@ namespace muebleriaValadezBack.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-
-        
 
 
         [HttpPost("entregarLoteInsumo")]

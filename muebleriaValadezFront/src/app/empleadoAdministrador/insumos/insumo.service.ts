@@ -28,9 +28,9 @@ export class InsumoService {
   }
 
   // Método para insertar un insumo
-  insertInsumo(insumo: Insumo, idProveedor: number, idUsuario: number): Observable<Insumo> {
+  insertInsumo(insumo: Insumo, idProveedor: number, idUsuario: number, idSucursal: number): Observable<Insumo> {
     insumo.idProveedor = idProveedor;
-    return this.http.post<Insumo>(`${this.apiUrl}/${idUsuario}`, insumo);
+    return this.http.post<Insumo>(`${this.apiUrl}/${idUsuario}/${idSucursal}`, insumo);
   }
 
   // Método para actualizar un insumo

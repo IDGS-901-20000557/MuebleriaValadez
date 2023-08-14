@@ -1,5 +1,5 @@
-.body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+* {
+    font-family: system-ui;
 }
 
 .container {
@@ -75,4 +75,17 @@ a {
 .input-group-append:hover .tooltip {
     visibility: visible;
     opacity: 1;
+}
+
+label {
+    font-size: medium;
+}
+
+#title {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.body {
+    background-color: #CBC1B5;
 }

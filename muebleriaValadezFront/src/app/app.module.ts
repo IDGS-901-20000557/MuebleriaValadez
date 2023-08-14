@@ -25,6 +25,17 @@ import { InsumosComponent } from './empleadoAdministrador/insumos/insumos.compon
 import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { InventariosComponent } from './empleadoAdministrador/inventarios/inventarios.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
+import { ProveedorComponent } from './empleadoAdministrador/proveedores/proveedores.component';
+import { UsersComponent } from './empleadoAdministrador/users/users.component';
+import { ProfileComponent } from './cliente/profile/profile.component';
+import { TarjetasComponent } from './cliente/profile/tarjetas/tarjetas.component';
+import { ProfileUpdateComponent } from './cliente/profile/profile-update/profile-update.component';
+import { AddressComponent } from './cliente/profile/address/address.component';
+import { SucursalesComponent } from './empleadoAdministrador/sucursales/sucursales.component';
+import { ContactComponent } from './contact/contact.component';
+
 
 
 @NgModule({
@@ -34,6 +45,7 @@ import { InventariosComponent } from './empleadoAdministrador/inventarios/invent
     MenuComponent,
     SignupComponent,
     FooterComponent,
+    ContactComponent,
     LoaderComponent,
     ListProductsComponent,
     DashboardComponent,
@@ -41,7 +53,16 @@ import { InventariosComponent } from './empleadoAdministrador/inventarios/invent
     InsumosComponent, 
     ProductosPedidoComponent,
     CarritoComponent,
-    InventariosComponent
+    InventariosComponent,
+    PageNotFoundComponent,
+    PedidosComponent,
+    ProveedorComponent,
+    UsersComponent,
+    ProfileComponent,
+    TarjetasComponent,
+    ProfileUpdateComponent,
+    AddressComponent,
+    SucursalesComponent
   ],
   imports: [
     BrowserModule,

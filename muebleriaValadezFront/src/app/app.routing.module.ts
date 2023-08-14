@@ -12,6 +12,16 @@ import { ProductosComponent } from './empleadoAdministrador/productos/productos.
 import { InsumosComponent } from './empleadoAdministrador/insumos/insumos.component';
 import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.component';
 import { InventariosComponent } from './empleadoAdministrador/inventarios/inventarios.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
+import { ProveedorComponent } from './empleadoAdministrador/proveedores/proveedores.component';
+import { UsersComponent } from './empleadoAdministrador/users/users.component';
+import { ProfileComponent } from './cliente/profile/profile.component';
+import { TarjetasComponent } from './cliente/profile/tarjetas/tarjetas.component';
+import { ProfileUpdateComponent } from './cliente/profile/profile-update/profile-update.component';
+import { AuthGuardCliente } from './authCliente.guard';
+import { AddressComponent } from './cliente/profile/address/address.component';
+import { SucursalesComponent } from './empleadoAdministrador/sucursales/sucursales.component';
 
 
 const routes: Routes = [
@@ -26,9 +36,17 @@ const routes: Routes = [
     { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] },
     { path: 'productos', component: ProductosComponent, canActivate: [AuthGuardAdmin] },
     { path: 'insumos', component: InsumosComponent, canActivate: [AuthGuardAdmin] },
-    { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] },
-    { path: 'inventarios', component: InventariosComponent, canActivate: [AuthGuardAdmin] }
-
+    { path: 'inventarios', component: InventariosComponent, canActivate: [AuthGuardAdmin] },
+    { path: 'proveedores', component: ProveedorComponent, canActivate: [AuthGuardAdmin] },
+    { path: 'users', component: UsersComponent, canActivate: [AuthGuardAdmin] },
+    { path: 'sucursal', component: SucursalesComponent, canActivate: [AuthGuardAdmin] },
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardCliente] },
+    { path: 'tarjetas', component: TarjetasComponent, canActivate: [AuthGuardCliente] },
+    { path: 'profileUpdate', component: ProfileUpdateComponent, canActivate: [AuthGuardCliente] },
+    { path: 'address', component: AddressComponent, canActivate: [AuthGuardCliente] },
+    { path: 'myOrders', component: PedidosComponent},
+    // Page not found
+    { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

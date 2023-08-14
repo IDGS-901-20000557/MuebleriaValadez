@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
     private signUpService: SignupService,
     private loadingService: LoadingService,
     private router: Router
-  ) {}
+  ) { }
 
   isPasswordVisible = false;
   @ViewChild('asIcon') icono!: ElementRef;
@@ -87,67 +87,79 @@ export class SignupComponent implements OnInit {
     console.log(this.signUpForm.get('password')?.value);
     console.log(this.signUpForm.get('password2')?.value);
     if (this.signUpForm.valid) {
-      if (
+      if(this.signUpForm.get('password')?.value != this.signUpForm.get('password2')?.value){
+        Swal.fire({
+          icon: 'info',
+          title: 'Contraseñas incorrectas',
+          text: 'Las contraseñas ingresas no coinciden. Intente de nuevo.',
+          confirmButtonColor: '#20a124',
+          confirmButtonText: 'Aceptar',
+        });
+      }
+      else if (
         this.signUpForm.get('password')?.value ==
         this.signUpForm.get('password2')?.value
       ) {
         this.signUpService.userFind(this.signUpForm.get('email')?.value)
-      .then((result: any) => {
-        // 'result' contiene el resultado como texto (puede ser "true" o "false")
-        const exists = JSON.parse(result); // Convierte el texto a un valor booleano
-        console.log(exists.exists);
-        if (exists.exists) {
-          Swal.fire({
-            icon: 'info',
-            title: '¡Elija otro correo!',
-            text: 'El correo ya esta en uso',
-          });
-        } else {
-        const nombre = this.signUpForm.get('nombre')?.value;
-        const apellidoP = this.signUpForm.get('apellidoP')?.value;
-        const apellidoM = this.signUpForm.get('apellidoM')?.value;
-        const telefono = this.signUpForm.get('telefono')?.value;
-        const email = this.signUpForm.get('email')?.value;
-        const password = crypto
-          .SHA512(this.signUpForm.get('password')?.value)
-          .toString();
-        this.loadingService.show();
-        this.signUpService
-          .signUp(nombre, apellidoP, apellidoM, telefono, email, password)
-          .then((response: any) => {
+          .then((result: any) => {
+            // 'result' contiene el resultado como texto (puede ser "true" o "false")
+            const exists = JSON.parse(result); // Convierte el texto a un valor booleano
+            console.log(exists.exists);
+            if (exists.exists) {
+              Swal.fire({
+                icon: 'warning',
+                title: '¡Elija otro correo!',
+                text: 'El correo ingresado ya se encuentra registrado.',
+                confirmButtonColor: '#20a124',
+                confirmButtonText: 'Aceptar',
+              });
+            } else {
+              this.loadingService.show();
+              const nombre = this.signUpForm.get('nombre')?.value;
+              const apellidoP = this.signUpForm.get('apellidoP')?.value;
+              const apellidoM = this.signUpForm.get('apellidoM')?.value;
+              const telefono = this.signUpForm.get('telefono')?.value;
+              const email = this.signUpForm.get('email')?.value;
+              const password = crypto
+                .SHA512(this.signUpForm.get('password')?.value)
+                .toString();
+              this.loadingService.show();
+              this.signUpService
+                .signUp(nombre, apellidoP, apellidoM, telefono, email, password)
+                .then((response: any) => {
 
-            Swal.fire({
-              icon: 'success',
-              title: '¡Usuario creado!',
-              text: '¡Bienvenido!',
-              timer: 3000, // 3 segundos
-              timerProgressBar: true, // Muestra una barra de progreso durante el tiempo de espera
-              showConfirmButton: false // No muestra el botón de confirmación para cerrar el mensaje
-            }).then(() => {
-              // Redirigir al usuario a la página de inicio de sesión (/auth) después de mostrar el mensaje de éxito
-              this.router.navigateByUrl('/auth');
-            });
+                  Swal.fire({
+                    icon: 'success',
+                    title: '¡Usuario creado!',
+                    text: '¡Bienvenido!',
+                    timer: 3000, // 3 segundos
+                    timerProgressBar: true, // Muestra una barra de progreso durante el tiempo de espera
+                    showConfirmButton: false // No muestra el botón de confirmación para cerrar el mensaje
+                  }).then(() => {
+                    // Redirigir al usuario a la página de inicio de sesión (/auth) después de mostrar el mensaje de éxito
+                    this.router.navigateByUrl('/auth');
+                  });
+                })
+                .catch((error: any) => {
+
+                  Swal.fire({
+                    icon: 'error',
+                    title: '¡Error a la hora de crear usuario!',
+                    text: 'Ocurrió un error al crear el usuario.',
+                  });
+                })
+                .finally(() => {
+                  this.loadingService.hide(); // Ocultar el loader, tanto si hay éxito como error
+                });
+            }
           })
           .catch((error: any) => {
-
             Swal.fire({
               icon: 'error',
               title: '¡Error a la hora de crear usuario!',
               text: 'Ocurrió un error al crear el usuario.',
             });
-          })
-          .finally(() => {
-            this.loadingService.hide(); // Ocultar el loader, tanto si hay éxito como error
           });
-        }
-      })
-      .catch((error: any) => {
-        Swal.fire({
-          icon: 'error',
-          title: '¡Error a la hora de crear usuario!',
-          text: 'Ocurrió un error al crear el usuario.',
-        });
-      });
 
       }
     }
@@ -170,5 +182,16 @@ export class SignupComponent implements OnInit {
     }
 
     this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  // Validaciones del formulario crear cuenta antes de enviarlo
+  initForm(): FormGroup {
+    return this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      apellidoP: ['', [Validators.required, Validators.maxLength(50)]],
+      telefono: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(20)]],
+      email: ['', Validators.required, Validators.minLength(10), Validators.maxLength(100)],
+      password:['', Validators.required, Validators.minLength(3)]
+    });
   }
 }

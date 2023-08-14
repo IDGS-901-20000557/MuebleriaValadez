@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace muebleriaValadezBack.Models
 {
@@ -6,7 +7,13 @@ namespace muebleriaValadezBack.Models
     {
         [Key]
         public long IdUsuario_Rol { get; set; }
-        public Usuario usuario { get; set; }
-        public Rol rol { get; set; }
+        public Usuario? Usuario { get; set; }
+        public Rol? Rol { get; set; }
+
+        [ForeignKey("Usuario")]
+        public long IdUsuario { get; set; }
+
+        [ForeignKey("Rol")]
+        public long IdRol { get; set; }
     }
 }

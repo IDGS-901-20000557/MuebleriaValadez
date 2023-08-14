@@ -5,8 +5,9 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Producto } from './productos-pedido/product.interface';
+import { Producto } from './productos-pedido/interfaces/product.interface';
 import Swal from 'sweetalert2';
+import { Inventario } from './productos-pedido/interfaces/inventory.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,50 +15,55 @@ import Swal from 'sweetalert2';
 export class CarritoComprasService {
   private cartItems: Producto[] = [];
 
-  addToCart(item: Producto): void {
-    const existingItem = this.cartItems.find((product) => product.id === item.id);
+  addToCart(item: Producto, invent: Inventario): void {
+    const existingItem = this.cartItems.find((product) => product.idProducto === item.idProducto);
     if (existingItem) {
-      if(existingItem.cantidad < item.cantidad){
+      if(existingItem.cantidad >= invent.cantidaDisponible){
+        Swal.fire({
+          icon: 'error',
+          title: 'No se puede agregar al carrito',
+          text: 'Por el momento, solo puedes agregar hasta '+invent.cantidaDisponible+' '+item.nombreProducto+' al carrito',
+        });
+      }else{
       existingItem.cantidad++;
-    }else{
-      Swal.fire({
-        icon: 'error',
-        title: 'No se pudo realizar la accion',
-        text: 'Solo puedes agregar hasta '+item.cantidad+' piezas de este mueble',
-      });
-    }
+      }
     } else {
       this.cartItems.push({ ...item, cantidad: 1 });
       Swal.fire({
         icon: 'success',
         title: 'Agregado al carrito',
-        text: 'Agregaste '+item.nombre+' al carrito',
+        text: 'Agregaste '+item.nombreProducto+' al carrito',
       });
     }
   }
 
-  removeOne(item:Producto):void{
-    
-      const existingItem = this.cartItems.find((product) => product.id === item.id);
-      if (existingItem) {
-        existingItem.cantidad--;
-        if (existingItem.cantidad == 0) {
-          this.cartItems = this.cartItems.filter((product) => product.id !== item.id);
-        }
-      }
-  }
-
-  removeItem(item:Producto):void{
-    const existingItem = this.cartItems.find((product) => product.id === item.id);
-      if (existingItem) {
-          let existingItemIndex = this.cartItems.findIndex((product) => product.id === item.id);
-          this.cartItems = this.cartItems.splice(existingItemIndex, 1);
-        }
-  }
   
+removeOne(item: Producto): void {
+  const existingItemIndex = this.cartItems.findIndex(product => product.idProducto === item.idProducto);
+
+  if (existingItemIndex !== -1) {
+    const existingItem = this.cartItems[existingItemIndex];
+
+    if (existingItem.cantidad > 0) {
+      existingItem.cantidad--;
+
+      if (existingItem.cantidad <= 0) {
+        this.removeFromCart(existingItemIndex);
+      }
+    }
+  }
+}
+
+removeFromCart(index: number): void {
+  this.cartItems.splice(index, 1);
+}
 
   getCartItems(): Producto[] {
     return this.cartItems;
+  }
+
+  cleanCart(): void {
+    this.cartItems = [];
   }
 
   getTotal(): number {
