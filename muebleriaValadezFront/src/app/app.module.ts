@@ -36,6 +36,13 @@ import { AddressComponent } from './cliente/profile/address/address.component';
 import { SucursalesComponent } from './empleadoAdministrador/sucursales/sucursales.component';
 import { ContactComponent } from './contact/contact.component';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { InventarioProductosComponent } from './empleadoAdministrador/dashboard/inventario-productos/inventario-productos.component';
+import { InventarioInsumosComponent } from './empleadoAdministrador/dashboard/inventario-insumos/inventario-insumos.component';
+import { MejoresClientesComponent } from './empleadoAdministrador/dashboard/mejores-clientes/mejores-clientes.component';
+import { MayoresProductosComponent } from './empleadoAdministrador/dashboard/mayores-productos/mayores-productos.component';
+import { MenoresProductosComponent } from './empleadoAdministrador/dashboard/menores-productos/menores-productos.component';
+import { VentasMensualesComponent } from './empleadoAdministrador/dashboard/ventas-mensuales/ventas-mensuales.component';
 
 
 @NgModule({
@@ -62,7 +69,13 @@ import { ContactComponent } from './contact/contact.component';
     TarjetasComponent,
     ProfileUpdateComponent,
     AddressComponent,
-    SucursalesComponent
+    SucursalesComponent,
+    InventarioProductosComponent,
+    InventarioInsumosComponent,
+    MejoresClientesComponent,
+    MayoresProductosComponent,
+    MenoresProductosComponent,
+    VentasMensualesComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +86,8 @@ import { ContactComponent } from './contact/contact.component';
     HttpClientModule,
     DataTablesModule.forRoot(),
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule
   ],
   providers: [AuthService, SignupService],
   bootstrap: [AppComponent]

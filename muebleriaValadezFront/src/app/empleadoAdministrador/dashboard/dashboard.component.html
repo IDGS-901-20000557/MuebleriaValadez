@@ -100,3 +100,78 @@
     </div>
     <br><br>
 </div>
+<h1 class="text-center text-uppercase">Inventario</h1>
+    <div class="row" style="background-color: white;">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <app-inventario-productos></app-inventario-productos>
+        </div>
+        <div class="col-5">
+            <app-inventario-insumos></app-inventario-insumos>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <br><br>
+    <hr style="border-color: chocolate; border-width: 10px;">
+    <h1 class="text-center">Mejores y menores productos en pedidos</h1>
+    <div class="row" style="background-color: white;">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <app-mayores-productos></app-mayores-productos>
+        </div>
+        <div class="col-5">
+            <app-menores-productos></app-menores-productos>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <br><br>
+    <hr style="border-color: chocolate; border-width: 10px;">
+    <h1 class="text-center text-uppercase">Ventas Mensuales</h1>
+    <div class="row" style="background-color: white;">
+        <div class="col-3"></div>
+        <div class="col-9">
+            <app-ventas-mensuales></app-ventas-mensuales>
+        </div>
+    <br><br>
+    <hr style="border-color: chocolate; border-width: 10px;">
+    <div class="row" style="background-color: white;">
+        <div class="col-1"></div>
+        <div class="col-9">
+            <app-mejores-clientes></app-mejores-clientes>
+        </div>
+        <div class="col-2">
+            <div class="ganancias-container border border-2 border-success">
+                <div class="row">
+                    <div class="col-6 text-center"><h2>Ganancias Totales</h2></div>
+                    <div class="col-6">
+                        <br>
+                        <h3 class="text-success text-center">{{ datos.gross_profit | currency:'USD':'symbol' }}</h3>
+                    </div>
+                </div>   
+            </div>
+            <div class="ganancias-container border border-2 border-success">
+                <div class="row">
+                    <div class="col-6"><h2 class="text-center">Valor promedio en pedidos</h2></div>
+                    <div class="col-6">
+                        <br><br>
+                        <h3 class="text-success text-center">
+                            {{ datos.average_order_value | currency:'USD':'symbol' }}
+                        </h3>
+                    </div>
+                </div>   
+            </div>
+
+            <div class="ganancias-container border border-2 border-success">
+                <div class="row">
+                    <div class="col-6"><h2 class="text-center">Clientes registrados</h2></div>
+                    <div class="col-6">
+                        <br>
+                        <h3 class="text-success text-center">
+                            {{ datos.total_users | number:'1.0-0' }}
+                        </h3>
+                    </div>
+                </div>   
+            </div>
+        </div>
+    </div>
+    <br><br>
