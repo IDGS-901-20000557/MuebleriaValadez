@@ -1,10 +1,16 @@
+.body {
+    background-color: #D9DAD9;
+    width: 100%;
+    height: auto;
+}
+
 .form-outline {
     margin: 10px !important;
 }
 
 #title {
-    font-weight: bold;
-    font-size:larger;
+    font-weight: bold !important;
+    font-size: 22px !important;
 }
 
 /* Estilos para la tabla */
@@ -30,8 +36,4 @@ table>tbody>tr>td {
 .btn-group,
 .btn-group-vertical {
     position: absolute !important;
-}
-
-.body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

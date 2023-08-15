@@ -1,185 +1,89 @@
-<div class="container-fluid mt-5 mb-5">
-  <div class="row mt-3">
-    <div class="form-group col-12 col-md-4">
-      <form
-        [formGroup]="registroUpForm"
-        (ngSubmit)="registroUpForm.valid && guardarUsuario()"
-      >
-        <div class="card shadow rounded">
-          <div id="title" class="card-header text-center">
-            Registro de Usuario
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <h1 class="text-center" *ngIf="selectedUserType === 1">
-                <i class="fas fa-user-tie"></i>
-              </h1>
-              <h1 class="text-center" *ngIf="selectedUserType === 2">
-                <i class="fas fa-user"></i>
-              </h1>
+<div class="body">
+  <div class="container"><br><br>
+    <div class="row">
+      <div class="form-group col-12 col-md-4 mt-4">
+        <form
+          [formGroup]="registroUpForm"
+          (ngSubmit)="registroUpForm.valid && guardarUsuario()"
+        >
+          <div class="card shadow rounded">
+            <div id="title" class="card-header text-center">
+              Usuarios
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <h1 class="text-center" *ngIf="selectedUserType === 1">
+                  <i class="fas fa-user-tie"></i>
+                </h1>
+                <h1 class="text-center" *ngIf="selectedUserType === 2">
+                  <i class="fas fa-user"></i>
+                </h1>
 
-              <label for="userType" class="form-label">Tipo de Usuario</label>
-              <select
-                class="form-control"
-                id="userType"
-                (change)="selectedUserTypeChanged()"
-             
-                [value]="selectedUserType"
-              >
-                <option value="1">Empleado</option>
-                <option value="2">Cliente</option>
-              </select>
-              <div class="form-group col-12 col-md-12">
-                <label class="form-label" for="txtName">Nombre</label>
-                <input
-                  id="txtnombre"
-                  type="text"
-                  class="form-control form-control-lg"
-                  formControlName="nombres"
-                />
-                <div *ngIf="!isUpdate">
-                  <div
-                    *ngIf="registroUpForm.get('nombres')?.errors?.['required']"
-                    class="text-danger"
-                  >
-                    Nombre es requerido.
-                  </div>
-                  <div
-                    *ngIf="registroUpForm.get('nombres')?.errors?.['minLength']"
-                    class="text-danger"
-                  >
-                    Debe ser mayor a 3 su longitud.
-                  </div>
-                  <div
-                    *ngIf="registroUpForm.get('nombres')?.errors?.['maxLength']"
-                    class="text-danger"
-                  >
-                    Debe ser menor a 100 su longitud.
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group col-12 col-md-6">
-                <label class="form-label" for="txtAPaterno"
-                  >Apellido Paterno</label
+                <label for="userType" class="form-label">Tipo de Usuario</label>
+                <select
+                  class="form-control"
+                  id="userType"
+                  (change)="selectedUserTypeChanged()"
+                  [value]="selectedUserType"
                 >
-                <input
-                  id="txtAPaterno"
-                  type="text"
-                  class="form-control form-control-lg"
-                  formControlName="ApellidoPaterno"
-                />
-                <div *ngIf="!isUpdate">
-                  <div
-                    *ngIf="registroUpForm.get('ApellidoPaterno')?.errors?.['required']"
-                    class="text-danger"
-                  >
-                    Apellido Paterno es requerido.
-                  </div>
-                  <div
-                    *ngIf="registroUpForm.get('ApellidoPaterno')?.errors?.['minLength']"
-                    class="text-danger"
-                  >
-                    Debe ser mayor a 3 su longitud.
-                  </div>
-                  <div
-                    *ngIf="registroUpForm.get('ApellidoPaterno')?.errors?.['maxLength']"
-                    class="text-danger"
-                  >
-                    Debe ser menor a 50 su longitud.
-                  </div>
-                </div>
-              </div>
-
-              <!-- Apellido Materno input -->
-              <div class="form-group col-12 col-md-6">
-                <label class="form-label" for="txtAMaterno"
-                  >Apellido Materno</label
-                >
-                <input
-                  id="txtAMaterno"
-                  type="text"
-                  class="form-control form-control-lg"
-                  formControlName="ApellidoMaterno"
-                />
-                <div *ngIf="!isUpdate">
-                  <div
-                    *ngIf="registroUpForm.get('ApellidoMaterno')?.errors?.['required']"
-                    class="text-danger"
-                  >
-                    Apellido Materno es requerido.
-                  </div>
-                  <div
-                    *ngIf="registroUpForm.get('ApellidoMaterno')?.errors?.['minLength']"
-                    class="text-danger"
-                  >
-                    Debe ser mayor a 3 su longitud.
-                  </div>
-                  <div
-                    *ngIf="registroUpForm.get('ApellidoMaterno')?.errors?.['maxLength']"
-                    class="text-danger"
-                  >
-                    Debe ser menor a 50 su longitud.
-                  </div>
-                </div>
-              </div>
-
-              <!-- Telefono input -->
-
-              <div class="form-group col-12 col-md-12">
-                <label class="form-label" for="txtTelefono">Telefono</label>
-                <input
-                  id="txtTelefono"
-                  type="text"
-                  class="form-control form-control-lg"
-                  formControlName="Telefono"
-                />
-                <div *ngIf="!isUpdate">
-                  <div
-                    *ngIf="registroUpForm.get('Telefono')?.errors?.['required']"
-                    class="text-danger"
-                  >
-                    Telefono es requerido.
-                  </div>
-                  <div
-                    *ngIf="registroUpForm.get('Telefono')?.errors?.['minLength']"
-                    class="text-danger"
-                  >
-                    Debe ser mayor a 3 su longitud.
-                  </div>
-                  <div
-                    *ngIf="registroUpForm.get('Telefono')?.errors?.['maxLength']"
-                    class="text-danger"
-                  >
-                    Debe ser menor a 50 su longitud.
-                  </div>
-                </div>
-              </div>
-
-              <div *ngIf="selectedUserType === 1" class="row">
-                <div class="form-group col-12 col-md-6">
-                  <label class="form-label" for="txtRfc">RFC</label>
+                  <option value="1">Empleado</option>
+                  <option value="2">Cliente</option>
+                </select>
+                <div class="form-group col-12 col-md-12">
+                  <label class="form-label" for="txtName">Nombre</label>
                   <input
-                    id="txtRfc"
+                    id="txtnombre"
                     type="text"
                     class="form-control form-control-lg"
-                    formControlName="Rfc"
+                    formControlName="nombres"
                   />
                   <div *ngIf="!isUpdate">
                     <div
-                      *ngIf="registroUpForm.get('Rfc')?.errors?.['required']"
+                      *ngIf="registroUpForm.get('nombres')?.errors?.['required']"
                       class="text-danger"
                     >
-                      RFC es requerido.
+                      Nombre es requerido.
                     </div>
                     <div
-                      *ngIf="registroUpForm.get('Rfc')?.errors?.['minLength']"
+                      *ngIf="registroUpForm.get('nombres')?.errors?.['minLength']"
                       class="text-danger"
                     >
                       Debe ser mayor a 3 su longitud.
                     </div>
                     <div
-                      *ngIf="registroUpForm.get('Rfc')?.errors?.['maxLength']"
+                      *ngIf="registroUpForm.get('nombres')?.errors?.['maxLength']"
+                      class="text-danger"
+                    >
+                      Debe ser menor a 100 su longitud.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group col-12 col-md-6">
+                  <label class="form-label" for="txtAPaterno"
+                    >Apellido Paterno</label
+                  >
+                  <input
+                    id="txtAPaterno"
+                    type="text"
+                    class="form-control form-control-lg"
+                    formControlName="ApellidoPaterno"
+                  />
+                  <div *ngIf="!isUpdate">
+                    <div
+                      *ngIf="registroUpForm.get('ApellidoPaterno')?.errors?.['required']"
+                      class="text-danger"
+                    >
+                      Apellido Paterno es requerido.
+                    </div>
+                    <div
+                      *ngIf="registroUpForm.get('ApellidoPaterno')?.errors?.['minLength']"
+                      class="text-danger"
+                    >
+                      Debe ser mayor a 3 su longitud.
+                    </div>
+                    <div
+                      *ngIf="registroUpForm.get('ApellidoPaterno')?.errors?.['maxLength']"
                       class="text-danger"
                     >
                       Debe ser menor a 50 su longitud.
@@ -187,29 +91,32 @@
                   </div>
                 </div>
 
+                <!-- Apellido Materno input -->
                 <div class="form-group col-12 col-md-6">
-                  <label class="form-label" for="txtPuesto">Puesto</label>
+                  <label class="form-label" for="txtAMaterno"
+                    >Apellido Materno</label
+                  >
                   <input
-                    id="txtPuesto"
+                    id="txtAMaterno"
                     type="text"
                     class="form-control form-control-lg"
-                    formControlName="Puesto"
+                    formControlName="ApellidoMaterno"
                   />
                   <div *ngIf="!isUpdate">
                     <div
-                      *ngIf="registroUpForm.get('Puesto')?.errors?.['required']"
+                      *ngIf="registroUpForm.get('ApellidoMaterno')?.errors?.['required']"
                       class="text-danger"
                     >
-                      Puesto es requerido.
+                      Apellido Materno es requerido.
                     </div>
                     <div
-                      *ngIf="registroUpForm.get('Puesto')?.errors?.['minLength']"
+                      *ngIf="registroUpForm.get('ApellidoMaterno')?.errors?.['minLength']"
                       class="text-danger"
                     >
                       Debe ser mayor a 3 su longitud.
                     </div>
                     <div
-                      *ngIf="registroUpForm.get('Puesto')?.errors?.['maxLength']"
+                      *ngIf="registroUpForm.get('ApellidoMaterno')?.errors?.['maxLength']"
                       class="text-danger"
                     >
                       Debe ser menor a 50 su longitud.
@@ -217,269 +124,363 @@
                   </div>
                 </div>
 
-                <div class="form-group col-12 col-md-6">
-                  <label class="form-label" for="txtSucursal">Sucursal</label>
-                  <select
-                    id="txtSucursal"
-                    class="form-control form-control-lg"
-                    formControlName="Sucursal"
-                  >
-                    <option
-                      *ngFor="let sucursal of sucurzales"
-                      [value]="sucursal.idSucursal"
-                    >
-                      {{ sucursal.razonSocial }}
-                    </option>
-                  </select>
+                <!-- Telefono input -->
 
+                <div class="form-group col-12 col-md-12">
+                  <label class="form-label" for="txtTelefono">Telefono</label>
+                  <input
+                    id="txtTelefono"
+                    type="text"
+                    class="form-control form-control-lg"
+                    formControlName="Telefono"
+                  />
                   <div *ngIf="!isUpdate">
                     <div
-                      *ngIf="registroUpForm.get('Sucursal')?.errors?.['required']"
+                      *ngIf="registroUpForm.get('Telefono')?.errors?.['required']"
                       class="text-danger"
                     >
-                      Sucursal es requerido.
+                      Telefono es requerido.
+                    </div>
+                    <div
+                      *ngIf="registroUpForm.get('Telefono')?.errors?.['minLength']"
+                      class="text-danger"
+                    >
+                      Debe ser mayor a 3 su longitud.
+                    </div>
+                    <div
+                      *ngIf="registroUpForm.get('Telefono')?.errors?.['maxLength']"
+                      class="text-danger"
+                    >
+                      Debe ser menor a 50 su longitud.
                     </div>
                   </div>
                 </div>
-                <div class="form-group col-12 col-md-6">
-                  <label class="form-label" for="txtSucursal">Rol</label>
-                  <select
-                    id="txtRol"
-                    class="form-control form-control-lg"
-                    formControlName="Rol"
-                  >
-                    <option *ngFor="let rol of roles" [value]="rol.idRol">
-                      {{ rol.nombre }}
-                    </option>
-                  </select>
-                  <div *ngIf="!isUpdate">
-                    <div
-                      *ngIf="registroUpForm.get('Rol')?.errors?.['required']"
-                      class="text-danger"
+
+                <div *ngIf="selectedUserType === 1" class="row">
+                  <div class="form-group col-12 col-md-6">
+                    <label class="form-label" for="txtRfc">RFC</label>
+                    <input
+                      id="txtRfc"
+                      type="text"
+                      class="form-control form-control-lg"
+                      formControlName="Rfc"
+                    />
+                    <div *ngIf="!isUpdate">
+                      <div
+                        *ngIf="registroUpForm.get('Rfc')?.errors?.['required']"
+                        class="text-danger"
+                      >
+                        RFC es requerido.
+                      </div>
+                      <div
+                        *ngIf="registroUpForm.get('Rfc')?.errors?.['minLength']"
+                        class="text-danger"
+                      >
+                        Debe ser mayor a 3 su longitud.
+                      </div>
+                      <div
+                        *ngIf="registroUpForm.get('Rfc')?.errors?.['maxLength']"
+                        class="text-danger"
+                      >
+                        Debe ser menor a 50 su longitud.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-12 col-md-6">
+                    <label class="form-label" for="txtPuesto">Puesto</label>
+                    <input
+                      id="txtPuesto"
+                      type="text"
+                      class="form-control form-control-lg"
+                      formControlName="Puesto"
+                    />
+                    <div *ngIf="!isUpdate">
+                      <div
+                        *ngIf="registroUpForm.get('Puesto')?.errors?.['required']"
+                        class="text-danger"
+                      >
+                        Puesto es requerido.
+                      </div>
+                      <div
+                        *ngIf="registroUpForm.get('Puesto')?.errors?.['minLength']"
+                        class="text-danger"
+                      >
+                        Debe ser mayor a 3 su longitud.
+                      </div>
+                      <div
+                        *ngIf="registroUpForm.get('Puesto')?.errors?.['maxLength']"
+                        class="text-danger"
+                      >
+                        Debe ser menor a 50 su longitud.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-12 col-md-6">
+                    <label class="form-label" for="txtSucursal">Sucursal</label>
+                    <select
+                      id="txtSucursal"
+                      class="form-control form-control-lg"
+                      formControlName="Sucursal"
                     >
-                      Rol es requerido.
+                      <option
+                        *ngFor="let sucursal of sucurzales"
+                        [value]="sucursal.idSucursal"
+                      >
+                        {{ sucursal.razonSocial }}
+                      </option>
+                    </select>
+
+                    <div *ngIf="!isUpdate">
+                      <div
+                        *ngIf="registroUpForm.get('Sucursal')?.errors?.['required']"
+                        class="text-danger"
+                      >
+                        Sucursal es requerido.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label class="form-label" for="txtSucursal">Rol</label>
+                    <select
+                      id="txtRol"
+                      class="form-control form-control-lg"
+                      formControlName="Rol"
+                    >
+                      <option *ngFor="let rol of roles" [value]="rol.idRol">
+                        {{ rol.nombre }}
+                      </option>
+                    </select>
+                    <div *ngIf="!isUpdate">
+                      <div
+                        *ngIf="registroUpForm.get('Rol')?.errors?.['required']"
+                        class="text-danger"
+                      >
+                        Rol es requerido.
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Correo input -->
+                <!-- Correo input -->
 
-              <div class="form-group col-12 col-md-6">
-                <label class="form-label" for="txtCorreo">Correo</label>
-                <input
-                  id="txtCorreo"
-                  type="text"
-                  class="form-control form-control-lg"
-                  formControlName="email"
-                />
-                <div *ngIf="!isUpdate">
-                  <div
-                    *ngIf="registroUpForm.get('email')?.errors?.['required']"
-                    class="text-danger"
-                  >
-                    Correo es requerido.
-                  </div>
-                  <div
-                    *ngIf="registroUpForm.get('email')?.errors?.['minLength']"
-                    class="text-danger"
-                  >
-                    Debe ser mayor a 3 su longitud.
-                  </div>
-                  <div
-                    *ngIf="registroUpForm.get('email')?.errors?.['maxLength']"
-                    class="text-danger"
-                  >
-                    Debe ser menor a 50 su longitud.
+                <div class="form-group col-12 col-md-6">
+                  <label class="form-label" for="txtCorreo">Correo</label>
+                  <input
+                    id="txtCorreo"
+                    type="text"
+                    class="form-control form-control-lg"
+                    formControlName="email"
+                  />
+                  <div *ngIf="!isUpdate">
+                    <div
+                      *ngIf="registroUpForm.get('email')?.errors?.['required']"
+                      class="text-danger"
+                    >
+                      Correo es requerido.
+                    </div>
+                    <div
+                      *ngIf="registroUpForm.get('email')?.errors?.['minLength']"
+                      class="text-danger"
+                    >
+                      Debe ser mayor a 3 su longitud.
+                    </div>
+                    <div
+                      *ngIf="registroUpForm.get('email')?.errors?.['maxLength']"
+                      class="text-danger"
+                    >
+                      Debe ser menor a 50 su longitud.
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Password input -->
+                <!-- Password input -->
 
-              <div class="form-group col-12 col-md-6">
-                <label class="form-label" for="txtPassword">Password</label>
-                <input
-                  id="txtPassword"
-                  type="password"
-                  class="form-control form-control-lg"
-                  formControlName="password"
-                  (keyup)="password()"
-                />
+                <div class="form-group col-12 col-md-6">
+                  <label class="form-label" for="txtPassword">Password</label>
+                  <input
+                    id="txtPassword"
+                    type="password"
+                    class="form-control form-control-lg"
+                    formControlName="password"
+                    (keyup)="password()"
+                  />
 
-                <div id="passmensaje">
-                  <p>A</p>
+                  <div id="passmensaje">
+                    <p>A</p>
+                  </div>
+                  <div *ngIf="!isUpdate">
+                    <div
+                      *ngIf="registroUpForm.get('password')?.errors?.['required']"
+                      class="text-danger"
+                    >
+                      Password es requerido.
+                    </div>
+                    <div
+                      *ngIf="registroUpForm.get('password')?.errors?.['minLength']"
+                      class="text-danger"
+                    >
+                      Debe ser mayor a 3 su longitud.
+                    </div>
+                    <div
+                      *ngIf="registroUpForm.get('password')?.errors?.['maxLength']"
+                      class="text-danger"
+                    >
+                      Debe ser menor a 50 su longitud.
+                    </div>
+                  </div>
                 </div>
-                <div *ngIf="!isUpdate">
-                  <div
-                    *ngIf="registroUpForm.get('password')?.errors?.['required']"
-                    class="text-danger"
-                  >
-                    Password es requerido.
-                  </div>
-                  <div
-                    *ngIf="registroUpForm.get('password')?.errors?.['minLength']"
-                    class="text-danger"
-                  >
-                    Debe ser mayor a 3 su longitud.
-                  </div>
-                  <div
-                    *ngIf="registroUpForm.get('password')?.errors?.['maxLength']"
-                    class="text-danger"
-                  >
-                    Debe ser menor a 50 su longitud.
-                  </div>
-                </div>
-              </div>
 
-              <div class="form-group col-12 col-md-12">
-                <div class="row justify-content-center">
-                  <div class="col-12 col-md-6" *ngIf="!isUpdate">
-                    <button
-                      class="btn btn-success mt-2 form-control"
-                      (click)="guardarUsuario()"
-                      id="btnGuardar"
-                    >
-                      <i class="fas fa-save"></i> Guardar
-                    </button>
-                  </div>
+                <div class="form-group col-12 col-md-12">
+                  <div class="row justify-content-center">
+                    <div class="col-12 col-md-6" *ngIf="!isUpdate">
+                      <button
+                        class="btn btn-success mt-2 form-control"
+                        (click)="guardarUsuario()"
+                        id="btnGuardar"
+                      >
+                        <i class="fas fa-save"></i> Guardar
+                      </button>
+                    </div>
 
-                  <div class="col-12 col-md-6" *ngIf="isUpdate">
-                    <button
-                      class="btn btn-success mt-2 form-control"
-                      *ngIf="selectedUserType == 2"
-                      (click)="editarUsuario()"
-                      id="btnGuardar"
-                    >
-                      <i class="fas fa-save"></i> Actualizar Cliente
-                    </button>
-                    <button
-                      class="btn btn-success mt-2 form-control"
-                      *ngIf="selectedUserType == 1"
-                      (click)="editarEmpleadoback()"
-                      id="btnGuardar"
-                    >
-                      <i class="fas fa-save"></i> Actualizar Empleado
-                    </button>
-                  </div>
+                    <div class="col-12 col-md-6" *ngIf="isUpdate">
+                      <button
+                        class="btn btn-success mt-2 form-control"
+                        *ngIf="selectedUserType == 2"
+                        (click)="editarUsuario()"
+                        id="btnGuardar"
+                      >
+                        <i class="fas fa-save"></i> Actualizar Cliente
+                      </button>
+                      <button
+                        class="btn btn-success mt-2 form-control"
+                        *ngIf="selectedUserType == 1"
+                        (click)="editarEmpleadoback()"
+                        id="btnGuardar"
+                      >
+                        <i class="fas fa-save"></i> Actualizar Empleado
+                      </button>
+                    </div>
 
-                  <div class="col-12 col-md-6" *ngIf="selectedUserType == 1">
-                    <button
-                      class="btn btn-danger mt-2 form-control"
-                      (click)="cancelarEm()"
-                      id="btnCancelar"
-                    >
-                      <i class="fas fa-times"></i> Cancelar
-                    </button>
-                  </div>
+                    <div class="col-12 col-md-6" *ngIf="selectedUserType == 1">
+                      <button
+                        class="btn btn-danger mt-2 form-control"
+                        (click)="cancelarEm()"
+                        id="btnCancelar"
+                      >
+                        <i class="fas fa-times"></i> Cancelar
+                      </button>
+                    </div>
 
-                  <div class="col-12 col-md-6" *ngIf="selectedUserType == 2">
-                    <button
-                      class="btn btn-danger mt-2 form-control"
-                      (click)="cancelarUs()"
-                      id="btnCancelar"
-                    >
-                      <i class="fas fa-times"></i> Cancelar
-                    </button>
+                    <div class="col-12 col-md-6" *ngIf="selectedUserType == 2">
+                      <button
+                        class="btn btn-danger mt-2 form-control"
+                        (click)="cancelarUs()"
+                        id="btnCancelar"
+                      >
+                        <i class="fas fa-times"></i> Cancelar
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
 
-    <div class="form-group col-12 col-md-8">
-      <div class="table-responsive">
-        <table
-          datatable
-          [dtOptions]="dtOptions"
-          class="table table-striped table-hover table-bordered"
-          cellspacing="0"
-          width="100%"
-        >
-          <thead class="mt-3">
-            <tr class="text-center">
-              <!--  <th>ID</th> -->
-              <th>Nombre</th>
-              <!--  <th>Apellido Paterno </th>
+      <div class="form-group col-12 col-md-8 mt-4">
+        <div class="table-responsive">
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            class="table table-striped table-hover table-bordered"
+            cellspacing="0"
+            width="100%"
+          >
+            <thead class="mt-3">
+              <tr class="text-center">
+                <!--  <th>ID</th> -->
+                <th>Nombre</th>
+                <!--  <th>Apellido Paterno </th>
               <th>Apellido Materno</th> -->
-              <th>Correo</th>
-              <th>Telefono</th>
-              <th>Estatus</th>
-              <th>Rol</th>
-              <th>Accion</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="text-center" *ngFor="let user of usuarios">
-              <!--  <td>{{ user.idUsuario }}</td> -->
-              <td>
-                {{ user.nombres }} {{ user.apellidoPaterno }}
-                {{ user.apellidoMaterno }}
-              </td>
-              <td>{{ user.email }}</td>
-              <td>{{ user.telefono }}</td>
+                <th>Correo</th>
+                <th>Telefono</th>
+                <th>Estatus</th>
+                <th>Rol</th>
+                <th>Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center" *ngFor="let user of usuarios">
+                <!--  <td>{{ user.idUsuario }}</td> -->
+                <td>
+                  {{ user.nombres }} {{ user.apellidoPaterno }}
+                  {{ user.apellidoMaterno }}
+                </td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.telefono }}</td>
 
-              <td>{{ user.estatus != 0 ? "Activo" : "Inactivo" }}</td>
-              <td>{{ user.nombre }}</td>
-              <td>
-                <button
-                  class="btn btn-primary mx-1"
-                  *ngIf="user.idRol == 3"
-                  (click)="
-                    editarUser({
-                      idUsuario: user.idUsuario,
-                      nombres: user.nombres,
-                      apellidoPaterno: user.apellidoPaterno,
-                      apellidoMaterno: user.apellidoMaterno,
-                      email: user.email,
-                      telefono: user.telefono,
-                      estatus: user.estatus,
-                      rol: user.idRol,
-                      sucursal: user.idSucursal,
-                      password: user.password,
-                      tipoUsuario: user.idRol != 3 ? 1 : 2
-                    })
-                  "
-                >
-                  <i class="fas fa-edit"></i>
-                </button>
+                <td>{{ user.estatus != 0 ? "Activo" : "Inactivo" }}</td>
+                <td>{{ user.nombre }}</td>
+                <td>
+                  <button id="btnUpdate"
+                    class="btn mx-1"
+                    *ngIf="user.idRol == 3"
+                    (click)="
+                      editarUser({
+                        idUsuario: user.idUsuario,
+                        nombres: user.nombres,
+                        apellidoPaterno: user.apellidoPaterno,
+                        apellidoMaterno: user.apellidoMaterno,
+                        email: user.email,
+                        telefono: user.telefono,
+                        estatus: user.estatus,
+                        rol: user.idRol,
+                        sucursal: user.idSucursal,
+                        password: user.password,
+                        tipoUsuario: user.idRol != 3 ? 1 : 2
+                      })
+                    "
+                  >
+                    <i class="fas fa-edit"></i>
+                  </button>
 
-                <button
-                  class="btn btn-primary mx-1"
-                  *ngIf="user.idRol != 3"
-                  (click)="editarEmpleado(user.idUsuario)"
-                >
-                  <i class="fas fa-edit"></i>
-                </button>
-                <button
-                  *ngIf="user.idRol != 3"
-                  class="btn btn-primary mx-1"
-                  (click)="getEmpleado(user.idUsuario)"
-                >
-                  <i class="fas fa-user"></i>
-                </button>
-                <button
-                  class="btn btn-danger"
-                  (click)="deleteUser(user.idUsuario)"
-                  *ngIf="user.estatus != 0"
-                >
-                  <i class="fas fa-trash"></i>
-                </button>
+                  <button id="btnUpdate"
+                    class="btn mx-1"
+                    *ngIf="user.idRol != 3"
+                    (click)="editarEmpleado(user.idUsuario)"
+                  >
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button
+                    *ngIf="user.idRol != 3"
+                    class="btn btn-secondary mx-1"
+                    (click)="getEmpleado(user.idUsuario)"
+                  >
+                    <i class="fas fa-user"></i>
+                  </button>
+                  <button
+                    class="btn btn-danger"
+                    (click)="deleteUser(user.idUsuario)"
+                    *ngIf="user.estatus != 0"
+                  >
+                    <i class="fas fa-trash"></i>
+                  </button>
 
-                <button
-                  class="btn btn-success"
-                  (click)="activarUser(user.idUsuario)"
-                  *ngIf="user.estatus == 0"
-                >
-                  <i class="fas fa-check"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                  <button
+                    class="btn btn-success"
+                    (click)="activarUser(user.idUsuario)"
+                    *ngIf="user.estatus == 0"
+                  >
+                    <i class="fas fa-check"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
