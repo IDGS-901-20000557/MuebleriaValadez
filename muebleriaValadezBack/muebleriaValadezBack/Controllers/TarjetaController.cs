@@ -24,12 +24,42 @@ namespace muebleriaValadezBack.Controllers
             try{
                 var results = _context.Set<Tarjetas>()
                    .FromSqlRaw("SELECT * FROM Tarjetas WHERE idCliente = @idCliente", new SqlParameter("@idCliente", idCliente)).ToList();
+                
+                var maskedResults = results.Select(item => new
+                {
+                    item.IdTarjeta,
+                    numeroTarejta = MaskCreditCardNumber(item.numeroTarejta),
+                    item.nombreTitular,
+                    item.vencimiento,
+                    item.cvv,
+                    item.tipo,
+                    item.IdCliente
+                }).ToList();
 
-                return Ok(results);
-            }catch (Exception ex)
+                return Ok(maskedResults);
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        // Función para enmascarar el número de tarjeta
+        private string MaskCreditCardNumber(long creditCardNumber)
+        {
+            string creditCardStr = creditCardNumber.ToString();
+            int visibleDigits = 4; // Cantidad de dígitos visibles en el número de tarjeta
+
+            if (creditCardStr.Length <= visibleDigits)
+            {
+                return creditCardStr; // No hay suficientes dígitos para enmascarar
+            }
+
+            // Enmascarar todos los dígitos excepto los últimos 'visibleDigits'
+            string maskedPart = new string('*', creditCardStr.Length - visibleDigits);
+            string visiblePart = creditCardStr.Substring(creditCardStr.Length - visibleDigits);
+
+            return maskedPart + visiblePart;
         }
 
 

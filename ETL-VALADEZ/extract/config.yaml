@@ -1,0 +1,168 @@
+database :
+    connection: "DRIVER={ODBC Driver 17 for SQL Server}; 
+                SERVER=DESKTOP-LOBNEKH\\SQLEXPRESS; 
+                DATABASE=DBMuebleriaValadez; Trusted_Connection=yes"
+    tablas:
+      producto:
+        query : "SELECT p.*, inv.cantidaDisponible FROM Productos p 
+                INNER JOIN Inventario inv ON inv.IdInventario = p.IdInventario;"
+        headers :
+          - idProducto
+          - nombreProducto
+          - descripcion
+          - foto
+          - costoProduccion
+          - precioVenta
+          - observaciones
+          - idInventario
+          - cantidadAceptable
+          - estatus
+          - cantidaDisponible
+        structure:
+          - name : idProducto
+          - name : nombre
+          - name : descripcion
+          - name : foto
+          - name : costoProduccion
+          - name : precioVenta
+          - name : observaciones
+          - name : idInventario
+          - name : cantidad
+          - name : estatus
+          - name : cantidadDisponible
+      pedido:
+        query: "SELECT * FROM [Pedidos] WHERE estatus > 0;"
+        headers:
+          - idPedido
+          - idCliente
+          - idTarjeta
+          - fechaPedido
+          - fechaEntrega
+          - codigo
+          - total
+          - idDireccion
+          - idEmpleadoEntrega
+          - estatus
+        structure:
+          - name : idPedido
+          - name : idCliente
+          - name : idTarjeta
+          - name : fechaPedido
+          - name : fechaEntrega
+          - name : codigo
+          - name : total
+          - name : idDireccion
+          - name : idEmpleadoEntrega
+          - name : estatus
+      ordenesPedido:
+        query: "SELECT * FROM [OrdenesPedidos];"
+        headers:
+          - idOrdenPedido
+          - idPedido
+          - idProducto
+          - cantidad
+          - subtotal
+        structure:
+          - name : idOrdenPedido
+          - name : idPedido
+          - name : idProducto
+          - name : cantidad
+          - name : subtotal
+      ordenesVentas:
+        query: "SELECT (p.costoProduccion*oP.cantidad) AS costoProdFin FROM Productos p
+                INNER JOIN OrdenesPedidos oP ON oP.IdProducto = p.IdProducto;"
+        headers:
+          - costoProdFin
+        structure:
+          - name : costoProdFin
+      ordenesVentaProducto:
+        query: "SELECT * FROM [OrdenesVentaProducto];"
+        headers:
+          - idOrdenVentaProducto
+          - idOrdenVenta
+          - cantidad
+          - subtotal
+          - idProducto
+        structure:
+          - name : idOrdenVentaProducto
+          - name : idOrdenVenta
+          - name : cantidad
+          - name : subtotal
+          - name : idProducto
+      insumo:
+        query: "SELECT ins.*, inv.cantidaDisponible 
+                FROM Insumos ins INNER JOIN Inventario inv ON inv.IdInventario = ins.IdInventario;"
+        headers :
+          - idInsumo
+          - nombreInsumo
+          - idProveedor
+          - idInventario
+          - unidad
+          - precio
+          - observaciones
+          - estatus
+          - cantidadAceptable
+          - cantidaDisponible
+        structure:
+          - name : idInsumo
+          - name : nombreInsumo
+          - name : idProveedor
+          - name : idInventario
+          - name : unidad
+          - name : precio
+          - name : observaciones
+          - name : estatus
+          - name : cantidadAceptable
+          - name : cantidadDisponible
+      usuarios:
+        query: "SELECT us.*, bit.fecha FROM Usuarios us 
+                INNER JOIN Bitacora bit ON bit.idUsuario = us.IdUsuario 
+                WHERE bit.observaciones = 'Se inserto un usuario de tipo:3';"
+        headers:
+          - idUsuario
+          - email
+          - password
+          - idPersona
+          - estatus
+          - fecha
+        structure:
+          - name : idUsuario
+          - name : email
+          - name : password
+          - name : idPersona
+          - name : estatus
+          - name : fecha
+      clientes:
+        query: "SELECT cl.*, CONCAT(per.nombres,' ',per.apellidoPaterno, ' ',per.apellidoMaterno) AS nombreCompleto 
+                FROM Clientes cl INNER JOIN Personas per ON per.IdPersona = cl.IdPersona 
+                INNER JOIN Pedidos ped ON ped.IdCliente = cl.IdCliente;"
+        headers:
+          - idCliente
+          - idPersona
+          - nombreCompleto
+        structure:
+          - name : idCliente
+          - name : idPersona
+          - name : nombreCompleto
+      pedidosFull:
+        query: "SELECT p.nombreProducto, op.*, ped.fechaPedido
+                FROM OrdenesPedidos op
+                INNER JOIN Pedidos ped ON op.IdPedido = ped.IdPedido
+                INNER JOIN Productos p ON op.IdProducto = p.IdProducto
+                WHERE ped.estatus > 0;"
+        headers:
+          - nombreProducto
+          - idOrdenPedido
+          - idPedido
+          - idProducto
+          - cantidad
+          - subtotal
+          - fechaPedido
+        structure:
+          - name : nombreProducto
+          - name : idOrdenPedido
+          - name : idPedido
+          - name : idProducto
+          - name : cantidad
+          - name : subtotal
+          - name : fechaPedido

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj": {}
+    "C:\\Users\\quiro\\OneDrive\\Escritorio\\MuebleriaValadez_v2\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj": {
+    "C:\\Users\\quiro\\OneDrive\\Escritorio\\MuebleriaValadez_v2\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
+        "projectUniqueName": "C:\\Users\\quiro\\OneDrive\\Escritorio\\MuebleriaValadez_v2\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
         "projectName": "muebleriaValadezBack",
-        "projectPath": "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
-        "packagesPath": "C:\\Users\\SUPERVISOR\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SUPERVISOR\\source\\repos\\IDGS-901-20000557\\v2\\MuebleriaValadez\\muebleriaValadezBack\\muebleriaValadezBack\\obj\\",
+        "projectPath": "C:\\Users\\quiro\\OneDrive\\Escritorio\\MuebleriaValadez_v2\\muebleriaValadezBack\\muebleriaValadezBack\\muebleriaValadezBack.csproj",
+        "packagesPath": "C:\\Users\\quiro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\quiro\\OneDrive\\Escritorio\\MuebleriaValadez_v2\\muebleriaValadezBack\\muebleriaValadezBack\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\SUPERVISOR\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\quiro\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -79,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
