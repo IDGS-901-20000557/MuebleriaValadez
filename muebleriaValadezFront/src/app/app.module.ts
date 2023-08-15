@@ -24,6 +24,7 @@ import { ProductosComponent } from './empleadoAdministrador/productos/productos.
 import { InsumosComponent } from './empleadoAdministrador/insumos/insumos.component';
 import { ProductosPedidoComponent } from './productos-pedido/productos-pedido.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { InventariosComponent } from './empleadoAdministrador/inventarios/inventarios.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { ProveedorComponent } from './empleadoAdministrador/proveedores/proveedores.component';
@@ -43,6 +44,7 @@ import { MayoresProductosComponent } from './empleadoAdministrador/dashboard/may
 import { MenoresProductosComponent } from './empleadoAdministrador/dashboard/menores-productos/menores-productos.component';
 import { VentasMensualesComponent } from './empleadoAdministrador/dashboard/ventas-mensuales/ventas-mensuales.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +60,7 @@ import { VentasMensualesComponent } from './empleadoAdministrador/dashboard/vent
     InsumosComponent, 
     ProductosPedidoComponent,
     CarritoComponent,
+    InventariosComponent,
     PageNotFoundComponent,
     PedidosComponent,
     ProveedorComponent,

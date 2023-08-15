@@ -1,0 +1,42 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Claudio Tamayo
+-- Create date: 09/07/2023
+-- Description:	SP que baja inventario de un insumo
+-- =============================================
+CREATE PROCEDURE SP_DisminuirInventario_Insumo 
+	@PIdInsumo BIGINT,
+	@PIdProducto BIGINT,
+	@cantidadProducto float
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	BEGIN TRAN
+
+	DECLARE @CantidadInsumo FLOAT;
+
+	SET @CantidadInsumo = (SELECT cantidadInsumo FROM LibroRecetas WHERE IdProducto = @PIdProducto AND IdInsumo = @PIdInsumo);
+
+	IF @CantidadInsumo IS NOT NULL
+		UPDATE Inventario SET cantidaDisponible = (
+			(SELECT cantidaDisponible FROM Insumos AS INS INNER JOIN Inventario AS INV ON INS.IdInventario = INV.IdInventario WHERE IdInsumo = @PIdInsumo)
+			- (@cantidadProducto * @CantidadInsumo))
+		WHERE IdInventario = (SELECT INV.IdInventario FROM Insumos AS INS INNER JOIN Inventario AS INV ON INS.IdInventario = INV.IdInventario WHERE IdInsumo = @PIdInsumo);
+	
+	
+	COMMIT
+END TRY
+BEGIN CATCH
+	-- Todo esto es necesario para capturar el error (en caso de que haya un error en la transacción)
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber,
+        ERROR_SEVERITY() AS ErrorSeverity,
+        ERROR_STATE() AS ErrorState,
+        ERROR_PROCEDURE() AS ErrorProcedure,
+        ERROR_MESSAGE() AS ErrorMessage;
+END CATCH
+

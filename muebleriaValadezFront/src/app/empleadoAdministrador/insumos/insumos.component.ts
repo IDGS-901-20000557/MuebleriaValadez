@@ -131,7 +131,8 @@ export class InsumosComponent implements OnInit {
         title: 'Error',
         text: 'Complete todos los campos requeridos y asegúrese de que las cantidades sean mayores o iguales a 0.',
         icon: 'error',
-        confirmButtonText: 'Aceptar'
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#20a124'
       });
       return;
     }
@@ -149,7 +150,9 @@ export class InsumosComponent implements OnInit {
             title: '¡Actualización exitosa!',
             text: 'Los datos del insumo han sido actualizados.',
             icon: 'success',
-            confirmButtonText: 'Aceptar'
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#20a124'
+
           });
           this.getAllInsumos();
           this.clearForm();
@@ -168,7 +171,9 @@ export class InsumosComponent implements OnInit {
             title: '¡Éxito!',
             text: 'El insumo ha sido insertado correctamente.',
             icon: 'success',
-            confirmButtonText: 'Aceptar'
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#20a124'
+
           });
         },
         (error) => {
@@ -176,7 +181,9 @@ export class InsumosComponent implements OnInit {
             title: '¡Error!',
             text: 'Ha ocurrido un error al insertar el insumo.',
             icon: 'error',
-            confirmButtonText: 'Aceptar'
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#20a124'
+
           });
           console.log(error);
         }

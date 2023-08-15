@@ -1,111 +1,113 @@
-<div class="container mt-5 mb-5">
-  <div class="row mt-3">
-    <div class="form-group col-12 col-md-4 mt-4">
-      <!-- Código del formulario de insert de insumos -->
-      <div class="card shadow rounded">
-        <div id="title" class="card-header text-center">Insumos</div>
-        <div class="card-body" [formGroup]="insumoForm">
-          <label for="nombreInsumo" class="form-label">Nombre</label>
-          <input type="text" class="form-control" formControlName="nombreInsumo" id="nombreInsumo" name="nombreInsumo" [(ngModel)]="nuevoInsumo.nombreInsumo" required/>
-          <div *ngIf="insumoForm.get('nombreInsumo')?.touched && 
-                            insumoForm.get('nombreInsumo')?.errors?.['required']" class="alert alert-danger">
-                    Este campo es requerido
-          </div>
-          <div *ngIf="insumoForm.get('nombreInsumo')?.touched && 
-                            insumoForm.get('nombreInsumo')?.errors?.['minlength']" class="alert alert-danger">
-                    El nombre debe ser más largo que
-                    {{insumoForm.get('nombreInsumo')?.errors?.['minlength']?.requiredLength}}
-          </div>
-          
-          <label for="idProveedor" class="form-label mt-2">Seleccione el proveedor</label>
-          <select class="form-control" id="idProveedor" (change)="onProveedorSelected($event)">
-            <option value="0" disabled selected>Selecciona un proveedor</option>
-            <option *ngFor="let proveedor of proveedores" [value]="proveedor.idProveedor">{{ proveedor.nombreEmpresa }}</option>
-          </select>                    
+<div class="body">
+  <div class="container"><br><br>
+    <div class="row">
+      <div class="form-group col-12 col-md-4 mt-4">
+        <!-- Código del formulario de insert de insumos -->
+        <div class="card shadow rounded">
+          <div id="title" class="card-header text-center">Insumos</div>
+          <div class="card-body" [formGroup]="insumoForm">
+            <label for="nombreInsumo" class="form-label">Nombre</label>
+            <input type="text" class="form-control" formControlName="nombreInsumo" id="nombreInsumo" name="nombreInsumo" [(ngModel)]="nuevoInsumo.nombreInsumo" required/>
+            <div *ngIf="insumoForm.get('nombreInsumo')?.touched && 
+                              insumoForm.get('nombreInsumo')?.errors?.['required']" class="alert text-danger">
+                      Este campo es requerido
+            </div>
+            <div *ngIf="insumoForm.get('nombreInsumo')?.touched && 
+                              insumoForm.get('nombreInsumo')?.errors?.['minlength']" class="alert text-danger">
+                      El nombre debe ser más largo que
+                      {{insumoForm.get('nombreInsumo')?.errors?.['minlength']?.requiredLength}}
+            </div>
+            
+            <label for="idProveedor" class="form-label mt-2">Seleccione el proveedor</label>
+            <select class="form-control" id="idProveedor" (change)="onProveedorSelected($event)">
+              <option value="0" disabled selected>Selecciona un proveedor</option>
+              <option *ngFor="let proveedor of proveedores" [value]="proveedor.idProveedor">{{ proveedor.nombreEmpresa }}</option>
+            </select>                    
 
-          <label for="unidad" class="form-label mt-2">Seleccione la unidad</label>
-          <select formControlName="unidad" class="form-control" id="unidad" [(ngModel)]="nuevoInsumo.unidad">
-            <option value="Piezas">Piezas</option>
-            <option value="Metros">Metros</option>
-            <option value="Litros">Litros</option>
-            <option value="Kilogramos">Kilogramos</option>
-          </select>
+            <label for="unidad" class="form-label mt-2">Seleccione la unidad</label>
+            <select formControlName="unidad" class="form-control" id="unidad" [(ngModel)]="nuevoInsumo.unidad">
+              <option value="Piezas">Piezas</option>
+              <option value="Metros">Metros</option>
+              <option value="Litros">Litros</option>
+              <option value="Kilogramos">Kilogramos</option>
+            </select>
 
-          <label for="precio" class="form-label mt-2">Precio</label>
-          <input type="number" class="form-control" formControlName="precio" id="precio" name="precio" [(ngModel)]="nuevoInsumo.precio" min="0" />
-          <div *ngIf="insumoForm.get('precio')?.touched && 
-                            insumoForm.get('precio')?.errors?.['required']" class="alert alert-danger">
-                    Este campo es requerido
-          </div>
-          <div *ngIf="insumoForm.get('precio')?.touched && 
-                            insumoForm.get('precio')?.errors?.['min']" class="alert alert-danger">
-                    El precio debe ser mayor a 0
-          </div>
+            <label for="precio" class="form-label mt-2">Precio</label>
+            <input type="number" class="form-control" formControlName="precio" id="precio" name="precio" [(ngModel)]="nuevoInsumo.precio" min="0" />
+            <div *ngIf="insumoForm.get('precio')?.touched && 
+                              insumoForm.get('precio')?.errors?.['required']" class="alert text-danger">
+                      Este campo es requerido
+            </div>
+            <div *ngIf="insumoForm.get('precio')?.touched && 
+                              insumoForm.get('precio')?.errors?.['min']" class="alert text-danger">
+                      El precio debe ser mayor a 0
+            </div>
 
-          <label for="observaciones" class="form-label mt-2">Observaciones</label>
-          <textarea formControlName="observaciones" id="observaciones" name="observaciones" class="form-control" rows="3" [(ngModel)]="nuevoInsumo.observaciones"></textarea>
-          <div *ngIf="insumoForm.get('observaciones')?.touched && 
-                            insumoForm.get('observaciones')?.errors?.['required']" class="alert alert-danger">
-                    Este campo es requerido
-          </div>
-          <div *ngIf="insumoForm.get('observaciones')?.touched && 
-                            insumoForm.get('observaciones')?.errors?.['minlength']" class="alert alert-danger">
-                    La descripción debe ser mayor de 10 caracteres
-          </div>
+            <label for="observaciones" class="form-label mt-2">Observaciones</label>
+            <textarea formControlName="observaciones" id="observaciones" name="observaciones" class="form-control" rows="3" [(ngModel)]="nuevoInsumo.observaciones"></textarea>
+            <div *ngIf="insumoForm.get('observaciones')?.touched && 
+                              insumoForm.get('observaciones')?.errors?.['required']" class="alert text-danger">
+                      Este campo es requerido
+            </div>
+            <div *ngIf="insumoForm.get('observaciones')?.touched && 
+                              insumoForm.get('observaciones')?.errors?.['minlength']" class="alert text-danger">
+                      La descripción debe ser mayor de 10 caracteres
+            </div>
 
-          <label for="cantidadAceptable" class="form-label mt-2">Cantidad Aceptable</label>
-          <input formControlName="cantidadAceptable" id="cantidadAceptable" name="cantidadAceptable" type="number" class="form-control" [(ngModel)]="nuevoInsumo.cantidadAceptable" />
-          <div *ngIf="insumoForm.get('cantidadAceptable')?.touched && 
-                            insumoForm.get('cantidadAceptable')?.errors?.['required']" class="alert alert-danger">
-                    Este campo es requerido
-          </div>
-          <div *ngIf="insumoForm.get('cantidadAceptable')?.touched && 
-                            insumoForm.get('cantidadAceptable')?.errors?.['min']" class="alert alert-danger">
-                    La cantidad aceptable debe ser mayor a 0
-          </div>
+            <label for="cantidadAceptable" class="form-label mt-2">Cantidad Aceptable</label>
+            <input formControlName="cantidadAceptable" id="cantidadAceptable" name="cantidadAceptable" type="number" class="form-control" [(ngModel)]="nuevoInsumo.cantidadAceptable" />
+            <div *ngIf="insumoForm.get('cantidadAceptable')?.touched && 
+                              insumoForm.get('cantidadAceptable')?.errors?.['required']" class="alert text-danger">
+                      Este campo es requerido
+            </div>
+            <div *ngIf="insumoForm.get('cantidadAceptable')?.touched && 
+                              insumoForm.get('cantidadAceptable')?.errors?.['min']" class="alert text-danger">
+                      La cantidad aceptable debe ser mayor a 0
+            </div>
 
-          <button class="btn btn-success mt-2 form-control" (click)="insertNewInsumo()">
-            <i class="fas fa-save"></i> Guardar
-          </button>
+            <button class="btn btn-success mt-2 form-control" (click)="insertNewInsumo()">
+              <i class="fas fa-save"></i> Guardar
+            </button>
+          </div>
         </div>
       </div>
+      <div class="form-group col-12 col-md-8 mt-4">
+        <table datatable [dtOptions]="dtOptions" class="table table-striped table-hover table-bordered" cellspacing="0" width="100%">
+          <thead>
+            <tr class="text-center">
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Proveedor</th>
+              <th>Unidad</th>
+              <th>Precio</th>
+              <!--<th>Observaciones</th>-->
+              <th>Cantidad Aceptable</th>
+              <th>Detalles</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr *ngFor="let insumo of insumos">
+              <td>{{ insumo.idInsumo }}</td>
+              <td>{{ insumo.nombreInsumo }}</td>
+              <td>{{ getNombreProveedorById(insumo.idProveedor) }}</td>
+              <td>{{ insumo.unidad }}</td>
+              <td>${{ insumo.precio }} </td>
+              <!--<td>{{ insumo.observaciones }}</td>-->
+              <td>{{ insumo.cantidadAceptable }}</td>
+              <td class="text-center">
+                <div class="d-flex">
+                  <button id="btnUpdate" class="btn" (click)="editarInsumo(insumo)">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button id="btnDelete" class="btn btn-danger" (click)="deleteInsumo(insumo.idInsumo)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="form-group col-12 col-md-8 mt-4">
-      <table datatable [dtOptions]="dtOptions" class="table table-striped table-hover table-bordered" cellspacing="0" width="100%">
-        <thead>
-          <tr class="text-center">
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Proveedor</th>
-            <th>Unidad</th>
-            <th>Precio</th>
-            <!--<th>Observaciones</th>-->
-            <th>Cantidad Aceptable</th>
-            <th>Detalles</th>
-          </tr>
-        </thead>
-        <tbody class="text-center">
-          <tr *ngFor="let insumo of insumos">
-            <td>{{ insumo.idInsumo }}</td>
-            <td>{{ insumo.nombreInsumo }}</td>
-            <td>{{ getNombreProveedorById(insumo.idProveedor) }}</td>
-            <td>{{ insumo.unidad }}</td>
-            <td>${{ insumo.precio }} </td>
-            <!--<td>{{ insumo.observaciones }}</td>-->
-            <td>{{ insumo.cantidadAceptable }}</td>
-            <td class="text-center">
-              <div class="d-flex">
-                <button id="btnUpdate" class="btn" (click)="editarInsumo(insumo)">
-                  <i class="fas fa-eye"></i>
-                </button>
-                <button id="btnDelete" class="btn btn-danger" (click)="deleteInsumo(insumo.idInsumo)">
-                  <i class="fas fa-trash"></i>
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  </div><br><br>
 </div>
