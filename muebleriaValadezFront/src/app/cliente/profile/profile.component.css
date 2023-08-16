@@ -1,52 +1,90 @@
-.body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-
 .card2 {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    margin: auto;
-    text-align: center;
-    font-family: arial;
-    height: 600px;
-  }
-  
-  .title {
-    color: grey;
-    font-size: 18px;
-  }
-  
-  button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-  }
-  
-  a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-  }
-  
-  button:hover, a:hover {
-    opacity: 0.7;
-  }
-
-
-  input {
-    margin-top: 3px;
-    padding: 15px;
-    font-size: 16px;
-    width: 100%;
-    border-radius: 3px;
-    border: 1px solid #dcdcdc;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  height: 450px;
 }
- 
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover,
+a:hover {
+  opacity: 0.7;
+}
+
+
+input {
+  margin-top: 3px;
+  padding: 15px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #dcdcdc;
+}
+
+.body {
+  background-color: #D9DAD9;
+  width: 100%;
+  height: auto;
+}
+
+#btn:hover {
+  background-color: #B88736;
+}
+
+#name {
+  font-weight: 700;
+  font-size: 20px;
+  color: #B88736;
+  text-transform: uppercase;
+}
+
+.card-item {
+  font-size: medium;
+}
+
+.info {
+  color: #B88736;
+  font-size: 14px;
+}
+
+.x1, .x2 {
+  font-size: 10px;
+  color: gray;
+}
+
+.x1 {
+  margin-bottom: -10px;
+}
+
+.x2 {
+  margin-top: -10px;
+}
+
+a:hover {
+  color: #B88736;
+}

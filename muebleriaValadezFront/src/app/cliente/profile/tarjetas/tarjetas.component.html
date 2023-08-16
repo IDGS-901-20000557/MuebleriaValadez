@@ -40,14 +40,14 @@ style="cursor: pointer; font-size: medium;  " class="mt-3"> <i
                     </text>
                  
                     <text transform="matrix(1 0 0 1 54.1064 428.1723)" id="svgname" class="st2 st5 st6"> {{name}} </text>
-                    <text transform="matrix(1 0 0 1 54.1074 389.8793)" class="st7 st5 st8">cardholder name</text>
-                    <text transform="matrix(1 0 0 1 479.7754 388.8793)" class="st7 st5 st8">expiration</text>
-                    <text transform="matrix(1 0 0 1 65.1054 241.5)" class="st7 st5 st8">card number</text>
+                    <text transform="matrix(1 0 0 1 54.1074 389.8793)" class="st7 st5 st8">Titular de la tarjeta</text>
+                    <text transform="matrix(1 0 0 1 479.7754 388.8793)" class="st7 st5 st8">Expiración</text>
+                    <text transform="matrix(1 0 0 1 65.1054 241.5)" class="st7 st5 st8">Número de Tarjeta</text>
                     <g>
                         <text transform="matrix(1 0 0 1 574.4219 433.8095)" id="svgexpire"
                             class="st2 st5 st9">{{expiration}}</text>
-                        <text transform="matrix(1 0 0 1 479.3848 417.0097)" class="st2 st10 st11">VALID</text>
-                        <text transform="matrix(1 0 0 1 479.3848 435.6762)" class="st2 st10 st11">THRU</text>
+                        <text transform="matrix(1 0 0 1 479.3848 417.0097)" class="st2 st10 st11">VÁLIDA</text>
+                        <text transform="matrix(1 0 0 1 479.3848 435.6762)" class="st2 st10 st11">HASTA</text>
                         <polygon class="st2" points="554.5,421 540.4,414.2 540.4,427.9 		" />
                     </g>
                     <g id="cchip">
@@ -101,52 +101,51 @@ style="cursor: pointer; font-size: medium;  " class="mt-3"> <i
         <div class="row" *ngIf="!edit">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="cardName">Name on card</label>
-              <input type="text" class="form-control" id="cardName" formControlName="cardName" placeholder="Name on card" required (keypress)="validateName()" (change)="validateName()" max="20" />
+              <label for="cardName">Titular de la tarjeta</label>
+              <input type="text" class="form-control" id="cardName" formControlName="cardName" placeholder="Ingrese el nombre" required (keypress)="validateName()" (change)="validateName()" max="20" />
               <div *ngIf="tarjetaForm.get('cardName')?.invalid && (tarjetaForm.get('cardName')?.dirty || tarjetaForm.get('cardName')?.touched)">
-                <small class="text-danger" *ngIf="tarjetaForm.get('cardName')?.errors?.['required']">Name is required.</small>
+                <small class="text-danger" *ngIf="tarjetaForm.get('cardName')?.errors?.['required']">Nombre es requerido.</small>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="cardNumber">Card number</label>
+              <label for="cardNumber">Número de Tarjeta</label>
               <div class="input-group mb-3">
-                <input type="text" id="cardNumber" class="form-control" formControlName="cardNumber" placeholder="Valid card number" required autofocus maxlength="19" (keypress)="validateNumberCard()" (change)="validateNumberCard()" />
+                <input type="text" id="cardNumber" class="form-control" formControlName="cardNumber" placeholder="Ingrese el número de su tarjeta" required autofocus maxlength="19" (keypress)="validateNumberCard()" (change)="validateNumberCard()" />
               </div>
               <div *ngIf="tarjetaForm.get('cardNumber')?.invalid && (tarjetaForm.get('cardNumber')?.dirty || tarjetaForm.get('cardNumber')?.touched)">
-                <small class="text-danger" *ngIf="tarjetaForm.get('cardNumber')?.errors?.['required']">Card number is required.</small>
+                <small class="text-danger" *ngIf="tarjetaForm.get('cardNumber')?.errors?.['required']">Número de tarjeta requerido.</small>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="cardExpiry">Expiration date</label>
+              <label for="cardExpiry">Fecha de expiración</label>
               <input type="text" class="form-control" formControlName="cardExpiry" placeholder="MM / YY" id="expiration" required maxlength="5" (keypress)="validateNumber()" (change)="validateNumber()" />
               <div *ngIf="tarjetaForm.get('cardExpiry')?.invalid && (tarjetaForm.get('cardExpiry')?.dirty || tarjetaForm.get('cardExpiry')?.touched)">
-                <small class="text-danger" *ngIf="tarjetaForm.get('cardExpiry')?.errors?.['required']">Expiration date is required.</small>
-                <small class="text-danger" *ngIf="tarjetaForm.get('cardExpiry')?.errors?.['pattern']">Invalid format (MM/YY).</small>
+                <small class="text-danger" *ngIf="tarjetaForm.get('cardExpiry')?.errors?.['required']">Fecha de expiración es querida.</small>
+                <small class="text-danger" *ngIf="tarjetaForm.get('cardExpiry')?.errors?.['pattern']">Formato inválido (MM/YY).</small>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="cardCVC">Security code</label>
+              <label for="cardCVC">CVC</label>
               <input type="password" id="CSV" class="form-control" formControlName="cardCVC" placeholder="CVC" required maxlength="3" (keypress)="validateNumberCv()" (change)="validateNumberCv()" />
               <div *ngIf="tarjetaForm.get('cardCVC')?.invalid && (tarjetaForm.get('cardCVC')?.dirty || tarjetaForm.get('cardCVC')?.touched)">
-                <small class="text-danger" *ngIf="tarjetaForm.get('cardCVC')?.errors?.['required']">Security code is required.</small>
-                <small class="text-danger" *ngIf="tarjetaForm.get('cardCVC')?.errors?.['pattern']">Invalid security code.</small>
+                <small class="text-danger" *ngIf="tarjetaForm.get('cardCVC')?.errors?.['required']">Código de seguridad es requerido.</small>
+                <small class="text-danger" *ngIf="tarjetaForm.get('cardCVC')?.errors?.['pattern']">Código de seguridad inválido.</small>
             </div>
-              <small class="form-text text-muted">Last three digits on signature strip</small>
+              <small class="form-text text-muted">Últimos 3 dígitos de su tarjeta.</small>
             </div>
           </div>
           <div class="col-md-12">
             <div *ngIf="!edit">
-              <button class="btn btn-primary btn-block" type="submit">Save</button>
+              <button id="btn" class="btn mt-2" type="submit">Guardar</button>
             </div>
-           
             <br />
-            <small class="form-text text-muted">By clicking save, you agree to our Terms of Use and Privacy Policy.</small>
+            <small class="form-text text-muted">Al dar clic, usted está aceptando nuestros términos y condiciones de privacidad.</small>
           </div>
         </div>
       </form>

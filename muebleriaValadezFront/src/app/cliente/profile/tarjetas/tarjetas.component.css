@@ -6,16 +6,16 @@ body {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-line-pack: center;
-        align-content: center;
+    align-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     min-height: 100vh;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     font-family: 'Raleway';
 }
 
@@ -54,7 +54,7 @@ body {
     grid-column-gap: 10px;
     grid-template-columns: auto auto;
     grid-template-rows: 90px 90px 90px;
-    grid-template-areas: "name name""number number""expiration security";
+    grid-template-areas: "name name" "number number" "expiration security";
     max-width: 100%;
     padding: 20px;
     color: #707070;
@@ -125,7 +125,7 @@ input {
     border-radius: 22px;
 }
 
-#generatecard{
+#generatecard {
     cursor: pointer;
     float: right;
     font-size: 12px;
@@ -134,7 +134,7 @@ input {
     background-color: #909090;
     border-radius: 4px;
     cursor: pointer;
-    float:right;
+    float: right;
 }
 
 /* CHANGEABLE CARD ELEMENTS */
@@ -366,12 +366,16 @@ input {
 button {
     border: none;
     outline: 0;
-    display: inline-block;
     padding: 8px;
     color: white;
-    background-color: #000;
+    background-color: #B88736;
     text-align: center;
     cursor: pointer;
     width: 100%;
     font-size: 18px;
-  }
+}
+
+#btn:hover {
+    background-color: #000;
+    color: white;
+}
