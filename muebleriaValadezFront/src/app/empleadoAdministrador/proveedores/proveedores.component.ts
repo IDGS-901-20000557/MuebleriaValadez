@@ -28,9 +28,24 @@ export class ProveedorComponent {
 
 
  ngOnInit(): void {
+        //desde aqui
+        let url = window.location.href;
 
-
-
+        let params = url.split("?");
+        console.log(params);
+        if (params.length == 2) {
+          let charge = params[1].split("=");
+          console.log(charge);
+          let charge1 = parseInt(charge[1]);
+          console.log(charge1);
+          window.history.pushState({}, '', params[0]);
+    
+          if (charge1 == 1) {
+            window.location.reload();
+          }
+        }
+    
+        //hasta aqui
   this.user = sessionStorage.getItem("idUsuario");
 
 
@@ -132,22 +147,29 @@ export class ProveedorComponent {
   };
 
 
+  this.getData();
   // Llamada al servicio para obtener los proveedores
 
-  axios.get('https://localhost:7010/proveedor/Proveedor/proveedores')
-    .then((response) => {
-      this.proveedores = response.data;
-      console.log(this.proveedores);
-      //recargar la tabla
-      //this.dtTrigger.next();
-    }
-    )
-    .catch((error) => {
-      console.log(error);
-    }
-    );
  
   }
+
+
+  getData = async () => {
+    
+  axios.get('https://localhost:7010/proveedor/Proveedor/proveedores')
+  .then((response) => {
+    this.proveedores = response.data;
+    console.log(this.proveedores);
+    //recargar la tabla
+    //this.dtTrigger.next();
+  }
+  )
+  .catch((error) => {
+    console.log(error);
+  }
+  );
+
+}
 
   //metodo para registrar un proveedor
 
@@ -169,11 +191,11 @@ export class ProveedorComponent {
 
       Swal.fire({
         icon: 'success',
-        title: '´Proveedor registrado',
+        title: 'Proveedor registrado',
         text: 'El proveedor se ha registrado correctamente',
         showConfirmButton: true,
-        timer: 1500,
-        
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#20a124',
 
        }).then(() => {
         window.location.reload();
@@ -185,6 +207,8 @@ export class ProveedorComponent {
           title: 'Error',
           text: error.response.data.message,
           showConfirmButton: true,
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#20a124',
         });
 
 
@@ -229,8 +253,9 @@ export class ProveedorComponent {
             title: 'Proveedor actualizado',
             text: 'El proveedor se ha actualizado correctamente',
             showConfirmButton: false,
-            timer: 1500,
-            confirmButtonText: 'Aceptar'
+            timer: 3500,
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#20a124'
           }).then(() => {
             window.location.reload();
           });
@@ -241,6 +266,8 @@ export class ProveedorComponent {
             title: 'Error',
             text: error.response.data.message,
             showConfirmButton: true,
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#20a124'
           });
         });
     }
@@ -251,11 +278,11 @@ export class ProveedorComponent {
         
         Swal.fire({
           title: '¿Estás seguro?',
-          text: "No podrás revertir esto!",
+          text: "¡No podrás revertir esto!",
           icon: 'warning',
           showCancelButton: true,
-          confirmButtonColor: '#d33',
-          cancelButtonColor: '#3085d6',
+          confirmButtonColor: '#20a124',
+          cancelButtonColor: '#d33',
           confirmButtonText: 'Sí, eliminar!',
           cancelButtonText: 'Cancelar'
         }).then((result) => {
@@ -266,7 +293,7 @@ export class ProveedorComponent {
             axios.post(apiUri)
               .then((response) => {
                 Swal.fire(
-                  'Eliminado!',
+                  '¡Eliminación correcta!',
                   'El proveedor ha sido eliminado.',
                   'success',
                 ).then(() => {
@@ -279,6 +306,8 @@ export class ProveedorComponent {
                   title: 'Error',
                   text: error.response.data.message,
                   showConfirmButton: true,
+                  confirmButtonText: 'Aceptar',
+                  confirmButtonColor: '#20a124'
                 });
               });
           }
@@ -290,12 +319,12 @@ export class ProveedorComponent {
         
         Swal.fire({
           title: '¿Estás seguro?',
-          text: "No podrás revertir esto!",
+          text: "Esta acción reactivará el proveedor eliminado.",
           icon: 'warning',
           showCancelButton: true,
-          confirmButtonColor: '#d33',
-          cancelButtonColor: '#3085d6',
-          confirmButtonText: 'Sí, activar!',
+          confirmButtonColor: '#20a124',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '¡Sí, reactivar!',
           cancelButtonText: 'Cancelar'
         }).then((result) => {
           if (result.isConfirmed) {
@@ -305,8 +334,8 @@ export class ProveedorComponent {
             axios.post(apiUri)
               .then((response) => {
                 Swal.fire(
-                  'Activado!',
-                  'El proveedor ha sido activado.',
+                  '¡Proveedor Activado!',
+                  'El proveedor ha sido nuevamente activado.',
                   'success'
                 ).then(() => {
                   window.location.reload();
@@ -318,6 +347,8 @@ export class ProveedorComponent {
                   title: 'Error',
                   text: error.response.data.message,
                   showConfirmButton: true,
+                  confirmButtonText: 'Aceptar',
+                  confirmButtonColor: '#20a124'
                 });
               });
           }
