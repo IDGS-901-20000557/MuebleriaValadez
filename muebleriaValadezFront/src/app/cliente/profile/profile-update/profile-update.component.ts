@@ -72,7 +72,7 @@ export class ProfileUpdateComponent implements OnInit {
     
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
+        title: 'Ocurrió un error',
         text: 'Favor de llenar todos los campos',
       })
 
@@ -129,8 +129,7 @@ export class ProfileUpdateComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Algo salió mal!',
-          footer: '<a href>Why do I have this issue?</a>'
+          text: 'Ocurrió un problema. Intente de nuevo',
         })
 
       }

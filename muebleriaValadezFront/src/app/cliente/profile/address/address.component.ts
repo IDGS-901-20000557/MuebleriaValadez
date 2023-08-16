@@ -157,7 +157,7 @@ export class AddressComponent implements OnInit {
 
       Swal.fire({
         icon: 'success',
-        title: 'Dirección agregada',
+        title: 'Dirección agregada con éxito',
         showConfirmButton: false,
         timer: 1500
       })
@@ -176,11 +176,13 @@ export class AddressComponent implements OnInit {
     ).catch((error) => {
 
       Swal.fire({
+        title: 'Ocurrió un error',
+        text: 'Los datos de su dirección son incorrectos. Intente nuevo',
         icon: 'error',
-        title: 'Oops...',
-        text: 'Algo salió mal!',
-        footer: '<a href>Why do I have this issue?</a>'
-      })
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#d33'
+      });
+      console.log(error);
 
     }
 
@@ -205,7 +207,7 @@ export class AddressComponent implements OnInit {
     let estado = (<HTMLInputElement>document.getElementById("estado")).value;
     this.ciudades = [];
     await axios.get("https://localhost:7010/api/Direccion/getCiudades?estado=" + estado).then((res) => {
-      this.ciudades = res.data;
+      this.ciudades = res.data.sort();
     });
 
 
@@ -216,7 +218,7 @@ export class AddressComponent implements OnInit {
 
     this.estados = [];
     await axios.get("https://localhost:7010/api/Direccion/getEstados").then((res) => {
-      this.estados = res.data;
+      this.estados = res.data.sort();
     });
 
 
@@ -248,14 +250,14 @@ export class AddressComponent implements OnInit {
     } */
 
     Swal.fire({
-      title: '¿Estás seguro?',
-      text: "No podrás revertir los cambios",
+      title: 'Alerta de confirmación',
+      text: "¿Desea guardar los cambios en el sistema?",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#198754',
       cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Si, actualizar'
+      confirmButtonText: 'Sí, confirmar',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
 
@@ -298,9 +300,8 @@ export class AddressComponent implements OnInit {
 
           Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'Algo salió mal!',
-            footer: '<a href>Why do I have this issue?</a>'
+            title: 'Ocurrió un error',
+            text: '¡Algo salió mal! Intente de nuevo',
           })
 
         }
