@@ -13,7 +13,7 @@ export class InventarioService {
     constructor(private http: HttpClient) { }
     
     getAllInventario(): Observable<Inventario[]> {
-        return this.http.get<Inventario[]>(this.apiUrl);
+        return this.http.get<Inventario[]>(`${this.apiUrl}/GetAll`);
     }
     
     getInventoryById(id: number): Observable<Inventario> {

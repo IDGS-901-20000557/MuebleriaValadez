@@ -29,7 +29,8 @@ export class ProductosPedidoComponent {
     private direccionesService: DireccionService,
     private tarjetaService: TarjetaService,
     private carritoService: CarritoComprasService
-  ) {}
+  ) {
+  }
 
   // Variables para guardar los datos del producto, tarjeta, cantidad y direccion seleccionados
   productoS: Producto = {
@@ -97,10 +98,9 @@ export class ProductosPedidoComponent {
   }
 
   isLoggedIn(){
-    if(sessionStorage.getItem('idUsuario') == null){
+    if(sessionStorage.getItem('idCliente') == null){
       return false;
-    }
-    else{
+    }else{
       return true;
     }
   }
@@ -215,4 +215,6 @@ export class ProductosPedidoComponent {
     }
   }
   
+
+
 }
