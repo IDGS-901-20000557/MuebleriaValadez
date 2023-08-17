@@ -27,8 +27,8 @@ def main():
     # Realizar las transformaciones y análisis de datos
     gross_profit = calculate_gross_profit(df_compra, df_pedido)
     average_purchase_value = calculate_average_purchase_value(df_detalleCompra, df_producto)
-    top_selling_products = get_top_selling_products(df_detalleCompra, df_producto, 5)
-    bottom_selling_products = get_bottom_selling_products(df_detalleCompra, df_producto, 5)
+    top_selling_products = get_top_selling_products(df_detallePedido, df_producto, 5)
+    bottom_selling_products = get_bottom_selling_products(df_detallePedido, df_producto, 5)
     bestClients = get_top_clients(df_pedido, df_clientes)
     total_users = get_user_statistics(df_user)
     average_order_value=calculate_average_order_value(df_detallePedido)
@@ -137,16 +137,16 @@ def calculate_average_order_value(df_detallePedido):
     return round(average_order_value, 2)
 
 # Obtener los 5 productos más vendidos
-def get_top_selling_products(df_detalleCompra, df_producto, num_products):
-    df_merged = pd.merge(df_detalleCompra, df_producto, left_on='idProducto', right_on='idProducto')
-    df_grouped = df_merged.groupby('idProducto').agg({'idProducto':'first','cantidad': 'sum', 'nombreProducto': 'first', 'precioVenta': 'first'})
+def get_top_selling_products(df_detallePedido, df_producto, num_products):
+    df_merged = pd.merge(df_detallePedido, df_producto, left_on='idProducto', right_on='idProducto')
+    df_grouped = df_merged.groupby('idProducto').agg({'idProducto':'first', 'cantidad': 'sum', 'nombreProducto': 'first', 'precioVenta': 'first'})
     df_grouped['total_obtenido'] = df_grouped['cantidad'] * df_grouped['precioVenta']
     df_sorted = df_grouped.sort_values('cantidad', ascending=False).head(num_products)
     return df_sorted[['idProducto','nombreProducto', 'cantidad', 'precioVenta', 'total_obtenido']]
 
 # Obtener los 5 productos menos vendidos
-def get_bottom_selling_products(df_detalleCompra, df_producto, num_products):
-    df_merged = pd.merge(df_detalleCompra, df_producto, left_on='idProducto', right_on='idProducto')
+def get_bottom_selling_products(df_detallePedido, df_producto, num_products):
+    df_merged = pd.merge(df_detallePedido, df_producto, left_on='idProducto', right_on='idProducto')
     df_grouped = df_merged.groupby('idProducto').agg(
                 {'idProducto': 'first', 'cantidad': 'sum', 'nombreProducto': 'first', 'precioVenta': 'first'})
     df_grouped['total_obtenido'] = df_grouped['cantidad'] * df_grouped['precioVenta']
