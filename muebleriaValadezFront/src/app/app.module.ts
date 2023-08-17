@@ -35,6 +35,7 @@ import { ProfileUpdateComponent } from './cliente/profile/profile-update/profile
 import { AddressComponent } from './cliente/profile/address/address.component';
 import { SucursalesComponent } from './empleadoAdministrador/sucursales/sucursales.component';
 import { ContactComponent } from './contact/contact.component';
+import { VentasComponent } from './empleadoAdministrador/ventas/ventas.component';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { InventarioProductosComponent } from './empleadoAdministrador/dashboard/inventario-productos/inventario-productos.component';
@@ -70,6 +71,7 @@ import { VentasMensualesComponent } from './empleadoAdministrador/dashboard/vent
     ProfileUpdateComponent,
     AddressComponent,
     SucursalesComponent,
+    VentasComponent,
     InventarioProductosComponent,
     InventarioInsumosComponent,
     MejoresClientesComponent,

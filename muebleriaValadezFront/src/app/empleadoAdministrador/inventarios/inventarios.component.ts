@@ -274,7 +274,7 @@ export class InventariosComponent implements OnInit {
                 )}</td>
               </tr>`;
           }
-        }if (lotePrincipal.productosLote) {
+        }else if (lotePrincipal.productosLote) {
           for (const producto of lotePrincipal.productosLote) {
             let costoTotal = 0;
             costoTotal =
@@ -379,6 +379,15 @@ export class InventariosComponent implements OnInit {
       this.inventarioService
       .entregarLoteProducto(this.lotePendiente)
       .then((response: any) => {
+
+        if (response.startsWith("FALTA")) {
+          const insumoNombre = response.split(": ")[1];
+          Swal.fire({
+              icon: 'info',
+              title: 'Falta Insumo',
+              text: `Falta inventario del insumo: ${insumoNombre}`,
+          });
+      }else{
          this.printLote(this.lotePendiente);
         this.limpiarCampos();
         this.getAllLote();
@@ -387,6 +396,7 @@ export class InventariosComponent implements OnInit {
           title: '¡Lote entregado!',
           text: 'Revise la tabla de la derecha, ahi lo encontrara.',
         });
+       }
       })
       .catch((error: any) => {
         Swal.fire({

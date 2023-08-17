@@ -1,0 +1,45 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Claudio Tamayo
+-- Create date: 09/07/2023
+-- Description:	SP que inserta un lote
+-- =============================================
+CREATE PROCEDURE SP_Insertar_OrdenVenta
+	@PIdUsuario BIGINT,
+	@PidEmpleado BIGINT,
+	@Ptotal real,
+	@PidCliente BIGINT,
+    @PidSucursal BIGINT,
+	@ptipoPago nchar(1),
+	@OrdenVentaId BIGINT OUTPUT 
+
+AS
+BEGIN TRY
+	SET LANGUAGE 'ESPAÑOL';
+	DECLARE @CIdOrden BIGINT;
+	BEGIN TRAN
+
+	INSERT INTO OrdenesVenta (IdEmpleadoMostrador,fechaVenta,estatus,total,IdCliente,IdDireccion,codigo,tipoPago) 
+	VALUES(@PidEmpleado,GETDATE(),'1', @Ptotal, @PidCliente,(select idDireccion from Sucursales where idSucursal=@PidSucursal), 123, @ptipoPago);
+
+	SET @CIdOrden = (SELECT SCOPE_IDENTITY());
+	-- Insertamos en la bitacora la acción (Siempre que se hagan inserts, updates o deletes se inserta en bitacora).
+	INSERT INTO Bitacora VALUES(@PIdUsuario, 'Inserción', 'Ventas', CONCAT('Se insertó una venta con id:', @CIdOrden), GETUTCDATE() AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time');
+
+	COMMIT
+	SET @OrdenVentaId = @CIdOrden;
+END TRY
+BEGIN CATCH
+	-- Todo esto es necesario para capturar el error (en caso de que haya un error en la transacción)
+	ROLLBACK
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber,
+        ERROR_SEVERITY() AS ErrorSeverity,
+        ERROR_STATE() AS ErrorState,
+        ERROR_PROCEDURE() AS ErrorProcedure,
+        ERROR_MESSAGE() AS ErrorMessage;
+END CATCH
+

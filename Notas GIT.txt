@@ -33,3 +33,7 @@ Cancela todos los git add:
 git reset
 En especifico:
 git reset HEAD nombre_del_archivo.ext
+
+#Si no les jala el pull por la cache, ya que dice que nsuban cambios pero esos cambios son la cache, ejecuten este comando:
+ git reset --hard HEAD
+y luego hagan el pull
