@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="noExt">Número Exterior</label>
+                    <label for="noExt" class="mt-2">Número Exterior</label>
                     <input type="number" class="form-control" id="noExt" formControlName="noExt"
                         placeholder="Número Exterior"  />
                    
@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="noInt">Número Interior</label>
+                    <label for="noInt" class="mt-2">Número Interior</label>
                     <input type="number" class="form-control" id="noInt" formControlName="noInt"
                         placeholder="Número Interior" required />
                   
@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-6" >
                 <div class="form-group">
-                    <label for="estado">Estado</label>
+                    <label for="estado" class="mt-2">Estado</label>
                     <select type="text" class="form-control" id="estado" formControlName="estado" placeholder="Estado" (change)="getCiuades()" required >
                         required >
                     <option *ngFor="let estado of estados" [value]="estado">{{estado}}</option>
@@ -46,7 +46,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="ciudad">Ciudad</label>
+                    <label for="ciudad" class="mt-2">Ciudad</label>
                     <select type="text" class="form-control" id="ciudad" formControlName="ciudad" placeholder="Ciudad"
                         required (change)="getCp()">
                     <option *ngFor="let ciudad of ciudades" [value]="ciudad">{{ciudad}}</option>
@@ -61,7 +61,7 @@
             </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="cp">Código Postal</label>
+                <label for="cp" class="mt-2">Código Postal</label>
                 <select type="text" class="form-control" id="cp" formControlName="cp" placeholder="Código Postal"
                     required (change)="getColonias()">
                     <option *ngFor="let cp of cps" [value]="cp">{{cp}}</option>
@@ -76,7 +76,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="colonia">Colonia</label>
+                <label for="colonia" class="mt-2">Colonia</label>
                 <select type="text" class="form-control" id="colonia" formControlName="colonia" placeholder="Colonia"
                     required >
                     <option *ngFor="let colonia of colonias" [value]="colonia.idDomicilio">{{colonia.colonia}}</option>
@@ -93,14 +93,12 @@
 
         <div class="col-md-12">
             <div *ngIf="!edit">
-                <button class="btn btn-primary btn-block mt-5 mb-5" type="submit">Save</button>
+                <button class="btn btn-block mt-4 mb-2" type="submit">Guardar</button>
             </div>
             <div *ngIf="edit">
-                <button class="btn btn-primary btn-block mt-5 mb-5" type="button" (click)="onUpdate()">Update</button>
+                <button class="btn btn-primary btn-block mt-4 mb-2" type="button" (click)="onUpdate()">Actualizar</button>
             </div>
-            <br />
-            <small class="form-text text-muted">By clicking save, you agree to our Terms of Use and Privacy
-                Policy.</small>
+            <small class="form-text text-muted">Al dar clic, usted está aceptando nuestros términos y condiciones de privacidad.</small>
         </div>
 </div>
 </form>

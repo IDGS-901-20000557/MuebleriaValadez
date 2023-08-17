@@ -1,7 +1,4 @@
-<div class="body mt-5 pt-5 mb-5 pb-5">
-
-
-
+<div class="body pt-5 pb-5"><br><br>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -10,22 +7,18 @@
                         <div class="row">
                             <div class="col-md-4">
 
-                                <div class="card card2">
-                                    <img src="../../assets/img/img_avatar.png"
-                                        alt="John" style="width:100%">
-                                    <h1>{{nombre}}</h1>
+                                <div class="card card2 text-center"><br>
+                                    <img class="rounded mx-auto d-block" src="../../assets/img/usuario.png"
+                                        alt="Usuario" style="width:35%">
+                                    <br>
+                                    <p id="name">{{nombre}}</p>
                                     <p class="title">{{rol}}</p>
-                                    <p>{{email}}</p>
-                                    <p>{{telefono}}</p>
-                                    <p>{{rfc}}</p>
-
-                                    <div style="margin: 24px 0;">
-                                        <a href="#"><i class="fas fa-dove mx-1"></i></a>
-                                        <a href="#"><i class="fas fa-envelope mx-1"></i></a>
-                                        <a href="#"><i class="fas fa-phone mx-1"></i></a>
-                                        <a href="#"><i class="fas fa-birthday-cake mx-1"></i></a>
-                                    </div>
-                                    <p><button>Contact</button></p>
+                                    <p class="x1">⊖</p>
+                                    <hr>
+                                    <p class="x2">⊖</p>
+                                    <p class="info"><b>INFORMACIÓN DE CONTACTO</b></p>
+                                    <p class="card-item" ><i class="fas fa-envelope"></i> {{email}}</p>
+                                    <p class="card-item"><i class="fa fa-phone"></i> {{telefono}}</p>
                                 </div>
                             </div>
 
@@ -34,15 +27,15 @@
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link" (click)="mostrarTab(1)"
-                                            [class.active]="activeTab === 1">Payment</a>
+                                            [class.active]="activeTab === 1">Tarjetas</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" (click)="mostrarTab(2)"
-                                            [class.active]="activeTab === 2">Direction</a>
+                                            [class.active]="activeTab === 2">Direcciones</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" (click)="mostrarTab(3)"
-                                            [class.active]="activeTab === 3">Profile</a>
+                                            [class.active]="activeTab === 3">Perfil</a>
                                     </li>
                                 </ul>
 
@@ -132,7 +125,7 @@
                                                             <p class="card-text"><b>Ciudad:</b> {{
                                                                 direccion.direccion.domicilio.ciudad }}
                                                               <b>Estado:</b>   {{ direccion.direccion.domicilio.estado }}</p>
-                                                            <button class="btn btn-primary mt-2" (click)="editarDireccion(direccion.idDireccion)">Editar
+                                                            <button id="btn" class="btn btn-primary mt-2" (click)="editarDireccion(direccion.idDireccion)">Editar
                                                                 Dirección</button>
                                                         </div>
                                                     </div>

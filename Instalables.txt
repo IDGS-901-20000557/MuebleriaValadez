@@ -1,0 +1,7 @@
+npm install @swimlane/ngx-charts --save
+
+npm install --save-dev @types/d3-shape
+
+npm install --save-dev @types/d3-scale
+
+npm install --save-dev @types/d3-selection

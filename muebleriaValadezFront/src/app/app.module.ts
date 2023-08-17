@@ -37,6 +37,13 @@ import { SucursalesComponent } from './empleadoAdministrador/sucursales/sucursal
 import { ContactComponent } from './contact/contact.component';
 import { VentasComponent } from './empleadoAdministrador/ventas/ventas.component';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { InventarioProductosComponent } from './empleadoAdministrador/dashboard/inventario-productos/inventario-productos.component';
+import { InventarioInsumosComponent } from './empleadoAdministrador/dashboard/inventario-insumos/inventario-insumos.component';
+import { MejoresClientesComponent } from './empleadoAdministrador/dashboard/mejores-clientes/mejores-clientes.component';
+import { MayoresProductosComponent } from './empleadoAdministrador/dashboard/mayores-productos/mayores-productos.component';
+import { MenoresProductosComponent } from './empleadoAdministrador/dashboard/menores-productos/menores-productos.component';
+import { VentasMensualesComponent } from './empleadoAdministrador/dashboard/ventas-mensuales/ventas-mensuales.component';
 
 
 @NgModule({
@@ -64,7 +71,13 @@ import { VentasComponent } from './empleadoAdministrador/ventas/ventas.component
     ProfileUpdateComponent,
     AddressComponent,
     SucursalesComponent,
-    VentasComponent
+    VentasComponent,
+    InventarioProductosComponent,
+    InventarioInsumosComponent,
+    MejoresClientesComponent,
+    MayoresProductosComponent,
+    MenoresProductosComponent,
+    VentasMensualesComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +88,8 @@ import { VentasComponent } from './empleadoAdministrador/ventas/ventas.component
     HttpClientModule,
     DataTablesModule.forRoot(),
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule
   ],
   providers: [AuthService, SignupService],
   bootstrap: [AppComponent]
