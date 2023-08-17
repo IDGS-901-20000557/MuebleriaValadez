@@ -22,6 +22,8 @@ import { ProfileUpdateComponent } from './cliente/profile/profile-update/profile
 import { AuthGuardCliente } from './authCliente.guard';
 import { AddressComponent } from './cliente/profile/address/address.component';
 import { SucursalesComponent } from './empleadoAdministrador/sucursales/sucursales.component';
+import { VentasComponent } from './empleadoAdministrador/ventas/ventas.component';
+import { AuthGuardVenta } from './authEmpleadoVenta.guard';
 
 
 const routes: Routes = [
@@ -34,6 +36,7 @@ const routes: Routes = [
     { path: 'loader', component: LoaderComponent },
     { path: 'shop', component: ProductosPedidoComponent },
     { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] },
+    { path: 'ventas', component: VentasComponent, canActivate: [AuthGuardVenta] },
     { path: 'productos', component: ProductosComponent, canActivate: [AuthGuardAdmin] },
     { path: 'insumos', component: InsumosComponent, canActivate: [AuthGuardAdmin] },
     { path: 'inventarios', component: InventariosComponent, canActivate: [AuthGuardAdmin] },
