@@ -13,7 +13,7 @@ export class InsumosComponent implements OnInit {
   insumoForm!: FormGroup;
   insumos: Insumo[] = [];
   proveedores: any[] = [];
-  
+
   dtOptions = {};
   // Variables para el formulario de inserción
   nuevoInsumo: Insumo = {
@@ -33,7 +33,7 @@ export class InsumosComponent implements OnInit {
 
   constructor(private insumoService: InsumoService, private readonly fb: FormBuilder) {
     this.insumoForm = this.initForm();
-    this.nuevoInsumo = { 
+    this.nuevoInsumo = {
       nombreInsumo: '',
       idProveedor: 0,
       unidad: '',
@@ -81,7 +81,7 @@ export class InsumosComponent implements OnInit {
           className: 'btn btn-danger'
         },
       ],
-      // Uso de botones   
+      // Uso de botones
       responsive: true,
     };
     // Cargar todos los insumos al iniciar el componente
@@ -90,7 +90,7 @@ export class InsumosComponent implements OnInit {
     this.getAllProveedores();
     // Valor predeterminado para el proveedor seleccionado
     this.selectedProveedorId = 0;
-    
+
   }
 
   // Obtener todos los insumos activos
@@ -122,7 +122,7 @@ export class InsumosComponent implements OnInit {
   onProveedorSelected(event: any): void {
     this.selectedProveedorId = event.target.value ? Number(event.target.value) : 0;
   }
-  
+
 
   // Insertar o actualizar un nuevo insumo
   insertNewInsumo(): void {
@@ -144,7 +144,7 @@ export class InsumosComponent implements OnInit {
     if (this.modoEdicion) {
       // Modo edición: actualizar el insumo existente
       this.insumoService.updateInsumo(this.nuevoInsumo.idInsumo, this.nuevoInsumo, idUsuario).subscribe(
-        (response) => { 
+        (response) => {
           this.modoEdicion = false;
           Swal.fire({
             title: '¡Actualización exitosa!',
@@ -158,7 +158,7 @@ export class InsumosComponent implements OnInit {
           this.clearForm();
         },
         (error) => {
-          console.error(error);        
+          console.error(error);
         }
       );
     } else {
@@ -190,7 +190,7 @@ export class InsumosComponent implements OnInit {
       );
     }
   }
-  
+
   // Método para limpiar el campo
   clearForm(): void {
     this.nuevoInsumo = {
@@ -205,7 +205,7 @@ export class InsumosComponent implements OnInit {
       idInventario: 0
     };
     this.selectedProveedorId = 0;
-  }  
+  }
 
   getNombreProveedorById(idProveedor: number): string {
     const proveedor = this.proveedores.find((proveedor) => proveedor.idProveedor === idProveedor);
@@ -218,7 +218,7 @@ export class InsumosComponent implements OnInit {
     this.selectedProveedorId = insumo.idProveedor; // Asignar el id del proveedor seleccionado al campo correspondiente
     this.modoEdicion = true; // Establecer el modo de edición
   }
-  
+
 
   // Eliminar el insumo seleccionado
   deleteInsumo(id: number): void {
@@ -253,7 +253,7 @@ export class InsumosComponent implements OnInit {
   initForm(): FormGroup {
     return this.fb.group({
       nombreInsumo: ['', [Validators.required, Validators.minLength(3)]],
-      precio: ['', [Validators.required, Validators.min(1)]],
+      precio: ['', [Validators.required, Validators.min(0.1)]],
       observaciones: ['', [Validators.required, Validators.minLength(10)]],
       cantidadAceptable: ['', [Validators.required, Validators.min(1)]],
       idProveedor: [0, Validators.required],

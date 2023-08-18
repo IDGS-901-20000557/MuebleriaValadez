@@ -307,9 +307,6 @@
                     (keyup)="password()"
                   />
 
-                  <div id="passmensaje">
-                    <p>A</p>
-                  </div>
                   <div *ngIf="!isUpdate">
                     <div
                       *ngIf="registroUpForm.get('password')?.errors?.['required']"

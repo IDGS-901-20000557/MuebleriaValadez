@@ -112,7 +112,7 @@ export class InventariosComponent implements OnInit {
   getAllInventario(): void {
     this.inventarioService.getAllInventario().subscribe(
       (data) => {
-        this.inventario = data;
+        this.inventario = data.sort();
         this.inicializarDataTables();
       },
       (error) => {
@@ -250,8 +250,12 @@ export class InventariosComponent implements OnInit {
               <th style="text-align: center; font-size: 3px;">Precio</th>
               <th style="text-align: center; font-size: 3px; ">Total</th>
             </tr>`;
+        console.log()
 
         if (lotePrincipal.insumosLote) {
+          if(lotePrincipal.insumosLote?.length>0){
+
+
           console.log(lotePrincipal.insumosLote);
           for (const insumo of lotePrincipal.insumosLote) {
             let costoTotal = 0;
@@ -275,6 +279,9 @@ export class InventariosComponent implements OnInit {
               </tr>`;
           }
         }else if (lotePrincipal.productosLote) {
+          if(lotePrincipal.productosLote.length>0){
+
+
           for (const producto of lotePrincipal.productosLote) {
             let costoTotal = 0;
             costoTotal =
@@ -296,11 +303,13 @@ export class InventariosComponent implements OnInit {
                 )}</td>
               </tr>`;
           }
+        }
         } else {
           insumosTable += `
             <tr>
               <td colspan="4" style="text-align: center; font-size: 3px;">No hay insumos/productos en este lote.</td>
             </tr>`;
+        }
         }
 
         insumosTable += `</table>`;
