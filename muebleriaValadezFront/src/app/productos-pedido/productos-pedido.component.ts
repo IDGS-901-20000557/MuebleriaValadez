@@ -144,25 +144,44 @@ export class ProductosPedidoComponent {
     const idUs = idUsuario!== null ? parseInt(idUsuario, 10) : 0;
     // Si no existe, se asigna 0 y se convierte a numero
     const idCl = idCliente!== null ? parseInt(idCliente, 10) : 0;
-    // Agrega el pedido a la tabla de pedidos
-   this.pedidoService.addPedidoOrden(this.productoS, idUs, idCl, this.cantidadS, this.tarjetaS, this.direccionS)
-   .then((response: any) => {
-    Swal.fire({
-      icon: 'success',
-      title: '¡Pedido realizado con éxito!',
-      text: 'Tu pedido se ha realizado con éxito.',
-      timer: 5000,
+
+    this.inventory$.subscribe((inventarios: Inventario[]) => {
+      for (const inventario of inventarios) {
+        if (inventario.idInventario == this.productoS.idInventario) {
+          if (inventario.cantidaDisponible >= this.cantidadS) {
+            // Agrega el pedido a la tabla de pedidos
+            this.pedidoService.addPedidoOrden(this.productoS, idUs, idCl, this.cantidadS, this.tarjetaS, this.direccionS)
+            .then((response: any) => {
+              Swal.fire({
+                icon: 'success',
+                title: '¡Pedido realizado con éxito!',
+                text: 'Tu pedido se ha realizado con éxito.',
+                timer: 5000,
+              });
+
+                  })
+                  .catch((error: any) => {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: 'Hubo un error al realizar tu pedido, por favor intenta de nuevo',
+                      timer: 5000,
+                    });
+                  });
+          }else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'No hay suficientes productos en inventario para realizar tu pedido',
+              timer: 5000,
+            });
+            return;
+          }
+        }
+      }
     });
-    
-        })
-        .catch((error: any) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Hubo un error al realizar tu pedido, por favor intenta de nuevo',
-            timer: 5000,
-          });
-        }); 
+
+
   }
 
   async doManyOrders(): Promise<void> {
@@ -171,12 +190,12 @@ export class ProductosPedidoComponent {
     const idUs = idUsuario !== null ? parseInt(idUsuario, 10) : 0;
     const idCl = idCliente !== null ? parseInt(idCliente, 10) : 0;
     const total = this.cartService.getTotal();
-  
+
     try {
       const pedidoResponse = await this.pedidoService.addPedido(total, idCl, this.tarjetaS, this.direccionS);
       this.cartItems = this.cartService.getCartItems();
       let errors = 0;
-  
+
       for (const producto of this.cartItems) {
         try {
           const ordenResponse = await this.pedidoService.addOrden(producto, producto.cantidad);
@@ -184,7 +203,7 @@ export class ProductosPedidoComponent {
           errors++;
         }
       }
-  
+
       if (errors === 0) {
         Swal.fire({
           icon: 'success',
@@ -192,7 +211,7 @@ export class ProductosPedidoComponent {
           text: 'Tu pedido se ha realizado con éxito.',
           timer: 5000,
         });
-        
+
       } else {
         console.log(errors);
         Swal.fire({
@@ -202,7 +221,7 @@ export class ProductosPedidoComponent {
           timer: 5000,
         });
       }
-  
+
       this.cartService.cleanCart();
     } catch (error) {
       console.error('Error al realizar el pedido:', error);
@@ -214,7 +233,7 @@ export class ProductosPedidoComponent {
       });
     }
   }
-  
+
 
 
 }

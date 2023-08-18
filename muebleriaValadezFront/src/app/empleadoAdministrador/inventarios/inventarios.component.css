@@ -1,11 +1,20 @@
 
 .wrapper {
+
   width: 90%;
-  margin: 0 auto;
+  height: auto;
+  margin: 40px auto 0 auto;
+  padding: 0;
+}
+
+.body {
+  background-color: #D9DAD9;
+  width: 100%;
+  height: auto;
 }
 .tabs {
   position: relative;
-  margin: 3rem 0;
+  margin: 0 0;
   background: #9C8C72;
   height: 1000px;
  width: 100%;

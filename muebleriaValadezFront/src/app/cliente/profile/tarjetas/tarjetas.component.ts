@@ -44,7 +44,7 @@ export class TarjetasComponent implements OnInit {
 
     //let user = sessionStorage.getItem("user");
     //this.user = sessionStorage.getItem("user");
-    this.user = 20004;
+
     Swal.fire({
       title: 'Cargando',
       allowOutsideClick: false,
