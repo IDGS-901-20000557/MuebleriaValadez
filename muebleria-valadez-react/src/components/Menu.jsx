@@ -6,6 +6,8 @@
  * @requires N/A
  * @version 1.0.0
  * @since 1.0.0
+ * @description Componente que muestra la barra de navegación a los módulos
+ *             correspondientes
  * @created 2021-11-24
  * @modified 2021-11-24
  */
