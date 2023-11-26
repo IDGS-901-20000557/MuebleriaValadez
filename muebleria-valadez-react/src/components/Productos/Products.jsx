@@ -32,7 +32,7 @@ const Products = () => {
     const response = await fetch('https://localhost:7010/api/Productos');
     // Convierte la respuesta a JSON
     const data = await response.json();
-    // Imprime los productos en consola
+    // Agrega los registros en el estado de productos
     setProducts(data);
   }
 
@@ -42,7 +42,7 @@ const Products = () => {
     const response = await fetch(`https://localhost:7010/api/Inventario/GetAll`);
     // Convierte la respuesta a JSON
     const data = await response.json();
-    // Imprime los productos en consola
+    // Agrega los registros en el estado de inventario
     setInventory(data);
   }
 
