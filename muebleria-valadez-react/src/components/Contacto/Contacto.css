@@ -1,0 +1,118 @@
+#btnSend {
+    background-color: #B88736;
+    color: white;
+}
+
+#btnSend:hover {
+    background-color: #74531f;
+    transition: transform 0.5s;
+    transform: translateY(-5px);
+}
+
+#btnMessage {
+    width: 50px;
+    height: 50px;
+    color: #3d3a36;
+}
+
+#icon {
+    width: 30px;
+    height: 30px;
+}
+
+#contact {
+    background-color: #D9DAD9;
+    border-color: #D9DAD9;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: auto;
+    height: auto;
+}
+
+* {
+    font-family: system-ui;
+}
+
+/*Neo Brutalism pricing card*/
+#card-contact {
+    width: auto;
+    height: auto;
+    background: #D9DAD9;
+    border-color: #D9DAD9;
+    padding: 1rem;
+    border-radius: 1rem;
+    color: black;
+    margin-top: 1%;
+}
+
+/*Card content*/
+.pricing-block-content {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.pricing-plan {
+    color: #05060f;
+    font-size: 1.3rem;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.price-value {
+    color: #05060f;
+    font-size: 1.8rem;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.pricing-note {
+    opacity: .8;
+    font-size: 16px;
+}
+
+/*Checklist*/
+.check-list {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-top: .5rem;
+}
+
+.check-list-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 16px;
+}
+
+#img-contact {
+    height: 215px;
+    content: center;
+}
+
+#icono {
+    color: #B88736;
+}
+
+.ala {
+    text-decoration: none;
+    color: #05060f;
+}
+
+.body {
+    /*background-color: #E0CEB6;*/
+    background-color: #CBC1B5;
+
+}
+
+.form-check-label {
+    margin-left: 1%;
+}
+
+@media only screen and (max-width: 768px) {
+    #card-contact {
+        margin-top: 5%;
+    }
+}
