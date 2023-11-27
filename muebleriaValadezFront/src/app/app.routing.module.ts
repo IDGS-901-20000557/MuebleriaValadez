@@ -20,44 +20,86 @@ import { ProfileComponent } from './cliente/profile/profile.component';
 import { TarjetasComponent } from './cliente/profile/tarjetas/tarjetas.component';
 import { ProfileUpdateComponent } from './cliente/profile/profile-update/profile-update.component';
 import { AuthGuardCliente } from './authCliente.guard';
+import { AuthGuardPedido } from './authEmpleadoPedido.guard';
 import { AddressComponent } from './cliente/profile/address/address.component';
 import { SucursalesComponent } from './empleadoAdministrador/sucursales/sucursales.component';
 import { VentasComponent } from './empleadoAdministrador/ventas/ventas.component';
 import { AuthGuardVenta } from './authEmpleadoVenta.guard';
-
+import { RepartirComponent } from './empleadoRepartidor/repartir/repartir.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/auth', pathMatch: 'full' },
-    { path: 'auth', component: AuthComponent },
-    { path: 'signup', component: SignupComponent },
-    { path: 'contact', component: ContactComponent },
-    { path: 'us', component: UsComponent },
-    { path: 'products', component: ListProductsComponent },
-    { path: 'loader', component: LoaderComponent },
-    { path: 'shop', component: ProductosPedidoComponent },
-    { path: 'dashboardAdministrador', component: DashboardComponent, canActivate: [AuthGuardAdmin] },
-    { path: 'ventas', component: VentasComponent, canActivate: [AuthGuardVenta] },
-    { path: 'productos', component: ProductosComponent, canActivate: [AuthGuardAdmin] },
-    { path: 'insumos', component: InsumosComponent, canActivate: [AuthGuardAdmin] },
-    { path: 'inventarios', component: InventariosComponent, canActivate: [AuthGuardAdmin] },
-    { path: 'proveedores', component: ProveedorComponent, canActivate: [AuthGuardAdmin] },
-    { path: 'users', component: UsersComponent, canActivate: [AuthGuardAdmin] },
-    { path: 'sucursal', component: SucursalesComponent, canActivate: [AuthGuardAdmin] },
-    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardCliente] },
-    { path: 'tarjetas', component: TarjetasComponent, canActivate: [AuthGuardCliente] },
-    { path: 'profileUpdate', component: ProfileUpdateComponent, canActivate: [AuthGuardCliente] },
-    { path: 'address', component: AddressComponent, canActivate: [AuthGuardCliente] },
-    { path: 'myOrders', component: PedidosComponent},
-    // Page not found
-    { path: '**', component: PageNotFoundComponent }
+  { path: '', redirectTo: '/auth', pathMatch: 'full' },
+  { path: 'auth', component: AuthComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'us', component: UsComponent },
+  { path: 'products', component: ListProductsComponent },
+  { path: 'loader', component: LoaderComponent },
+  { path: 'shop', component: ProductosPedidoComponent },
+  {
+    path: 'dashboardAdministrador',
+    component: DashboardComponent,
+    canActivate: [AuthGuardAdmin],
+  },
+  { path: 'ventas', component: VentasComponent, canActivate: [AuthGuardVenta] },
+  {
+    path: 'productos',
+    component: ProductosComponent,
+    canActivate: [AuthGuardAdmin],
+  },
+  {
+    path: 'insumos',
+    component: InsumosComponent,
+    canActivate: [AuthGuardAdmin],
+  },
+  {
+    path: 'inventarios',
+    component: InventariosComponent,
+    canActivate: [AuthGuardAdmin],
+  },
+  {
+    path: 'proveedores',
+    component: ProveedorComponent,
+    canActivate: [AuthGuardAdmin],
+  },
+  { path: 'users', component: UsersComponent, canActivate: [AuthGuardAdmin] },
+  {
+    path: 'sucursal',
+    component: SucursalesComponent,
+    canActivate: [AuthGuardAdmin],
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuardCliente],
+  },
+  {
+    path: 'tarjetas',
+    component: TarjetasComponent,
+    canActivate: [AuthGuardCliente],
+  },
+  {
+    path: 'profileUpdate',
+    component: ProfileUpdateComponent,
+    canActivate: [AuthGuardCliente],
+  },
+  {
+    path: 'address',
+    component: AddressComponent,
+    canActivate: [AuthGuardCliente],
+  },
+  {
+    path: 'repartir',
+    component: RepartirComponent,
+    canActivate: [AuthGuardPedido],
+  },
+  { path: 'myOrders', component: PedidosComponent },
+  // Page not found
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
-    imports:[RouterModule.forRoot(routes)],
-    exports:[RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-
-export class AppRoutingModule{
-
-}
-
+export class AppRoutingModule {}

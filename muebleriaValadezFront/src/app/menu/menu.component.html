@@ -19,13 +19,13 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <div *ngIf="menuPrincipal()" style="display: flex; padding: 0">
-        <li class="nav-item" >
-            <a class="nav-link" routerLinkActive="active" routerLink="shop">
-              <button class="btn text-white text-left rounded">
-                <span>Productos</span>
-              </button>
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="shop">
+            <button class="btn text-white text-left rounded">
+              <span>Productos</span>
+            </button>
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="us">
             <button class="btn text-white text-left rounded">
@@ -62,7 +62,15 @@
         </li>
         <div class="dropdown">
           <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [class.active]="isActive('insumos') || isActive('productos') || isActive('inventario')">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              [class.active]="
+                isActive('insumos') ||
+                isActive('productos') ||
+                isActive('inventario')
+              "
+            >
               <button class="btn text-white text-left rounded">
                 <span>Producción</span>
               </button>
@@ -77,14 +85,22 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" routerLink="productos">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                routerLink="productos"
+              >
                 <button class="btn text-white text-left rounded">
                   <span>Productos</span>
                 </button>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" routerLink="inventarios">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                routerLink="inventarios"
+              >
                 <button class="btn text-white text-left rounded">
                   <span>Inventario</span>
                 </button>
@@ -93,7 +109,32 @@
           </div>
         </div>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" href="proveedores?chargue=1">
+          <a class="nav-link" routerLinkActive="active" routerLink="insumos">
+            <button class="btn text-white text-left rounded">
+              <span>Insumos</span>
+            </button>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="productos">
+            <button class="btn text-white text-left rounded">
+              <span>Productos</span>
+            </button>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="auth">
+            <button class="btn text-white text-left rounded">
+              <span>Inventario</span>
+            </button>
+          </a>
+        </li> -->
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="proveedores"
+          >
             <button class="btn text-white text-left rounded">
               <span>Proveedores</span>
             </button>
@@ -139,14 +180,7 @@
       </div>
       <div style="display: flex; padding: 0" *ngIf="menuEmpleadoPedidos()">
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="auth">
-            <button class="btn text-white text-left rounded">
-              <span>Inicio</span>
-            </button>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="auth">
+          <a class="nav-link" routerLinkActive="active" routerLink="repartir">
             <button class="btn text-white text-left rounded">
               <span>Pedidos</span>
             </button>
@@ -177,7 +211,12 @@
         </li>
         <li class="nav-item align-content-center">
           <a class="nav-link" routerLinkActive="active">
-            <button class="btn text-white text-left rounded" data-bs-toggle="modal" data-bs-target="#cartModal" (click)="getCartItems()">
+            <button
+              class="btn text-white text-left rounded"
+              data-bs-toggle="modal"
+              data-bs-target="#cartModal"
+              (click)="getCartItems()"
+            >
               <span><i class="fa fa-shopping-cart"></i></span>
             </button>
           </a>
@@ -193,47 +232,81 @@
       </li>
     </ul>
   </div>
-
-</nav><br><br>
+</nav>
+<br /><br />
 <!-- Modal -->
-<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="cartModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title text-center" id="exampleModalLabel">Carrito de compras</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title text-center" id="exampleModalLabel">
+          Carrito de compras
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-        <h2 class="text-center text-uppercase" *ngIf="cartItems.length === 0">Aún no haz agregado nada al carrito</h2>
+        <h2 class="text-center text-uppercase" *ngIf="cartItems.length === 0">
+          Aún no haz agregado nada al carrito
+        </h2>
         <div *ngFor="let item of cartItems">
-        <div class="card mb-3" style="max-width: 540px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <ng-container *ngIf="item.foto == ''">
-                <img src="../../assets/img/logo.jpg" class="img-fluid rounded-start" alt="logo">
-              </ng-container>
-              <ng-container *ngIf="item.foto != '' || item.foto">
-                <img src="{{item.foto}}" class="img-fluid rounded-start" alt="{{item.nombreProducto}}">
-              </ng-container>
-            </div>
-            <div class="col-md-8">
-              <div class="row">
-                <div class="card-body">
-                  <h3 class="card-title">{{item.nombreProducto}}</h3>
-                  <h4 class="card-text text-muted">Agregaste {{item.cantidad}} pz(s)</h4>
-                  <button class="btn btn-danger btn-sm" (click)="removeOneCart(item)">
-                    Remover piezas <i class="fas fa-minus"></i>
-                  </button>
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <ng-container *ngIf="item.foto == ''">
+                  <img
+                    src="../../assets/img/logo.jpg"
+                    class="img-fluid rounded-start"
+                    alt="logo"
+                  />
+                </ng-container>
+                <ng-container *ngIf="item.foto != '' || item.foto">
+                  <img
+                    src="{{ item.foto }}"
+                    class="img-fluid rounded-start"
+                    alt="{{ item.nombreProducto }}"
+                  />
+                </ng-container>
+              </div>
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="card-body">
+                    <h3 class="card-title">{{ item.nombreProducto }}</h3>
+                    <h4 class="card-text text-muted">
+                      Agregaste {{ item.cantidad }} pz(s)
+                    </h4>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      (click)="removeOneCart(item)"
+                    >
+                      Remover piezas <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
       <div class="modal-footer">
         <div *ngIf="cartItems.length > 0">
-          <button data-bs-toggle="modal" class="btn btn-success" data-bs-dismiss="modal" data-bs-target="#finVenta" (click)="checkSession();">
+          <button
+            data-bs-toggle="modal"
+            class="btn btn-success"
+            data-bs-dismiss="modal"
+            data-bs-target="#finVenta"
+            (click)="checkSession()"
+          >
             Finalizar pedido <i class="fa fa-cart-arrow-down"></i>
           </button>
         </div>
