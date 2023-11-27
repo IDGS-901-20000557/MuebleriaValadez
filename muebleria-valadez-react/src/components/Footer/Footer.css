@@ -1,0 +1,22 @@
+.footer {
+    /* background-color: #89683B; */
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+footer {
+    width: 100%;
+}
+
+.pene {
+    font-size: 16px;
+}
+
+.anal {
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+    .list-unstyled.d-flex {
+        justify-content: center;
+    }
+}

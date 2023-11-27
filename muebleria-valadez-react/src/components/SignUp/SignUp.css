@@ -1,0 +1,104 @@
+/* Estilos globales */
+body {
+    font-family: system-ui;
+}
+.contenedor {
+    background-color: #D9DAD9;
+    width: 70%;
+    margin: 0 auto; /* Esto centra horizontalmente el contenedor */
+    display: flex; /* Utilizar flexbox para centrar el contenido verticalmente */
+    justify-content: center; /* Centrar horizontalmente el contenido */
+    align-items: center; /* Centrar verticalmente el contenido */
+    flex-direction: column; /* Alinear el contenido en columna */
+}
+
+#botonCrear {
+    background-color: #B88736;
+    color: white;
+}
+
+#botonCrear:hover {
+    background-color: #74531f;
+    transition: transform 0.3s;
+    transform: translateY(-5px);
+}
+
+#botonVolver {
+    color: white;
+    background-color: #3d3a36;
+}
+
+#botonVolver:hover {
+    color: white;
+    background-color: #585550;
+    transition: transform 0.3s;
+    transform: translateY(-5px);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Tooltip de entrada */
+.botonTelefono, .botonDireccion {
+    width: 50px;
+    height: 50px;
+    color: #3d3a36;
+}
+
+.botonContrasena {
+    width: 25px;
+    height: 30px;
+    margin-top: 5px;
+    border: none; /* Elimina cualquier borde */
+    padding: 0;
+    background-color: transparent;
+    display: flex; /* Usa flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+
+.grupo-entrada-adjunto {
+    position: relative;
+    display: inline-block;
+}
+
+.fa-question-circle {
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    width: 200px;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 9999;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.grupo-entrada-adjunto:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+label {
+    font-size: medium;
+}
+
+#tituloFormulario {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.cuerpo {
+    background-color: #CBC1B5;
+}
