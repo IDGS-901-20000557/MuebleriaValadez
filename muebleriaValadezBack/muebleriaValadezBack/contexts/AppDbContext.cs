@@ -44,9 +44,12 @@ namespace muebleriaValadezBack
 
         public DbSet<ClienteDirecciones>? cliente_Direcciones { get; set; }
         public DbSet<DomicilioResult>? DomicilioResult { get; set; }
+        public DbSet<Repartidor>? Repartidor { get; set; }
+        public DbSet<RepartirDetalle>? RepartirDetalle { get; set; }
+        public DbSet<ProductoRepartir>? ProductoRepartir { get; set; }
 
 
-        
+
 
     }
 }
