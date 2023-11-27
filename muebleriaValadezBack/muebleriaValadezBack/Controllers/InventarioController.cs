@@ -17,6 +17,21 @@ namespace muebleriaValadezBack.Controllers
             _context = context;
         }
 
+        [HttpGet("GetAll", Name = "ObtenerInventario")]
+        public IActionResult GetAllInvent()
+        {
+            try
+            {
+                var results = _context.Set<Inventario>().FromSqlRaw("SELECT * FROM Inventario").ToList();
+
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet]
         public IActionResult Get()
         {

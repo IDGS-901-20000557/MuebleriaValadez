@@ -164,13 +164,13 @@ export class ProfileComponent {
   dropDireccion(direccionId: number | null) {
 
     Swal.fire({
-      title: '¿Estás seguro?',
-      text: "No podrás revertir esto!",
+      title: 'Alerta de confirmación',
+      text: "¡No podrá revertir esta acción!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#1D9BF0',
+      confirmButtonColor: '#198754',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar!',
+      confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {

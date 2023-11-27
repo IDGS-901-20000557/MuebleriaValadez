@@ -28,9 +28,24 @@ export class ProveedorComponent {
 
 
  ngOnInit(): void {
+        //desde aqui
+        let url = window.location.href;
 
-
-
+        let params = url.split("?");
+        console.log(params);
+        if (params.length == 2) {
+          let charge = params[1].split("=");
+          console.log(charge);
+          let charge1 = parseInt(charge[1]);
+          console.log(charge1);
+          window.history.pushState({}, '', params[0]);
+    
+          if (charge1 == 1) {
+            window.location.reload();
+          }
+        }
+    
+        //hasta aqui
   this.user = sessionStorage.getItem("idUsuario");
 
 
@@ -132,22 +147,29 @@ export class ProveedorComponent {
   };
 
 
+  this.getData();
   // Llamada al servicio para obtener los proveedores
 
-  axios.get('https://localhost:7010/proveedor/Proveedor/proveedores')
-    .then((response) => {
-      this.proveedores = response.data;
-      console.log(this.proveedores);
-      //recargar la tabla
-      //this.dtTrigger.next();
-    }
-    )
-    .catch((error) => {
-      console.log(error);
-    }
-    );
  
   }
+
+
+  getData = async () => {
+    
+  axios.get('https://localhost:7010/proveedor/Proveedor/proveedores')
+  .then((response) => {
+    this.proveedores = response.data;
+    console.log(this.proveedores);
+    //recargar la tabla
+    //this.dtTrigger.next();
+  }
+  )
+  .catch((error) => {
+    console.log(error);
+  }
+  );
+
+}
 
   //metodo para registrar un proveedor
 

@@ -645,7 +645,7 @@ printVenta(venta: OrdenVenta) {
               this.ventasService
                 .signUp(nombre, apellidoP, apellidoM, telefono, email, password)
                 .then((response: any) => {
-
+                  this.limpiarCampos();
                   Swal.fire({
                     icon: 'success',
                     title: '¡Usuario creado!',

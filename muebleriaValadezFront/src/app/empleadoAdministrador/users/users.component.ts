@@ -36,6 +36,21 @@ export class UsersComponent  implements OnInit {
 
   ngOnInit(): void {
 
+    let url = window.location.href;
+
+    let params = url.split("?");
+    console.log(params);
+    if (params.length == 2) {
+    let charge = params[1].split("=");
+    console.log(charge);
+    let charge1 = parseInt(charge[1]);
+      console.log(charge1);
+      window.history.pushState({}, '', params[0]);
+
+    if (charge1 == 1) {
+      window.location.reload();
+    }
+  }
     this.registroUpForm = this.fb.group({});
     this.user = sessionStorage.getItem("idUsuario");
     this.registroUpForm.addControl(
@@ -137,10 +152,6 @@ export class UsersComponent  implements OnInit {
       ])
     );
 
-
-
-
-
     // Inicializa DataTables en el elemento HTML de la tabla
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -181,8 +192,13 @@ export class UsersComponent  implements OnInit {
 
 
     // Llamada al servicio para obtener los usuarios
+    this.getData();
+  }
 
-    axios.get('https://localhost:7010/user/User/users')
+
+  getData = async () => {
+    
+  await  axios.get('https://localhost:7010/user/User/users')
       .then((response) => {
         this.usuarios = response.data;
         console.log(this.usuarios);
@@ -196,7 +212,7 @@ export class UsersComponent  implements OnInit {
       );
 
     // Llamada al servicio para obtener las sucursales
-    axios.get('https://localhost:7010/user/User/sucursales')
+    await axios.get('https://localhost:7010/user/User/sucursales')
       .then((response) => {
         this.sucurzales = response.data;
         console.log(this.sucurzales);
@@ -208,7 +224,7 @@ export class UsersComponent  implements OnInit {
       );
 
     // Llamada al servicio para obtener los roles
-    axios.get('https://localhost:7010/user/User/roles')
+    await axios.get('https://localhost:7010/user/User/roles')
       .then((response) => {
         this.roles = response.data;
         console.log(this.roles);
@@ -219,8 +235,8 @@ export class UsersComponent  implements OnInit {
         console.log(error);
 
       });
-  }
 
+    }
 
   selectedUserTypeChanged() {
 

@@ -38,6 +38,13 @@ import { ContactComponent } from './contact/contact.component';
 import { VentasComponent } from './empleadoAdministrador/ventas/ventas.component';
 import { RepartirComponent } from './empleadoRepartidor/repartir/repartir.component';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { InventarioProductosComponent } from './empleadoAdministrador/dashboard/inventario-productos/inventario-productos.component';
+import { InventarioInsumosComponent } from './empleadoAdministrador/dashboard/inventario-insumos/inventario-insumos.component';
+import { MejoresClientesComponent } from './empleadoAdministrador/dashboard/mejores-clientes/mejores-clientes.component';
+import { MayoresProductosComponent } from './empleadoAdministrador/dashboard/mayores-productos/mayores-productos.component';
+import { MenoresProductosComponent } from './empleadoAdministrador/dashboard/menores-productos/menores-productos.component';
+import { VentasMensualesComponent } from './empleadoAdministrador/dashboard/ventas-mensuales/ventas-mensuales.component';
 
 
 @NgModule({
@@ -66,7 +73,13 @@ import { RepartirComponent } from './empleadoRepartidor/repartir/repartir.compon
     AddressComponent,
     SucursalesComponent,
     VentasComponent,
-    RepartirComponent
+    RepartirComponent,
+    InventarioProductosComponent,
+    InventarioInsumosComponent,
+    MejoresClientesComponent,
+    MayoresProductosComponent,
+    MenoresProductosComponent,
+    VentasMensualesComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +90,8 @@ import { RepartirComponent } from './empleadoRepartidor/repartir/repartir.compon
     HttpClientModule,
     DataTablesModule.forRoot(),
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule
   ],
   providers: [AuthService, SignupService],
   bootstrap: [AppComponent]

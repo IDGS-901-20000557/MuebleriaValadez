@@ -1,3 +1,8 @@
+<div class="body">
+  <div style="background-color: #D9DAD9;">
+    <br>
+    <br>
+    </div>
 <div class="wrapper">
   <div class="tabs">
     <div class="tab">
@@ -221,7 +226,7 @@
             <tbody style="text-align: center">
               <tr *ngFor="let inve of inventario">
                 <td>{{inve.nombre}}</td>
-                <td>{{inve.costo}}</td>
+                <td>{{inve.costo | number:'1.2-2'}}</td>
                 <td>{{inve.cantidadAceptable}}</td>
                 <td>{{inve.cantidaDisponible}}</td>
                 <td>{{inve.tipo}}</td>
@@ -232,7 +237,7 @@
     </div>
   </div>
 </div>
-
+</div>
 <div id="openModal5" class="modalDialog5">
   <div>
     <div>
@@ -325,6 +330,13 @@
       </div>
     </div>
   </div>
+</div>
+<div style="background-color: #D9DAD9;">
+<br>
+<br>
+<br>
+<br>
+<br>
 </div>
 
 <div id="openModal4" class="modalDialog4">

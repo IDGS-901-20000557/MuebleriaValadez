@@ -1,7 +1,11 @@
 .form-outline {
   margin: 10px !important;
 }
-
+.body {
+  background-color: #D9DAD9;
+  width: 100%;
+  height: auto;
+}
 #title {
   font-weight: bold;
   font-size:larger;

@@ -52,7 +52,7 @@ namespace muebleriaValadezBack.Controllers
         {
             try
             {
-                var sucursales = _context.Sucursales.ToList();
+                var sucursales = _context.Sucursales.Where(s => s.estatus == "1").ToList();
                 if (sucursales.Count > 0)
                 {
                     return new JsonResult(sucursales);
