@@ -6,13 +6,24 @@
  * @description Este componente se encarga de mostrar los productos disponibles en la tienda.
  * @version 1.0.0
  * @since 1.0.0
+ * @property {Object} props Propiedades del componente
+ * @property {Function} props.agregarItem Función que permite agregar un item al carrito
+ * @property {Function} props.showAlert Función que permite mostrar una alerta
+ * @property {Object} state Estado del componente
+ * @property {Array} state.products Arreglo que contiene los productos
+ * @property {Array} state.inventory Arreglo que contiene el inventario
+ * @property {Function} state.setProducts Función que permite actualizar el estado de los productos
+ * @property {Function} state.setInventory Función que permite actualizar el estado del inventario
+ * @property {Function} state.getProducts Función que permite obtener los productos desde la API
+ * @property {Function} state.getInventory Función que permite obtener el inventario desde la API
+ * @property {Function} state.useEffect Hook que permite ejecutar código cuando el componente se monta
  * @created 2021-11-24
  * @modified 2021-11-24
  */
 
 import { useEffect, useState } from 'react'
 
-const Products = () => {
+const Products = ({agregarItem, showAlert, setShowAlert}) => {
   // Define el estado de los productos
   const [products, setProducts] = useState([]);
   // Define el estado del inventario
@@ -85,6 +96,22 @@ const Products = () => {
         <hr className="border border-5" />
         </div>
         <div className="row">
+          {/* Muestra una ventana de alerta al agregar al carrito */}
+          {showAlert && (
+        <div className="alert alert-success alert-dismissible fade show fixed-bottom fixed-end"
+        role="alert"
+        style={{ position: 'fixed', bottom: '20px', right: '60px' }}
+        >
+          <center> Producto agregado al carrito <i className="fa fa-check"></i> </center>
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+            onClick={() => setShowAlert(false)}
+          ></button>
+        </div>
+          )}
           {/* Muestra los productos */}
           {products.map(product => (
             <div className="col-md-4 shadow" key={product.id}>
@@ -116,7 +143,7 @@ const Products = () => {
                         </a>
                       </div>
                       <div className="col-md-6">
-                        <a href="#" className="btn btn-outline-primary btn-block">
+                        <a className="btn btn-outline-primary btn-block" onClick={() => agregarItem(product)}>
                           <i className="fa fa-cart-plus"></i> Agregar al carrito
                         </a>
                       </div>
@@ -126,6 +153,7 @@ const Products = () => {
               </div>
             </div>
           ))}
+
         </div>
       </div>
     
