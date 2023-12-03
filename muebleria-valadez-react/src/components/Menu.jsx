@@ -12,10 +12,19 @@
  * @modified 2021-11-24
  */
 
-const Menu = () => {
+
+const Menu = ({items, 
+              eliminarItem, 
+              vaciarCarrito, 
+              getTotalCart, 
+              cards, 
+              addresses, 
+              registerOrder, 
+              cerrarSesion
+              }) => {
   // Funcion que comprueba si el usuario esta logueado
   let isLogged = () => {
-    if (sessionStorage.getItem('user')) {
+    if (sessionStorage.getItem('idCliente') != null ) {
       return true;
     } else {
       return false;
@@ -45,11 +54,14 @@ const Menu = () => {
               {/* Si el usuario esta logueado, mostrar las opciones del carrito y cerrar sesión */
                 isLogged() ?
                   <>
-                    <li className="nav-item">
-                      <a className="nav-link" href="/carrito"><i className="fas fa-shopping-cart"></i></a>
+                  <li className="nav-item">
+                      <a className="nav-link" href="/myOrders">Mis Pedidos</a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="/logout">Cerrar Sesión</a>
+                      <a className="nav-link" data-bs-toggle="modal" data-bs-target="#finVenta" ><i className="fas fa-shopping-cart"></i></a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" onClick={cerrarSesion}>Cerrar Sesión</a>
                     </li>
                   </>
                   :
@@ -62,7 +74,10 @@ const Menu = () => {
                       <a className="nav-link active" href="/contact">Contacto</a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link active" href="/login">Iniciar Sesión</a>
+                      <a className="nav-link" data-bs-toggle="modal" data-bs-target="#finVenta"><i className="fas fa-shopping-cart"></i></a>
+                    </li>s
+                    <li className="nav-item">
+                      <a className="nav-link active" href="/">Iniciar Sesión</a>
                     </li>
                   </>
               }
@@ -70,6 +85,123 @@ const Menu = () => {
           </div>
         </div>
       </nav>
+      {/* Ventana modal para mostrar el carrito */}
+      <div className="modal fade" id="finVenta"  role="dialog"  aria-hidden="true">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2 className="modal-title text-center" >Confirmar Compra</h2>
+              <button type="button" className="close btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body text-center">
+                <h4>Confirma tus datos de compra</h4> 
+                </div>
+            <div className="modal-body">
+                <div className="row" >
+                    {
+                        items.length === 0 ?
+                        <div className="col-md-12">
+                            <div className="alert alert-warning" role="alert">
+                                No hay productos en el carrito
+                            </div>
+                        </div>
+                        :
+                        <>
+                        <div className="row">
+                          {// Recorre el carrito para mostrar los productos
+                          items.map((item, index) => (
+                            <div className="col-md-6" key={index} >
+                              <div className="card mb-3" style={{ maxWidth: '540px' }}>
+                                <div className="row g-0">
+                                  <div className="col-md-4">
+                                    <img src={item.foto} className="img-fluid rounded-start" alt="..." />
+                                  </div>
+                                  <div className="col-md-8">
+                                    <div className="card-body">
+                                      <h5 className="card-title">{item.nombreProducto}</h5>
+                                      <p className="card-text text-success">$ {item.precioVenta} MXN</p>
+                                      <p className="card-text"><small className="text-muted">{item.cantidad} pieza(s)</small></p>
+                                      <button className="btn btn-danger" onClick={() => eliminarItem(item)}>-</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <br />
+                            </div>
+                          ))}
+                          </div>
+                          <div className="row">                
+                      <div className="col-md-12">
+                        <form>
+                          <div className="form-group">
+                              <div className="row">
+
+                                {sessionStorage.getItem('idCliente') != null ?
+                                  <>
+                                    <div className="col-6">
+                                      <label htmlFor="tarjeta" className="col-form-label">Escoge tu tarjeta</label><br />
+                                      <select className="form-select" id="tarjeta" name="tarjeta" >
+                                        {
+                                          cards.map(card => (
+                                            <option key={card.idTarjeta} value={card.idTarjeta}> 
+                                              {card.numeroTarejta}
+                                            </option>
+                                          ))
+                                        }
+                                      </select>
+                                    </div>
+                                    <div className="col-6">
+                                      <label htmlFor="direccion" className="col-form-label text-center">Escoge tu direccion</label><br />
+                                      <select className="form-select text-uppercase" id="direccion" name="direccion">
+                                        {
+                                          addresses.map(address => (
+                                            <option key={address.idDireccion} value={address.idDireccion}> 
+                                              {address.calle} #{address.noExt} 
+                                            </option>
+                                          ))
+                                        }
+                                      </select>
+                                    </div>
+                                  </>
+                                  :
+                                  <>
+                                  <center>
+                                    <div className="col-md-12">
+                                      <p><b>Tienes que iniciar sesión para poder ver tus direcciones y tarjetas </b> </p>
+                                    </div>
+                                  </center>
+                                  </>
+                                }
+                                </div>
+                                <br />
+                                <div className="row">
+                                  <div className="col-6">
+                                    <p className="h5 text-primary"> Total: </p>
+                                  </div>
+                                  <div className="col-6">
+                                      <p className="text-success h5">$ {getTotalCart()} MXN</p>
+                                  </div>
+                              </div>
+                            </div>
+                        </form>
+                      </div>
+                      <div className="modal-footer">
+                      <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" className="btn btn-warning" onClick={vaciarCarrito}>Limpiar Carrito <i className="fa fa-shopping-cart"></i></button>
+                        <button type="button" className="btn btn-success" data-bs-dismiss="modal" onClick={registerOrder}>Realizar Pedido</button>
+                      </div>
+                </div>
+                        </>
+                        }
+                      </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  {/* Termina ventana modal del carrito */}
+
     </>
   )
 }
