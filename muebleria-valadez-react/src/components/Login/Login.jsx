@@ -53,7 +53,10 @@ const Login = () => {
                     });
                     break;
                 case 3:
-                    navigate('/shop');
+                    // Le meti mano mi claudio
+                    // Nomás así jalo chido el login
+                    // Elimine navigate('/shop');
+                    window.location.href = '/shop';
                     break;
                 case 10002:
                     Swal.fire({
