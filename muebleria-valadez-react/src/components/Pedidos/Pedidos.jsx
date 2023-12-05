@@ -18,16 +18,20 @@
  * 
  */
 
-const Pedidos = ({ pedidos, direcciones, 
+const Pedidos = ( {pedidos, direcciones, 
                    productosOrden, ordenPedidos, 
-                   getDetallePedido, cancelPedido }) => {
+                   getDetallePedido, cancelPedido} ) => {
   return (
     <div>
       <div className="container-fluid">
         <div className="container-fluid mt-5" style={{ backgroundColor: 'white' }}>
-          <h1 className="text-center">Mis Pedidos</h1>
+          <h1 className="text-center text-uppercase text-secondary">Mis Pedidos <i className="fas fa-clipboard-list"></i></h1>
         </div>
-      </div>
+        <br />
+        <center>
+          <hr className="col-9 border border-3 border-secondary" />
+        </center>
+        <br />
       <div className="container">
         <div className="row">
           <div className="form-group col-12">
@@ -87,13 +91,17 @@ const Pedidos = ({ pedidos, direcciones,
                         </button>
                       </td>
                       <td className="text-center">
-                        {pedido.estatus === '0' ? (
-                          <p>Cancelado <i className="fa fa-cancel"></i></p>
-                        ) : (
-                          <button className="btn btn-danger" id="btnDelete" onClick={() => cancelPedido(pedido.idPedido)}>
-                            <i className="fas fa-trash"></i>
-                          </button>
-                        )}
+                        {pedido.estatus === '0' || pedido.estatus == '2' ? (
+                          pedido.estatus === '0' ? (
+                            <p className="text-danger">Cancelado <i className="fa fa-cancel"></i></p>
+                          ) : (
+                            <p className="text-success">Entregado <i className="fa fa-check"></i></p>
+                          )
+                        ):
+                        <button className="btn btn-danger" id="btnDelete" onClick={() => cancelPedido(pedido.idPedido)}>
+                          <i className="fa fa-times"></i>
+                        </button> 
+                        }
                       </td>
                     </tr>
                   ))
@@ -103,6 +111,12 @@ const Pedidos = ({ pedidos, direcciones,
           </div>
         </div>
       </div>
+      <br />
+        <center>
+          <hr className="col-9 border border-3 border-secondary" />
+        </center>
+        <br />
+      {/* Modal para mostrar los detalles del pedido */}
       <div className="modal fade" id="modal" tabIndex="-1" aria-labelledby="modal" aria-hidden="false">
       <div className="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
         <div className="modal-content">
@@ -143,6 +157,7 @@ const Pedidos = ({ pedidos, direcciones,
           </div>
         </div>
       </div>
+    </div>
     </div>
     </div>
   );

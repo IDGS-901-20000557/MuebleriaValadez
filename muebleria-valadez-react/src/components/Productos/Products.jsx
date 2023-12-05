@@ -20,42 +20,14 @@
  * @created 2021-11-24
  * @modified 2021-11-24
  */
-
-import { useEffect, useState } from 'react'
-
-const Products = ({agregarItem, showAlert, setShowAlert}) => {
-  // Define el estado de los productos
-  const [products, setProducts] = useState([]);
-  // Define el estado del inventario
-  const [inventory, setInventory] = useState([]);
-
-  // Actualiza los productos
-  useEffect(() => {
-    // Obtiene los productos
-    getProducts();
-    // Obtiene el inventario
-    getInventory();
-  }, []);
-
-  // Función que obtiene los productos desde la API de .NET
-  const getProducts = async () => {
-    // Obtiene los productos desde la API de .NET
-    const response = await fetch('https://localhost:7010/api/Productos');
-    // Convierte la respuesta a JSON
-    const data = await response.json();
-    // Agrega los registros en el estado de productos
-    setProducts(data);
-  }
-
-  // Funcion para obtener el inventario de los productos
-  const getInventory = async () => {
-    // Obtiene los productos desde la API de .NET
-    const response = await fetch(`https://localhost:7010/api/Inventario/GetAll`);
-    // Convierte la respuesta a JSON
-    const data = await response.json();
-    // Agrega los registros en el estado de inventario
-    setInventory(data);
-  }
+const Products = ({products, inventory,
+                  agregarItem, 
+                  showAlert, 
+                  setShowAlert, 
+                  selectProduct,
+                  limpiarCampo
+                }) => {
+  
 
 
   return (
@@ -127,28 +99,47 @@ const Products = ({agregarItem, showAlert, setShowAlert}) => {
                     inventory.map(inventory => (
                       inventory.idInventario === product.idInventario ?
                       <>
-                      <p className="card-text text-muted"> { inventory.cantidaDisponible } pzs en existencia</p>
+                      {
+                        inventory.cantidaDisponible > 0 ?
+                        <>
+                        <p className="card-text text-success">Existencias: {inventory.cantidaDisponible}</p>
+                        <hr />
+                      <center>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <a href="#" className="btn btn-outline-primary btn-block" data-bs-toggle="modal" 
+                            data-bs-target="#ventaUnica" onClick={() => {selectProduct(product); limpiarCampo();}}> 
+                              <i className="fa fa-shopping-bag"></i> 
+                              Comprar Ahora
+                            </a>
+                          </div>
+                          <div className="col-md-6">
+                            <a className="btn btn-outline-primary btn-block" onClick={() => agregarItem(product, product.idInventario)}>
+                              <i className="fa fa-cart-plus"></i> Agregar al carrito
+                            </a>
+                          </div>
+                        </div>
+                      </center>
+                        </>
+                        :
+                        <center>
+                          <p className="card-text text-danger text-uppercase">Agotado</p>
+                          <hr />
+                        <center>
+                          <div className="row">
+                            <div className="col-md-6">
+                            </div>
+                            <div className="col-md-6">
+                            </div>
+                          </div>
+                        </center>
+                        </center>
+                      }
                       </>
                       :
                       null
                     ))
                   }
-                  <hr />
-                  <center>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <a href="#" className="btn btn-outline-primary btn-block"> 
-                          <i className="fa fa-shopping-bag"></i> 
-                          Comprar Ahora
-                        </a>
-                      </div>
-                      <div className="col-md-6">
-                        <a className="btn btn-outline-primary btn-block" onClick={() => agregarItem(product)}>
-                          <i className="fa fa-cart-plus"></i> Agregar al carrito
-                        </a>
-                      </div>
-                    </div>
-                  </center>
                 </div>
               </div>
             </div>

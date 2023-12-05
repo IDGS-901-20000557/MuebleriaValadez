@@ -26,18 +26,45 @@ const App = () => {
   const [items, setItems] = useState(localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : []);
   const [cards, setCards] = useState([]);
   const [addresses, setAddresses] = useState([]);
-  /* Si elimino esta linea no jala */
-  //const [product, setProduct] = useState({});
+  // Define el estado de los productos
+  const [products, setProducts] = useState([]);
+  // Define el estado para un producto seleccionado
+  const [productoSeleccionado, setProductoSeleccionado] = useState({});
+
+  // Define el estado del inventario
+  const [inventory, setInventory] = useState([]);
+
+  // Función que obtiene los productos desde la API de .NET
+  const getProducts = async () => {
+    // Obtiene los productos desde la API de .NET
+    const response = await fetch('https://localhost:7010/api/Productos');
+    // Convierte la respuesta a JSON
+    const data = await response.json();
+    // Agrega los registros en el estado de productos
+    setProducts(data);
+  }
+
+  // Funcion para obtener el inventario de los productos
+  const getInventory = async () => {
+    // Obtiene los productos desde la API de .NET
+    const response = await fetch(`https://localhost:7010/api/Inventario/GetAll`);
+    // Convierte la respuesta a JSON
+    const data = await response.json();
+    // Agrega los registros en el estado de inventario
+    setInventory(data);
+  }
 
   // Estado para activar una alerta
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {}, [showAlert]);
   
-  // Obtiene las tarjetas y direcciones de la API
+  // Obtiene las tarjetas, direcciones, productos e inventario de la API
   useEffect(() => {
     getCards();
     getAdresses();
+    getProducts();
+    getInventory();
   }, []);
 
   // Función que obtiene las tarjetas de la API
@@ -70,18 +97,26 @@ const App = () => {
 
   // Funcion que permite agregar item al carrito
   // Si el item ya fue agregado se le suma la cantidad
-  const agregarItem = (item) => {
+  // Consulta en el inventario si hay suficiente stock
+  const agregarItem = (item, idInventario) => {
     const newItems = [...items];
     const index = newItems.findIndex(i => i.idProducto === item.idProducto);
     if (index > -1) {
+      let cantidadInventario = inventory.find(i => i.idInventario === idInventario).cantidaDisponible;
+
+      if(cantidadInventario < newItems[index].cantidad + 1) {
+        Swal.fire('No hay suficiente stock', 'Ya haz agregado todas las piezas existentes a tu carrito', 'warning');
+        return;
+      }else{
       newItems[index].cantidad += 1;
+    }
     } else {
       newItems.push({ ...item, cantidad: 1 });
     }
     setItems(newItems);
     localStorage.removeItem('items');
     localStorage.setItem('items', JSON.stringify(newItems));
-     // Mostrar la alerta
+     // Mostrar la alerta al agregar un item al carrito
       setShowAlert(true);
      // Ocultar la alerta después de 3 segundos 
      setTimeout(() => {
@@ -138,7 +173,98 @@ const App = () => {
   // State que almacena los productos de un pedido
   const [productosOrden, setProductosOrden] = useState([]);
 
-  // Función que registra el pedido completo en la base de datos
+  // Funcion que registra el pedido completo en la base de datos con el producto seleccionado
+  const registerOrderDetail = async () => {
+    let idUsuario = sessionStorage.getItem('idUsuario');
+    let idCliente = sessionStorage.getItem('idCliente');
+    let cantidadS = document.getElementById('cantidad').value;
+    let idTarjeta = document.getElementById('tarjetaS').value;
+    let idDireccion = document.getElementById('direccionS').value;
+    try {
+      if(cantidadS <= 0){
+        Swal.fire({
+          icon: 'error',
+          title: 'Tu pedido no puede realizarse',
+          text: 'La cantidad no puede ser menor a 0',
+          timer: 5000,
+        });
+        return;
+      //Valida que la cantidad no tenga puntos o guiones
+      }else if(cantidadS.includes('.') || cantidadS.includes('-')){
+        Swal.fire({
+          icon: 'error',
+          title: 'Tu pedido no puede realizarse',
+          text: 'La cantidad no puede tener puntos o guiones',
+          timer: 5000,
+        });
+        return;
+      }else if(cantidadS.includes('e')){
+        Swal.fire({
+          icon: 'error',
+          title: 'Tu pedido no puede realizarse',
+          text: 'La cantidad no puede tener la letra e',
+          timer: 5000,
+        });
+        return;
+      }else if(cantidadS.includes('E')){
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Tu pedido no puede realizarse',
+          text: 'La cantidad no puede tener la letra E',
+          timer: 5000,
+        });
+        return;
+      }else if(cantidadS.includes('+')){
+        Swal.fire({
+          icon: 'error',
+          title: 'Tu pedido no puede realizarse',
+          text: 'La cantidad no puede tener el signo +',
+          timer: 5000,
+        });
+        return;
+      }else if(cantidadS.includes(',')){
+        Swal.fire({
+          icon: 'error',
+          title: 'Tu pedido no puede realizarse',
+          text: 'La cantidad no puede tener comas',
+          timer: 5000,
+        });
+        return;
+      }else if(cantidadS.includes(' ')){
+        Swal.fire({
+          icon: 'error',
+          title: 'Tu pedido no puede realizarse',
+          text: 'La cantidad no puede tener espacios',
+          timer: 5000,
+        });
+        return;
+      }else{
+        const response = await addPedidoOrden(productoSeleccionado, idUsuario, idCliente, cantidadS, idTarjeta, idDireccion);
+        console.log(response); 
+        Swal.fire({
+          icon: 'success',
+          title: '¡Pedido realizado!',
+          text: 'Tu pedido se ha realizado correctamente.',
+          timer: 5000,
+        });
+        limpiarCampo();
+        getProducts();
+        getInventory();
+      }
+    } catch (error) {
+      console.error('Error al realizar el pedido:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Hubo un error al realizar tu pedido, por favor intenta de nuevo',
+        timer: 5000,
+      }); 
+    }
+
+  }
+  
+  // Función que registra el pedido completo en la base de datos con los items del carrito
   const registerOrder = async () => {
     if(sessionStorage.getItem('idCliente') != null) {
       // Obtiene el id del usuario del session storage
@@ -196,6 +322,39 @@ const App = () => {
     Swal.fire('Inicia sesión para realizar el pedido', 'Nosotros guardamos tu carrito por ti.', 'warning');
   }
   }
+
+  //Funcion que agrega pedido y orden de pedido
+  async function addPedidoOrden(producto, idUsuario, idClientes, cantidadS, idTarjeta, IdDireccion) {
+    // Genera un código aleatorio de 3 dígitos
+    const codigoAleatorio = Math.floor(Math.random() * 100000);
+    const codigoBD = codigoAleatorio.toString().padStart(3, '0');
+    
+    const body = {
+      pedido: {
+        IdCliente: idClientes,
+        IdTarjeta: idTarjeta,
+        fechaPedido: new Date(),
+        codigo: codigoBD,
+        total: producto.precioVenta * cantidadS,
+        IdDireccion: IdDireccion,
+        estatus: '1'
+      },
+      ordenPedido: {
+        cantidad: cantidadS,
+        IdProducto: producto.idProducto
+      }
+    };
+  
+    // Hace el post al API para agregar el pedido y regresa el pedidoDetalle en JSON
+    return fetch(`${apiPedidos}/AgregarPedidoOrden/${producto.precioVenta}&&${idUsuario}&&${producto.idInventario}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    }).then(response => response.json());
+  }
+  
 
   // Función que agrega un pedido a la base de datos
   async function addPedido(totalS, idClientes, idTarjeta, IdDireccion) {
@@ -275,46 +434,57 @@ const App = () => {
 
   // Función que cancela un pedido
   async function cancelPedido(idPedido) {
-    var pedido = {
-      idPedido:idPedido,
-      IdCliente : 0,
-      IdTarjeta:0,
-      fechaPedido:new Date(),
-      fechaEntrega:new Date(),
-      codigo: '',
-      total: 0,
-      idDireccion:0,
-      IdEmpleadoEntrega:0,
-      estatus:'0'
-  };
-
-    const response = await fetch(`${apiPedidos}/CancelarPedido/${idPedido}&&${sessionStorage.getItem('idUsuario')}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(pedido)
-    });
-
-    const data = await response.json();
-    if (data === 1) {
-      Swal.fire({
-        icon: 'success',
-        title: '¡Pedido cancelado!',
-        text: 'Tu pedido se ha cancelado correctamente.',
-        timer: 5000,
+    try {
+      // Genera una alerta Swal para confirmar la acción
+      const result = await Swal.fire({
+        title: '¿Estás segur@ de cancelar?',
+        text: 'No podrás revertir esta acción',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Cancelar pedido',
+        cancelButtonText: 'No, cancelar'
       });
-      getPedidos();
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Hubo un error al cancelar tu pedido, por favor intenta de nuevo',
-        timer: 5000,
-      });
+  
+      // Si el usuario confirma la acción, se cancela el pedido
+      if (result.isConfirmed) {
+        const idUsuario = sessionStorage.getItem('idUsuario');
+        const response = await fetch(`${apiPedidos}/CancelarPedido/${idUsuario}&&${idPedido}`,
+        {method: 'POST'}
+        );
+  
+        if (response.status == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: '¡Pedido cancelado!',
+              text: 'Tu pedido se ha cancelado correctamente.',
+              timer: 5000,
+            });
+            getPedidos();
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Hubo un error al cancelar tu pedido, por favor intenta de nuevo',
+              timer: 5000,
+            });
+          }
+       
+      }
+    } catch (error) {
+      console.error('Error en la función cancelPedido:', error);
     }
   }
+  
+  // Funcion para seleccionar un producto para venta unica
+  const selectProduct = (product) => {
+    setProductoSeleccionado(product);
+  }
 
+  const limpiarCampo = () => {
+    document.getElementById('cantidad').value = 1;
+  }
   // Hook que se ejecuta al cargar la página
   // Obtiene los pedidos del cliente
   // Obtiene los productos de un pedido
@@ -324,8 +494,6 @@ const App = () => {
       getPedidos();
     }
   }, []);
-  
-
 
 /**
  * ============================================================
@@ -360,10 +528,14 @@ const App = () => {
       eliminarItem={eliminarItem}
       vaciarCarrito={vaciarCarrito}
       registerOrder={registerOrder}
+      registerOrderDetail={registerOrderDetail}
       getTotalCart={getTotalCart}
       cards={cards}
       addresses={addresses}
+      agregarItem={agregarItem}
       cerrarSesion={cerrarSesion}
+      productoSeleccionado={productoSeleccionado}
+      inventory={inventory}
     />
 
       <BrowserRouter>
@@ -389,9 +561,15 @@ const App = () => {
           />
 
           <Route index path="/shop" element={
-            <Products agregarItem={agregarItem} 
+            <Products 
+            products={products}
+            inventory={inventory}
+            agregarItem={agregarItem} 
             showAlert={showAlert} 
-            setShowAlert={setShowAlert}/>
+            setShowAlert={setShowAlert}
+            selectProduct={selectProduct}
+            limpiarCampo={limpiarCampo}
+            />
           } />
           <Route index path="/us" element={
             <US />
