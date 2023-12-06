@@ -126,6 +126,10 @@ const Menu = ({items,
                       <a className="nav-link" data-bs-toggle="modal" data-bs-target="#carrito" ><i className="fas fa-shopping-cart"></i></a>
                     </li>
                     <li className="nav-item">
+                      <a className="nav-link" href="/myProfile">Mi Perfil <i className="fas fa-user"></i></a>
+                    </li>
+
+                    <li className="nav-item">
                       <a className="nav-link" onClick={cerrarSesion}>Cerrar Sesión</a>
                     </li>
                   </>
@@ -156,7 +160,7 @@ const Menu = ({items,
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="carrito">Carrito de compras</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+              <button type="button" className="btn-close col-2" data-bs-dismiss="modal" aria-label="Close" ></button>
             </div>
             <div className="modal-body">
               <div className="row">
@@ -202,9 +206,9 @@ const Menu = ({items,
                           ))}
                       </div>
                       <div className="modal-footer">
-                      <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" className="btn btn-warning" onClick={vaciarCarrito}>Limpiar Carrito <i className="fa fa-shopping-cart"></i></button>
-                        <button type="button" className="btn btn-success" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#finVenta">Continuar Pedido</button>
+                      <button type="button" className="btn btn-danger col-2" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" className="btn btn-warning col-4" onClick={vaciarCarrito}>Limpiar Carrito <i className="fa fa-shopping-cart"></i></button>
+                        <button type="button" className="btn btn-success col-4" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#finVenta">Continuar Pedido</button>
               </div>
                       </>
               }
@@ -221,7 +225,7 @@ const Menu = ({items,
           <div className="modal-content">
             <div className="modal-header">
               <h2 className="modal-title text-center" >Confirmar Compra</h2>
-              <button type="button" className="close btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
+              <button type="button" className="close btn btn-danger col-1" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -318,8 +322,8 @@ const Menu = ({items,
                         </form>
                       </div>
                       <div className="modal-footer">
-                      <button type="button" className="btn btn-warning" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#carrito">Regresar al carrito</button>
-                        <button type="button" className="btn btn-success" data-bs-dismiss="modal" onClick={registerOrder}>Realizar Pedido</button>
+                      <button type="button" className="btn btn-warning col-2" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#carrito">Regresar al carrito</button>
+                        <button type="button" className="btn btn-success col-2" data-bs-dismiss="modal" onClick={registerOrder}>Realizar Pedido</button>
                       </div>
                 </div>
                         </>
@@ -331,13 +335,13 @@ const Menu = ({items,
       </div>
       {/* Termina ventana modal del carrito */}
       
-      {/* Inicia ventana modal de los productos */}
+      {/* Inicia ventana modal para venta de un producto */}
       <div className="modal fade" id="ventaUnica" tabIndex="-1" role="dialog" aria-labelledby="ventaUnicaLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-scrollable" role="document">
           <div className="modal-content">
             <div className="modal-header">
               <h2 className="modal-title text-center" id="ventaUnica">Confirmar Compra</h2>
-              <button type="button" className="close btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
+              <button type="button" className="close btn btn-danger col-2" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -414,13 +418,13 @@ const Menu = ({items,
               </form>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" className="btn btn-success" data-bs-dismiss="modal" onClick={registerOrderDetail} >Realizar Pedido</button>
+              <button type="button" className="btn btn-danger col-4" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" className="btn btn-success col-5" data-bs-dismiss="modal" onClick={registerOrderDetail} >Realizar Pedido</button>
             </div>
           </div>
         </div>
       </div>
-      {/* Termina ventana modal de los productos */}
+      {/* Termina ventana modal para venta de un producto */}
     </>
   )
 }
