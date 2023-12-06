@@ -10,6 +10,7 @@ import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import Swal from 'sweetalert2';
 import Pedidos from './components/Pedidos/Pedidos';
+import Profile from './components/Profile/profile';
 
 const App = () => {
   // useEffect(() => {
@@ -571,6 +572,10 @@ const App = () => {
             limpiarCampo={limpiarCampo}
             />
           } />
+          <Route index path="/myProfile" element={
+            <Profile />
+          } />
+
           <Route index path="/us" element={
             <US />
           } />

@@ -1,5 +1,5 @@
 import React from 'react'
-import './address.css'
+// import './address.css'
 import axios from 'axios'
 const Address = ({ calle, noExt, noInt, cp, colonia, ciudad, estado, id , mostrar,editar,ids,getDirecciones}) => {
 
